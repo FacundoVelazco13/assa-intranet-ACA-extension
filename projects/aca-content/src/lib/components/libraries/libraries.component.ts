@@ -22,59 +22,17 @@
  * from Hyland Software. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { NavigateLibraryAction } from '@alfresco/aca-shared/store';
-import { SiteEntry } from '@alfresco/js-api';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import {
-  AppHookService,
-  ContextActionsDirective,
-  InfoDrawerComponent,
-  PageComponent,
-  PageLayoutComponent,
-  PaginationDirective,
-  ToolbarComponent
-} from '@alfresco/aca-shared';
-import { DocumentListPresetRef, DynamicColumnComponent } from '@alfresco/adf-extensions';
-import { CommonModule } from '@angular/common';
-import {
-  CustomEmptyContentTemplateDirective,
-  DataColumnComponent,
-  DataColumnListComponent,
-  EmptyContentComponent,
-  PaginationComponent
-} from '@alfresco/adf-core';
-import { DocumentListDirective } from '../../directives/document-list.directive';
-import { TranslatePipe } from '@ngx-translate/core';
-import { DocumentListComponent } from '@alfresco/adf-content-services';
+import { LibrariesBaseComponent } from '../libraries-base/libraries-base.component';
 
 @Component({
-  imports: [
-    CommonModule,
-    DocumentListDirective,
-    ContextActionsDirective,
-    PaginationComponent,
-    PaginationDirective,
-    InfoDrawerComponent,
-    PageLayoutComponent,
-    TranslatePipe,
-    ToolbarComponent,
-    EmptyContentComponent,
-    DynamicColumnComponent,
-    DocumentListComponent,
-    DataColumnComponent,
-    DataColumnListComponent,
-    CustomEmptyContentTemplateDirective
-  ],
+  selector: 'aca-libraries',
+  standalone: true,
   templateUrl: './libraries.component.html',
+  imports: [LibrariesBaseComponent],
   encapsulation: ViewEncapsulation.None
 })
-export class LibrariesComponent extends PageComponent implements OnInit {
-  columns: DocumentListPresetRef[] = [];
-
-  constructor(private appHookService: AppHookService) {
-    super();
-  }
-
+export class LibrariesComponent extends LibrariesBaseComponent implements OnInit {
   ngOnInit() {
     super.ngOnInit();
 
@@ -85,15 +43,5 @@ export class LibrariesComponent extends PageComponent implements OnInit {
     );
 
     this.columns = this.extensions.documentListPresets.libraries || [];
-  }
-
-  navigateTo(node: SiteEntry) {
-    if (node?.entry?.guid) {
-      this.store.dispatch(new NavigateLibraryAction(node.entry));
-    }
-  }
-
-  handleNodeClick(event: Event) {
-    this.navigateTo((event as CustomEvent).detail?.node);
   }
 }

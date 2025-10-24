@@ -23,33 +23,31 @@
  */
 
 import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FavoritePaging, Pagination } from '@alfresco/js-api';
-import { ContentApiService } from '@alfresco/aca-shared';
+import { Pagination, SitePaging } from '@alfresco/js-api';
 import { UserPreferencesService } from '@alfresco/adf-core';
-import { DocumentListPresetRef } from '@alfresco/adf-extensions';
+import { SitesService } from '@alfresco/adf-content-services';
 import { LibrariesBaseComponent } from '../libraries-base/libraries-base.component';
 
 @Component({
-  selector: 'aca-favorite-libraries',
+  selector: 'aca-library-list',
   standalone: true,
-  templateUrl: './favorite-libraries.component.html',
+  templateUrl: './library-list.component.html',
   imports: [LibrariesBaseComponent],
   encapsulation: ViewEncapsulation.None
 })
-export class FavoriteLibrariesComponent extends LibrariesBaseComponent implements OnInit {
-  pagination: Pagination = new Pagination({
+export class LibraryListComponent extends LibrariesBaseComponent implements OnInit {
+  pagination = new Pagination({
     skipCount: 0,
     maxItems: 25,
     totalItems: 0
   });
   isLoading = false;
-  list: FavoritePaging = null;
-  columns: DocumentListPresetRef[] = [];
+  list: SitePaging = null;
 
   constructor(
-    private contentApiService: ContentApiService,
-    private preferences: UserPreferencesService,
-    private changeDetectorRef: ChangeDetectorRef
+    private readonly preferences: UserPreferencesService,
+    private readonly changeDetectorRef: ChangeDetectorRef,
+    private readonly sitesService: SitesService
   ) {
     super();
   }
@@ -58,15 +56,13 @@ export class FavoriteLibrariesComponent extends LibrariesBaseComponent implement
     super.ngOnInit();
 
     this.getList({ maxItems: this.preferences.paginationSize });
-
     this.subscriptions.push(
       this.appHookService.libraryDeleted.subscribe(() => this.reloadList()),
       this.appHookService.libraryUpdated.subscribe(() => this.reloadList()),
       this.appHookService.libraryJoined.subscribe(() => this.reloadList()),
-      this.appHookService.libraryLeft.subscribe(() => this.reloadList()),
-      this.appHookService.favoriteLibraryToggle.subscribe(() => this.reloadList())
+      this.appHookService.libraryLeft.subscribe(() => this.reloadList())
     );
-    this.columns = this.extensions.documentListPresets.favoriteLibraries || [];
+    this.columns = this.extensions.documentListPresets.libraries || [];
   }
 
   onChangePageSize(pagination: Pagination) {
@@ -76,19 +72,19 @@ export class FavoriteLibrariesComponent extends LibrariesBaseComponent implement
 
   getList(pagination: Pagination) {
     this.isLoading = true;
-    this.contentApiService.getFavoriteLibraries('-me-', pagination).subscribe(
-      (favoriteLibraries: FavoritePaging) => {
-        this.list = favoriteLibraries;
-        this.pagination = favoriteLibraries.list.pagination;
+    this.sitesService.getSites(pagination).subscribe({
+      next: (libraryList: SitePaging) => {
+        this.list = libraryList;
+        this.pagination = libraryList.list.pagination;
         this.isLoading = false;
         this.changeDetectorRef.detectChanges();
       },
-      () => {
+      error: () => {
         this.list = null;
         this.pagination = null;
         this.isLoading = false;
       }
-    );
+    });
   }
 
   private reloadList() {
