@@ -1,0 +1,46 @@
+/* stylelint-disable selector-class-pattern */
+.ext-create-dossier-dialog-container {
+  max-width: 380px;
+  min-width: 260px;
+  width: 80vw;
+  margin: 0 auto;
+  padding: 32px 24px;
+  box-sizing: border-box;
+
+  &.mat-dialog-container {
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .mat-form-field {
+    width: 100%;
+  }
+
+  @media (max-width: 700px) {
+    min-width: 0;
+    width: 98vw;
+    padding: 8px 2vw;
+    max-width: 98vw;
+  }
+}
+
+.mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+[mat-dialog-actions] {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}

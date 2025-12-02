@@ -1,0 +1,64 @@
+/* stylelint-disable selector-class-pattern */
+:host {
+    .adf-card-container {
+        display: grid;
+
+        /* Esto hará que cada tarjeta tenga un ancho mínimo de 400px y crezca para llenar el espacio */
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 1.5rem; /* Aumenta el espacio entre las tarjetas */
+    }
+}
+
+.intranet-welcome-container {
+    padding: 2rem;
+    background-color: #fafafa;
+    border-radius: 8px;
+    max-width: 900px;
+    margin: 2rem auto;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+
+    h2 {
+        color: var(--theme-primary-color, #3f51b5);
+        margin-top: 0;
+        font-size: 1.8rem;
+        font-weight: 600;
+    }
+
+    h4 {
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+        color: #444;
+        border-bottom: 1px solid #e0e0e0;
+        padding-bottom: 0.5rem;
+    }
+
+    p {
+        line-height: 1.6;
+        color: #616161;
+    }
+
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+
+        li {
+            padding: 0.5rem 0;
+            color: #424242;
+
+            strong {
+                color: #212121;
+            }
+        }
+    }
+
+    .start-exploring {
+        margin-top: 2rem;
+        font-style: italic;
+        color: #757575;
+        text-align: center;
+        padding: 1rem;
+        background-color: #f0f0f0;
+        border-radius: 4px;
+    }
+}

@@ -1,0 +1,44 @@
+<div class="aca-page-layout-content">
+  <div class="aca-main-content" *ngIf="!isLoading">
+    <adf-document-list #documentList [contextMenuActions]="true" [contentActions]="true" [selectionMode]="'single'"
+      [multiselect]="false" [currentFolderId]="node?.id" [loading]="true" [allowDropFiles]="true"
+      [displayCheckboxesOnHover]="true" [navigate]="false" [sorting]="['name', 'asc']" [headerFilters]="true"
+      [isResizingEnabled]="true" [blurOnResize]="false" (node-dblclick)="handleNodeClick($event)"
+      (name-click)="handleNodeClick($event)" (error)="onError($event)">
+      <content-actions>
+        <content-action icon="visibility" target="document" title="Ver" (execute)="customNavigateAction($event)" />
+        <content-action icon="cloud_download" target="document" title="Descargar" (execute)="downloadFile($event)" />
+        <content-action icon="content_copy" target="document" title="Copiar" (execute)="copyFile($event)" />
+        <content-action icon="redo" target="document" title="Mover" (execute)="moveFile($event)" [disabled]="!canDeleteNode(node)" />
+        <content-action icon="delete" target="document" title="Eliminar" (execute)="deleteFile($event)" [disabled]="!canDeleteNode(node)" />
+        <content-action icon="share" target="document" title="Compartir enlace" (execute)="shareFile($event)" />
+      </content-actions>
+      <data-columns>
+        <ng-container *ngFor="let column of columns; trackBy: trackByColumnId">
+          <ng-container *ngIf="column.template">
+            <data-column [id]="column.id" [key]="column.key" [title]="column.title" [type]="column.type"
+              [format]="column.format" [class]="column.class" [sortable]="column.sortable"
+              [sortingKey]="column.sortingKey || column.key" [isHidden]="column.isHidden" [draggable]="column.draggable"
+              [resizable]="column.resizable">
+              <ng-template let-context>
+                <adf-dynamic-column [id]="column.template" [context]="context" />
+              </ng-template>
+            </data-column>
+          </ng-container>
+
+          <ng-container *ngIf="!column.template">
+            <data-column [id]="column.id" [key]="column.key" [title]="column.title" [type]="column.type"
+              [format]="column.format" [class]="column.class" [sortable]="column.sortable"
+              [sortingKey]="column.sortingKey || column.key" [isHidden]="column.isHidden" [draggable]="column.draggable"
+              [resizable]="column.resizable" />
+          </ng-container>
+        </ng-container>
+      </data-columns>
+    </adf-document-list>
+
+    <adf-pagination acaPagination [target]="documentList" />
+  </div>
+
+  <mat-progress-spinner *ngIf="isLoading" id="adf-document-list-loading" class="adf-document-list-loading-margin"
+    [color]="'primary'" [mode]="'indeterminate'" />
+</div>

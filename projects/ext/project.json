@@ -1,0 +1,39 @@
+{
+  "name": "ext",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "projects/ext",
+  "projectType": "library",
+  "prefix": "aca",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:ng-packagr",
+      "options": {
+        "tsConfig": "projects/ext/tsconfig.lib.json",
+        "project": "projects/ext/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "projects/ext/tsconfig.lib.prod.json"
+        }
+      },
+      "defaultConfiguration": "production",
+      "outputs": ["{workspaceRoot}/dist/@alfresco/ext"]
+    },
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "codeCoverage": true,
+        "main": "projects/ext/test.ts",
+        "tsConfig": "projects/ext/tsconfig.spec.json",
+        "karmaConfig": "projects/ext/karma.conf.js",
+        "codeCoverageExclude": [],
+        "stylePreprocessorOptions": {
+          "includePaths": ["node_modules"]
+        }
+      }
+    },
+    "lint": {
+      "executor": "@angular-eslint/builder:lint"
+    }
+  }
+}

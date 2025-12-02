@@ -1,0 +1,14 @@
+{
+  "EXT": {
+    "TOOLBAR": {
+      "ADD_ASSOCIATION": "Add association"
+    },
+    "DELETE_ASSOCIATION": {
+      "TITLE": "Delete Association",
+      "MESSAGE": "Are you sure you want to delete the association with '{{name}}'?",
+      "WARNING": "This action cannot be undone.",
+      "SUCCESS": "Association deleted successfully",
+      "ERROR": "Failed to delete association"
+    }
+  }
+}

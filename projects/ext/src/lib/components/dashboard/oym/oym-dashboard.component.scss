@@ -1,0 +1,79 @@
+/* stylelint-disable selector-class-pattern */
+.oym-container {
+  padding: 20px;
+  max-width: 900px; // O el ancho que consideres adecuado
+  margin: 0 auto; // Centrar el contenedor
+  font-family: Arial, sans-serif; // O la fuente que uses en tu app
+}
+
+.oym-header {
+  color: #0056b3; // Color similar al azul de la imagen
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.oym-content-area {
+  display: flex;
+  gap: 20px;
+  padding: 2rem;
+  background-color: #fafafa;
+  border-radius: 8px;
+  max-width: 900px;
+  margin: 2rem auto;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.oym-main-text {
+  padding-left: 10px; // Pequeño padding si hay una línea vertical
+
+}
+
+.start-exploring {
+  margin-top: 2rem;
+  font-style: italic;
+  color: #757575;
+  text-align: center;
+  padding: 1rem;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+}
+
+.oym-main-text h2 {
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.oym-main-text h2 small {
+  color: #666;
+  font-size: 0.8em;
+  font-weight: normal;
+}
+
+.oym-main-text p {
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.oym-main-text ul {
+  list-style-type: disc;
+  margin-left: 20px;
+  margin-bottom: 15px;
+}
+
+.oym-main-text ul li {
+  margin-bottom: 5px;
+}
+
+.oym-image-container {
+  flex-shrink: 0; // Evita que la imagen se achique
+  width: 150px; // Ajusta el ancho según tu imagen
+  text-align: center;
+}
+
+.oym-note-icon {
+  max-width: 100%;
+  height: auto;
+  opacity: 0.7; // Para el efecto de transparencia
+}

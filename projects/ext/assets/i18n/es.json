@@ -1,0 +1,14 @@
+{
+  "EXT": {
+    "TOOLBAR": {
+      "ADD_ASSOCIATION": "Agregar asociación"
+    },
+    "DELETE_ASSOCIATION": {
+      "TITLE": "Eliminar Asociación",
+      "MESSAGE": "¿Está seguro que desea eliminar la asociación con '{{name}}'?",
+      "WARNING": "Esta acción no se puede deshacer.",
+      "SUCCESS": "Asociación eliminada correctamente",
+      "ERROR": "Error al eliminar la asociación"
+    }
+  }
+}

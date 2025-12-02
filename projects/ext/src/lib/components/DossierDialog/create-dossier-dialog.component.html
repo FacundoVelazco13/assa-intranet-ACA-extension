@@ -1,0 +1,44 @@
+<h2 class="create-dossier-dialog-title" mat-dialog-title>
+  Crear Dossier
+</h2>
+
+<mat-dialog-content class="create-dossier-dialog-content">
+  <form [formGroup]="form" (submit)="submit()">
+    <mat-form-field class="full-width">
+      <mat-label>Nombre del dossier</mat-label>
+      <input id="dossier-name-input" aria-label="Nombre del dossier" matInput required formControlName="name" />
+      <mat-hint *ngIf="form.controls['name'].dirty">
+        <span *ngIf="form.controls['name'].errors?.required">
+          El nombre es obligatorio
+        </span>
+        <span *ngIf="!form.controls['name'].errors?.required && form.controls['name'].errors?.message">
+          {{ form.controls['name'].errors?.message }}
+        </span>
+      </mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Título</mat-label>
+      <input id="dossier-title-input" matInput aria-label="Título" formControlName="title" />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Descripción</mat-label>
+      <textarea id="dossier-description-input" matInput aria-label="Descripción" rows="4" formControlName="description">
+            </textarea>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions class="dialog-buttons">
+  <span class="fill-remaining-space"></span>
+
+  <button mat-button id="dossier-cancel-button" mat-dialog-close>
+    Cancelar
+  </button>
+
+  <button class="dialog-action-button" id="dossier-create-button" mat-button (click)="submit()"
+    [disabled]="!form.valid || disableSubmitButton">
+    Crear
+  </button>
+</mat-dialog-actions>

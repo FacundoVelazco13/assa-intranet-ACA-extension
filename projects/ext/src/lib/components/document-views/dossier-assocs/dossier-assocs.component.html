@@ -1,0 +1,40 @@
+<div class="aca-page-layout-content">
+  <div class="aca-main-content">
+    <adf-document-list #documentList [contextMenuActions]="true" [contentActions]="true" [selectionMode]="'single'"
+      [node]="nodePage" [loading]="isLoading" [displayCheckboxesOnHover]="true" [navigate]="false"
+      [sorting]="['name', 'asc']" [headerFilters]="true" [isResizingEnabled]="true" [blurOnResize]="false"
+      (node-dblclick)="handleNodeClick($event)" (name-click)="handleNodeClick($event)" (error)="onError($event)">
+      <content-actions>
+        <content-action icon="visibility" title="Ver" (execute)="customNavigateAction($event)" />
+        <content-action icon="delete" title="Eliminar Asociacion" (execute)="deleteAssoc($event)" />
+      </content-actions>
+
+      <data-columns *ngIf="columns && columns.length > 0">
+        <ng-container *ngFor="let column of columns; trackBy: trackByColumnId">
+          <ng-container *ngIf="column.template">
+            <data-column [id]="column.id" [key]="column.key" [title]="column.title" [type]="column.type"
+              [format]="column.format" [class]="column.class" [sortable]="column.sortable"
+              [sortingKey]="column.sortingKey || column.key" [isHidden]="column.isHidden" [draggable]="column.draggable"
+              [resizable]="column.resizable">
+              <ng-template let-context>
+                <adf-dynamic-column [id]="column.template" [context]="context" />
+              </ng-template>
+            </data-column>
+          </ng-container>
+
+          <ng-container *ngIf="!column.template">
+            <data-column [id]="column.id" [key]="column.key" [title]="column.title" [type]="column.type"
+              [format]="column.format" [class]="column.class" [sortable]="column.sortable"
+              [sortingKey]="column.sortingKey || column.key" [isHidden]="column.isHidden" [draggable]="column.draggable"
+              [resizable]="column.resizable" />
+          </ng-container>
+        </ng-container>
+      </data-columns>
+      <adf-custom-empty-content-template>
+        <h1>Sin documentos relacionados</h1>
+      </adf-custom-empty-content-template>
+    </adf-document-list>
+
+    <adf-pagination acaPagination [target]="documentList" />
+  </div>
+</div>
