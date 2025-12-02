@@ -9,7 +9,7 @@ import {
 import { Component, inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Node, NodeEntry, PathElement } from '@alfresco/js-api';
-import { NodeActionsService } from '@alfresco/aca-content';
+import { NodeActionsService, DocumentListDirective } from '@alfresco/aca-content';
 import {
   ContextActionsDirective,
   GenericErrorComponent,
@@ -32,7 +32,6 @@ import {
 import { DocumentListPresetRef, DynamicColumnComponent } from '@alfresco/adf-extensions';
 import { CommonModule } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
-import { DocumentListDirective } from '@alfresco/aca-content';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -225,7 +224,6 @@ export class IntranetPageComponentComponent extends PageComponent implements OnI
       void this.router.navigate(['.'], { relativeTo: this.route });
       this.isFilterHeaderActive = false;
       this.showHeader = ShowHeaderMode.Data;
-      this.onAllFilterCleared();
     }
   }
   navigateToFilter(activeFilters: FilterSearch[]) {

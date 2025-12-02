@@ -34,7 +34,8 @@
                 "TITLE": "Pakker",
                 "NAME": "Navn",
                 "VERSION": "Version"
-            }
+            },
+            "BACK_BUTTON_LABEL": "Gå tilbage"
         },
         "LANGUAGE": "Sprog",
         "SIGN_IN": "Log ind",
@@ -63,7 +64,8 @@
             "NAME": "Navn",
             "ADDRESS": "Adresse",
             "POSTCODE": "Postnummer",
-            "INVALID_INPUT": "Ugyldig indtastning"
+            "INVALID_INPUT": "Ugyldig indtastning",
+            "GO_TO_PERSONAL_FILES_BUTTON_LABEL": "Gå til personlige filer"
         },
         "LOCKED_BY": "Låst af: ",
         "PREVIEW": {
@@ -133,6 +135,10 @@
                     "FAVORITE_LIBRARIES": {
                         "TITLE": "Du har ikke angivet nogen biblioteker som favorit",
                         "TEXT": "Angiv et bibliotek som favorit for at gøre det nemt at finde biblioteket igen."
+                    },
+                    "ALL_LIBRARIES": {
+                        "TITLE": "Intet bibliotek fundet",
+                        "TEXT": "Opret et nyt bibliotek for at komme i gang."
                     }
                 },
                 "MENU": {
@@ -148,6 +154,13 @@
                         "SIDENAV_LINK": {
                             "LABEL": "Biblioteker, der er angivet som favorit",
                             "TOOLTIP": "Adgang til de biblioteker, jeg har angivet som favorit"
+                        }
+                    },
+                    "ALL_LIBRARIES": {
+                        "TITLE": "Alle Biblioteker",
+                        "SIDENAV_LINK": {
+                            "LABEL": "Alle Biblioteker",
+                            "TOOLTIP": "Få adgang til alle biblioteker"
                         }
                     }
                 },
@@ -461,7 +474,12 @@
             "COLLAPSE_NAVIGATION": "Luk navigationsmenuen",
             "OPTIONS_SETTINGS": "Valgmuligheder og indstillinger",
             "MY_PROFILE": "Min profil",
-            "EXPAND_NAVIGATION": "Udvid navigationsmenu"
+            "EXPAND_NAVIGATION": "Udvid navigationsmenu",
+            "EXPAND_SECTION": "Udvid sektion",
+            "COLLAPSE_SECTION": "Skjul sektion",
+            "EDIT": "Rediger",
+            "CANCEL": "Annuller",
+            "SAVE": "Gem"
         },
         "FOLDER_INFO": {
             "ICON": "Mappe-ikon",

@@ -40,3 +40,4 @@ export * from './lib/components/sidenav/directives/action.directive';
 export * from './lib/components/sidenav/components/expand-menu.component';
 export * from './lib/directives/document-list.directive';
 export * from './lib/utils/aca-search-utils';
+export * from './lib/pipes/is-feature-supported.pipe';

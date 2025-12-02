@@ -37,7 +37,6 @@ import {
   SetSelectedNodesAction,
   ShareNodeAction,
   UnlockWriteAction,
-  ViewNodeExtras,
   ViewNodeVersionAction
 } from '@alfresco/aca-shared/store';
 import { NodeEffects } from '../store/effects/node.effects';
@@ -53,6 +52,7 @@ import { Node, NodeEntry, SiteBodyCreate, SiteEntry, UserInfo, VersionPaging } f
 import {
   DocumentListService,
   FileModel,
+  LibraryDialogComponent,
   NewVersionUploaderDataAction,
   NewVersionUploaderDialogData,
   NewVersionUploaderService,
@@ -62,6 +62,8 @@ import {
 } from '@alfresco/adf-content-services';
 import { FolderInformationComponent } from '../dialogs/folder-details/folder-information.component';
 import { provideEffects } from '@ngrx/effects';
+import { ActivatedRoute, Router } from '@angular/router';
+import { EventEmitter } from '@angular/core';
 
 describe('ContentManagementService', () => {
   let dialog: MatDialog;
@@ -77,6 +79,8 @@ describe('ContentManagementService', () => {
   let appHookService: AppHookService;
   let newVersionUploaderService: NewVersionUploaderService;
   let appSettingsService: AppSettingsService;
+  let router: Router;
+  let activatedRoute: ActivatedRoute;
   let showErrorSpy: jasmine.Spy<(message: string, action?: string, interpolateArgs?: any, showAction?: boolean) => MatSnackBarRef<any>>;
   let showInfoSpy: jasmine.Spy<(message: string, action?: string, interpolateArgs?: any, showAction?: boolean) => MatSnackBarRef<any>>;
   let showWarningSpy: jasmine.Spy<(message: string, action?: string, interpolateArgs?: any, showAction?: boolean) => MatSnackBarRef<any>>;
@@ -104,7 +108,8 @@ describe('ContentManagementService', () => {
     appHookService = TestBed.inject(AppHookService);
     newVersionUploaderService = TestBed.inject(NewVersionUploaderService);
     appSettingsService = TestBed.inject(AppSettingsService);
-
+    router = TestBed.inject(Router);
+    activatedRoute = TestBed.inject(ActivatedRoute);
     dialog = TestBed.inject(MatDialog);
   });
 
@@ -1618,12 +1623,47 @@ describe('ContentManagementService', () => {
 
     it('should dispatch ViewNodeVersionAction if dialog emit view action', () => {
       const fakeVersionId = '1';
-      const fakeLocation: ViewNodeExtras = {
-        location: '/'
-      };
+      const mockLocation = '/personal-files';
+      activatedRoute.snapshot.queryParams = { location: mockLocation };
+
       spyOnOpenUploadNewVersionDialog.and.returnValue(of({ action: NewVersionUploaderDataAction.view, versionId: fakeVersionId } as ViewVersion));
       contentManagementService.manageVersions(fakeNodeIsFile);
-      expect(spyOnDispatch).toHaveBeenCalledOnceWith(new ViewNodeVersionAction(fakeNodeIsFile.entry.id, fakeVersionId, fakeLocation));
+
+      expect(spyOnDispatch).toHaveBeenCalledOnceWith(
+        new ViewNodeVersionAction(fakeNodeIsFile.entry.id, fakeVersionId, {
+          location: mockLocation
+        })
+      );
+    });
+
+    it('should dispatch ViewNodeVersionAction with location value from router.url if location param doesnt exist already', () => {
+      const fakeVersionId = '1';
+      const currentUrl = '/current-page';
+      activatedRoute.snapshot.queryParams = {};
+
+      spyOnProperty(router, 'url', 'get').and.returnValue(currentUrl);
+
+      spyOnOpenUploadNewVersionDialog.and.returnValue(of({ action: NewVersionUploaderDataAction.view, versionId: fakeVersionId } as ViewVersion));
+
+      contentManagementService.manageVersions(fakeNodeIsFile);
+
+      expect(spyOnDispatch).toHaveBeenCalledOnceWith(
+        new ViewNodeVersionAction(fakeNodeIsFile.entry.id, fakeVersionId, {
+          location: currentUrl
+        })
+      );
+    });
+
+    it('should dispatch ViewNodeVersionAction with the same location param if already exist', () => {
+      const fakeVersionId = '1';
+      const location = '/personal-files';
+      activatedRoute.snapshot.queryParams = { location: location };
+
+      spyOnOpenUploadNewVersionDialog.and.returnValue(of({ action: NewVersionUploaderDataAction.view, versionId: fakeVersionId } as ViewVersion));
+
+      contentManagementService.manageVersions(fakeNodeIsFile);
+
+      expect(spyOnDispatch).toHaveBeenCalledOnceWith(new ViewNodeVersionAction(fakeNodeIsFile.entry.id, fakeVersionId, { location }));
     });
 
     it('should show permission error is node is not a file and does not have nodeId', () => {
@@ -1826,6 +1866,60 @@ describe('ContentManagementService', () => {
 
       expect(appHookService.libraryUpdateFailed.next).toHaveBeenCalled();
       expect(showErrorSpy).toHaveBeenCalledWith('LIBRARY.ERRORS.LIBRARY_UPDATE_ERROR');
+    });
+  });
+
+  describe('createLibrary', () => {
+    let dialogRefMock: jasmine.SpyObj<MatDialogRef<LibraryDialogComponent, SiteEntry | null>>;
+
+    beforeEach(() => {
+      dialogRefMock = jasmine.createSpyObj<MatDialogRef<LibraryDialogComponent, SiteEntry | null>>('MatDialogRef', ['afterClosed'], {
+        componentInstance: { error: new EventEmitter<string>() } as LibraryDialogComponent
+      });
+    });
+
+    it('should open LibraryDialogComponent with autoFocus set to false', () => {
+      dialogRefMock.afterClosed.and.returnValue(of(null));
+      spyOn(dialog, 'open').and.returnValue(dialogRefMock);
+      contentManagementService.createLibrary();
+
+      expect(dialog.open).toHaveBeenCalledWith(LibraryDialogComponent, jasmine.objectContaining({ autoFocus: false }));
+    });
+
+    it('should show library creation error notifications', () => {
+      dialogRefMock.afterClosed.and.returnValue(of(null));
+      spyOn(dialog, 'open').and.returnValue(dialogRefMock);
+      contentManagementService.createLibrary();
+      dialogRefMock.componentInstance.error.emit('Library creation error');
+
+      expect(showErrorSpy).toHaveBeenCalled();
+    });
+
+    it('should emit guid, call libraryCreated hook and focus when site is created', (done) => {
+      const mockSiteEntry = new SiteEntry({ entry: { guid: 'guid', id: 'id', visibility: 'PUBLIC', title: 'title' } });
+      const button = document.createElement('button');
+      dialogRefMock.afterClosed.and.returnValue(of(mockSiteEntry));
+      spyOn(dialog, 'open').and.returnValue(dialogRefMock);
+      spyOn(appHookService.libraryCreated, 'next');
+      spyOn(document, 'querySelector').and.returnValue(button);
+      spyOn(button, 'focus');
+
+      contentManagementService.createLibrary().subscribe((guid) => {
+        expect(guid).toBe('guid');
+        expect(appHookService.libraryCreated.next).toHaveBeenCalledWith(mockSiteEntry);
+        expect(button.focus).toHaveBeenCalled();
+        done();
+      });
+    });
+
+    it('should emit null when node is missing guid', (done) => {
+      dialogRefMock.afterClosed.and.returnValue(of(null));
+      spyOn(dialog, 'open').and.returnValue(dialogRefMock);
+
+      contentManagementService.createLibrary().subscribe((guid) => {
+        expect(guid).toBeNull();
+        done();
+      });
     });
   });
 

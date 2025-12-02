@@ -23,13 +23,13 @@
  */
 
 import { Component, DestroyRef, inject, OnInit, ViewEncapsulation } from '@angular/core';
-import { SavedSearch, SavedSearchesService } from '@alfresco/adf-content-services';
+import { SavedSearch } from '@alfresco/adf-content-services';
 import { TranslationService, UserPreferencesService, UserPreferenceValues } from '@alfresco/adf-core';
 import { NavBarLinkRef } from '@alfresco/adf-extensions';
 import { ExpandMenuComponent } from '../../../sidenav/components/expand-menu.component';
-import { AppService } from '@alfresco/aca-shared';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { delay } from 'rxjs/operators';
+import { SavedSearchesContextService } from '../../../../services/saved-searches-context.service';
 
 @Component({
   selector: 'aca-save-search-sidenav',
@@ -38,8 +38,7 @@ import { delay } from 'rxjs/operators';
   encapsulation: ViewEncapsulation.None
 })
 export class SaveSearchSidenavComponent implements OnInit {
-  savedSearchesService = inject(SavedSearchesService);
-  appService = inject(AppService);
+  savedSearchesService = inject(SavedSearchesContextService);
   translationService = inject(TranslationService);
   item: NavBarLinkRef;
 
@@ -51,13 +50,10 @@ export class SaveSearchSidenavComponent implements OnInit {
 
   ngOnInit() {
     this.savedSearchesService.init();
-    this.savedSearchesService.savedSearches$
-      .asObservable()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((savedSearches) => {
-        this.item = this.createNavBarLinkRef(savedSearches);
-        this.savedSearchCount = savedSearches.length;
-      });
+    this.savedSearchesService.savedSearches$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((savedSearches) => {
+      this.item = this.createNavBarLinkRef(savedSearches);
+      this.savedSearchCount = savedSearches.length;
+    });
     this.userPreferenceService
       .select(UserPreferenceValues.Locale)
       .pipe(takeUntilDestroyed(this.destroyRef), delay(10))
@@ -66,12 +62,6 @@ export class SaveSearchSidenavComponent implements OnInit {
           this.item.title = this.translationService.instant('APP.BROWSE.SEARCH.SAVE_SEARCH.NAVBAR.TITLE', { number: this.savedSearchCount });
         }
       });
-  }
-
-  onActionClick(el: NavBarLinkRef): void {
-    if (el.id !== this.manageSearchesId) {
-      this.appService.appNavNarMode$.next('collapsed');
-    }
   }
 
   private createNavBarLinkRef(children: SavedSearch[]): NavBarLinkRef {

@@ -21,7 +21,6 @@
     "host": "{protocol}//{hostname}{:port}/auth/realms/alfresco",
     "clientId": "alfresco",
     "scope": "openid",
-    "secret": "",
     "implicitFlow": false,
     "codeFlow": true,
     "silentLogin": true,
@@ -35,7 +34,7 @@
   "locale": "en",
   "application": {
     "name": "Workspace",
-    "version": "7.1.0",
+    "version": "7.2.0",
     "logo": "assets/images/app-logo.svg",
     "copyright": "APP.COPYRIGHT"
   },
@@ -112,18 +111,10 @@
           "items": [
             {
               "aspect": "cm:effectivity",
-              "properties": ["cm:from", "cm:to"]
-            }
-          ]
-        }
-      ],
-      "my-preset": [
-        {
-          "title": "This is my preset",
-          "items": [
-            {
-              "aspect": "st:siteContainer",
-              "properties": ["*"]
+              "properties": [
+                "cm:from",
+                "cm:to"
+              ]
             }
           ]
         }
@@ -135,7 +126,13 @@
   "search-headers": {
     "filterWithContains": true,
     "include": ["path", "allowableOperations", "properties"],
-    "app:fields": ["cm:name", "cm:title", "cm:description", "TEXT", "TAG"],
+    "app:fields": [
+      "cm:name",
+      "cm:title",
+      "cm:description",
+      "TEXT",
+      "TAG"
+    ],
     "categories": [
       {
         "id": "logic",
@@ -161,15 +158,15 @@
             "pattern": "cm:name:'(.*?)'",
             "field": "cm:name",
             "placeholder": "SEARCH.SEARCH_HEADER.FILTERS.NAME.PLACEHOLDER",
-            "searchPrefix": "*",
-            "searchSuffix": "*"
+            "searchPrefix" : "*",
+            "searchSuffix" : "*"
           }
         }
       },
       {
         "id": "checkList",
         "name": "SEARCH.SEARCH_HEADER.FILTERS.TYPE.TITLE",
-        "columnKey": "$thumbnail",
+        "columnKey":"$thumbnail",
         "enabled": true,
         "component": {
           "selector": "check-list",
@@ -193,7 +190,7 @@
       {
         "id": "contentSize",
         "name": "SEARCH.SEARCH_HEADER.FILTERS.SIZE.TITLE",
-        "columnKey": "content.sizeInBytes",
+        "columnKey":"content.sizeInBytes",
         "enabled": true,
         "component": {
           "selector": "check-list",
@@ -316,39 +313,12 @@
     }
   },
   "aspect-visible": {
-    "default": [
-      "cm:generalclassifiable",
-      "cm:complianceable",
-      "cm:dublincore",
-      "cm:effectivity",
-      "cm:summarizable",
-      "cm:versionable",
-      "cm:templatable",
-      "cm:emailed",
-      "emailserver:aliasable",
-      "cm:taggable",
-      "app:inlineeditable",
-      "cm:geographic",
-      "exif:exif",
-      "audio:audio",
-      "cm:indexControl",
-      "dp:restrictable",
-      "smf:customConfigSmartFolder",
-      "smf:systemConfigSmartFolder"
-    ],
-    "ai": [
-      "ai:products",
-      "ai:dates",
-      "ai:places",
-      "ai:events",
-      "ai:organizations",
-      "ai:people",
-      "ai:things",
-      "ai:quantities",
-      "ai:creativeWorks",
-      "ai:labels",
-      "ai:textLines"
-    ]
+    "default" : ["cm:generalclassifiable", "cm:complianceable",
+                 "cm:dublincore", "cm:effectivity", "cm:summarizable",
+                 "cm:versionable", "cm:templatable","cm:emailed", "emailserver:aliasable",
+                 "cm:taggable", "app:inlineeditable", "cm:geographic", "exif:exif",
+                 "audio:audio", "cm:indexControl", "dp:restrictable", "smf:customConfigSmartFolder", "smf:systemConfigSmartFolder"],
+    "ai": ["ai:products", "ai:dates", "ai:places", "ai:events", "ai:organizations", "ai:people", "ai:things", "ai:quantities", "ai:creativeWorks", "ai:labels", "ai:textLines"]
   },
   "viewer": {
     "enableDownloadPrompt": true,

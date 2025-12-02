@@ -24,26 +24,29 @@
 
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { SaveSearchSidenavComponent } from './save-search-sidenav.component';
-import { SavedSearchesService } from '@alfresco/adf-content-services';
 import { AppTestingModule } from '../../../../testing/app-testing.module';
-import { of, ReplaySubject } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { SavedSearchesContextService } from '../../../../services/saved-searches-context.service';
+import { SavedSearch } from '@alfresco/adf-content-services';
 
 describe('SaveSearchSidenavComponent', () => {
   let fixture: ComponentFixture<SaveSearchSidenavComponent>;
   let component: SaveSearchSidenavComponent;
-  let savedSearchesService: SavedSearchesService;
+  let savedSearchesService: SavedSearchesContextService;
 
   beforeEach(() => {
-    const mockService = {
-      init: () => {},
-      getSavedSearches: () => of(),
-      savedSearches$: new ReplaySubject(1)
+    const mockService: Partial<SavedSearchesContextService> = {
+      init: (): void => {},
+
+      get savedSearches$(): Observable<SavedSearch[]> {
+        return of([]);
+      }
     };
     TestBed.configureTestingModule({
       imports: [AppTestingModule, SaveSearchSidenavComponent],
       providers: [
         {
-          provide: SavedSearchesService,
+          provide: SavedSearchesContextService,
           useValue: mockService
         }
       ]
@@ -51,11 +54,11 @@ describe('SaveSearchSidenavComponent', () => {
 
     fixture = TestBed.createComponent(SaveSearchSidenavComponent);
     component = fixture.componentInstance;
-    savedSearchesService = TestBed.inject(SavedSearchesService);
+    savedSearchesService = TestBed.inject(SavedSearchesContextService);
   });
 
   it('should set navbar object if no search is saved', async () => {
-    savedSearchesService.savedSearches$.next([]);
+    spyOnProperty(savedSearchesService, 'savedSearches$', 'get').and.returnValue(of([]));
     fixture.detectChanges();
     await fixture.whenStable();
 
@@ -78,7 +81,7 @@ describe('SaveSearchSidenavComponent', () => {
   });
 
   it('should set navbar object with children is searches are saved', fakeAsync(() => {
-    savedSearchesService.savedSearches$.next([{ name: '1', order: 0, encodedUrl: 'abc' }]);
+    spyOnProperty(savedSearchesService, 'savedSearches$', 'get').and.returnValue(of([{ name: '1', order: 0, encodedUrl: 'abc' }]));
     component.ngOnInit();
     fixture.detectChanges();
     tick(100);

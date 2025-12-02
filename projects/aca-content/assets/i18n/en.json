@@ -34,7 +34,8 @@
           "TITLE": "Packages",
           "NAME": "Name",
           "VERSION": "Version"
-        }
+        },
+        "BACK_BUTTON_LABEL": "Go back"
       },
         "LANGUAGE": "Language",
         "SIGN_IN": "Sign in",
@@ -63,7 +64,8 @@
             "NAME": "Name",
             "ADDRESS": "Address",
             "POSTCODE": "Postcode",
-            "INVALID_INPUT": "Invalid Input"
+            "INVALID_INPUT": "Invalid Input",
+            "GO_TO_PERSONAL_FILES_BUTTON_LABEL": "Go to Personal Files"
         },
         "LOCKED_BY": "Locked by: ",
         "PREVIEW": {
@@ -133,6 +135,10 @@
                     "FAVORITE_LIBRARIES": {
                         "TITLE": "No Favorite Libraries",
                         "TEXT": "Favorite a library that you want to find easily later."
+                    },
+                    "ALL_LIBRARIES": {
+                      "TITLE": "No library found",
+                      "TEXT": "Create a new library to get started."
                     }
                 },
                 "MENU": {
@@ -148,6 +154,13 @@
                         "SIDENAV_LINK": {
                             "LABEL": "Favorite Libraries",
                             "TOOLTIP": "Access my favorite libraries"
+                        }
+                    },
+                    "ALL_LIBRARIES": {
+                        "TITLE": "All Libraries",
+                        "SIDENAV_LINK": {
+                            "LABEL": "All Libraries",
+                            "TOOLTIP": "Access all libraries"
                         }
                     }
                 },
@@ -461,7 +474,12 @@
             "COLLAPSE_NAVIGATION": "Collapse navigation menu",
             "OPTIONS_SETTINGS": "Options and settings",
             "MY_PROFILE": "My profile",
-            "EXPAND_NAVIGATION": "Expand navigation menu"
+            "EXPAND_NAVIGATION": "Expand navigation menu",
+            "EXPAND_SECTION": "Expand section",
+            "COLLAPSE_SECTION": "Collapse section",
+            "EDIT": "Edit",
+            "CANCEL": "Cancel",
+            "SAVE": "Save"
           },
         "FOLDER_INFO": {
           "ICON": "Folder Icon",

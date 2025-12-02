@@ -81,9 +81,10 @@ test.describe('Search - Filters - Tags', () => {
     await expect(searchPage.dataTable.getRowByName(file1)).toBeVisible();
     await expect(searchPage.dataTable.getRowByName(file2)).toBeHidden();
 
+    await searchPage.searchFiltersTags.clearTagFilter(searchPage);
     await searchPage.searchFiltersTags.filterByTag(searchPage, `${tagPaging.list.entries[1].entry.tag}`);
 
-    await expect(searchPage.dataTable.getRowByName(file1)).toBeVisible();
+    await expect(searchPage.dataTable.getRowByName(file1)).toBeHidden();
     await expect(searchPage.dataTable.getRowByName(file2)).toBeVisible();
   });
 });

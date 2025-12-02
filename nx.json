@@ -38,10 +38,5 @@
   },
   "cacheDirectory": "nxcache",
   "useInferencePlugins": false,
-  "useLegacyCache": true,
-  "generators": {
-    "@nx/angular:component": {
-      "style": "scss"
-    }
-  }
+  "useLegacyCache": true
 }

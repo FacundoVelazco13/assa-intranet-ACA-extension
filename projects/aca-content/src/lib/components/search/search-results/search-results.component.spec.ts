@@ -24,13 +24,14 @@
 
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { SearchResultsComponent } from './search-results.component';
+import { Pipe, PipeTransform } from '@angular/core';
 import { AppConfigService, NotificationService, TranslationService } from '@alfresco/adf-core';
 import { Store } from '@ngrx/store';
 import { NavigateToFolder } from '@alfresco/aca-shared/store';
 import { Pagination, SearchRequest } from '@alfresco/js-api';
-import { SavedSearchesService, SearchQueryBuilderService } from '@alfresco/adf-content-services';
+import { SearchQueryBuilderService } from '@alfresco/adf-content-services';
 import { ActivatedRoute, Event, NavigationStart, Params, Router } from '@angular/router';
-import { BehaviorSubject, of, Subject, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject, throwError } from 'rxjs';
 import { AppTestingModule } from '../../../testing/app-testing.module';
 import { AppService } from '@alfresco/aca-shared';
 import { MatSnackBarModule, MatSnackBarRef } from '@angular/material/snack-bar';
@@ -41,6 +42,14 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatMenuHarness } from '@angular/material/menu/testing';
+import { SavedSearchesContextService } from '../../../services/saved-searches-context.service';
+
+@Pipe({ name: 'isFeatureSupportedInCurrentAcs' })
+class MockIsFeatureSupportedInCurrentAcsPipe implements PipeTransform {
+  transform(): Observable<boolean> {
+    return of(true);
+  }
+}
 
 describe('SearchComponent', () => {
   let component: SearchResultsComponent;
@@ -88,7 +97,7 @@ describe('SearchComponent', () => {
           }
         },
         {
-          provide: SavedSearchesService,
+          provide: SavedSearchesContextService,
           useValue: {
             getSavedSearches: jasmine
               .createSpy('getSavedSearches')
@@ -110,6 +119,12 @@ describe('SearchComponent', () => {
         },
         { provide: Router, useValue: routerMock }
       ]
+    });
+
+    TestBed.overrideComponent(SearchResultsComponent, {
+      add: {
+        imports: [MockIsFeatureSupportedInCurrentAcsPipe]
+      }
     });
 
     config = TestBed.inject(AppConfigService);
@@ -257,12 +272,11 @@ describe('SearchComponent', () => {
     expect(queryBuilder.userQuery).toBe(`((cm:tag:"orange*"))`);
   });
 
-  it('should get initial saved search when url matches', fakeAsync(() => {
+  it('should get initial saved search when url matches', () => {
     route.queryParams = of({ q: encodeQuery({ name: 'test' }) });
     component.ngOnInit();
-    tick();
     expect(component.initialSavedSearch).toEqual({ name: 'test', encodedUrl: encodeQuery({ name: 'test' }), order: 0 });
-  }));
+  });
 
   it('should render a menu with 2 options when initial saved search is found', async () => {
     route.queryParams = of({ q: encodeQuery({ name: 'test' }) });
@@ -325,8 +339,13 @@ describe('SearchComponent', () => {
     expect(queryBuilder.execute).toHaveBeenCalledTimes(1);
   }));
 
-  it('should NOT call execute on navigation to search page', fakeAsync(() => {
-    spyOn(queryBuilder, 'execute');
+  it('should NOT call execute on navigation to search page with unchanged query', fakeAsync(() => {
+    const executeSpy = spyOn(queryBuilder, 'execute');
+    queryParams.next({ q: encodeQuery({ userQuery: 'cm:name:"test*"' }) });
+    tick();
+
+    executeSpy.calls.reset();
+
     routerEvents.next(new NavigationStart(1, '/mock-search-url', 'imperative'));
     queryParams.next({ q: encodeQuery({ userQuery: 'cm:name:"test*"' }) });
 
@@ -334,6 +353,33 @@ describe('SearchComponent', () => {
 
     expect(queryBuilder.execute).not.toHaveBeenCalled();
   }));
+
+  it('should call execute on navigation to search page with changed query', fakeAsync(() => {
+    const executeSpy = spyOn(queryBuilder, 'execute');
+    queryParams.next({ q: encodeQuery({ userQuery: 'cm:name:"different*"' }) });
+    tick();
+
+    executeSpy.calls.reset();
+
+    routerEvents.next(new NavigationStart(1, '/mock-search-url', 'imperative'));
+    queryParams.next({ q: encodeQuery({ userQuery: 'cm:name:"test*"' }) });
+
+    tick();
+
+    expect(executeSpy).toHaveBeenCalledTimes(1);
+  }));
+
+  it('should format userQuery when url parameters changed and userQuery is not contained by url', () => {
+    routerEvents.next(new NavigationStart(1, ''));
+    queryParams.next({ q: encodeQuery('') });
+    expect(queryBuilder.userQuery).toBe('((cm:name:"*"))');
+  });
+
+  it('should not format userQuery when url parameters changed when userQuery is already contained by url', () => {
+    routerEvents.next(new NavigationStart(1, ''));
+    queryParams.next({ q: encodeQuery({ userQuery: 'test' }) });
+    expect(queryBuilder.userQuery).toBe('(test)');
+  });
 
   testHeader(SearchResultsComponent, false);
 });

@@ -483,6 +483,60 @@ export function canOpenWithOffice(context: AcaRuleContext): boolean {
   return context.permissions.check(file, ['update']);
 }
 
+/**
+ * Checks if user savedSearches are supported by current ACS version.
+ * JSON ref: `isPreferencesApiAvailable`
+ */
+export const isPreferencesApiAvailable = createVersionRule('25.1.0');
+
+/**
+ * Checks if folder info modal is supported by current ACS version.
+ * JSON ref: `isFolderInfoAvailable`
+ */
+export const isFolderInfoAvailable = createVersionRule('23.4.0');
+
+/**
+ * Checks if bulk update feature for legal holds is supported by current ACS version.
+ * JSON ref: `isBulkActionsAvailable`
+ */
+export const isBulkActionsAvailable = createVersionRule('23.3.0');
+
+/**
+ * Partially applies minimal version of a feature against a core compatibility evaluation.
+ * @param minimalVersion The minimal version to check against.
+ */
+export function createVersionRule(minimalVersion: string): (context: RuleContext) => boolean {
+  return (context: RuleContext): boolean => {
+    const acsVersion = context.repository.version?.display?.split(' ')[0];
+    return isVersionCompatible(acsVersion, minimalVersion);
+  };
+}
+
+function isVersionCompatible(currentVersion: string, minimalVersion: string): boolean {
+  if (!currentVersion || !minimalVersion) {
+    return false;
+  }
+
+  const currentParts = currentVersion.split('.').map(Number);
+  const minimalParts = minimalVersion.split('.').map(Number);
+  const maxLength = Math.max(currentParts.length, minimalParts.length);
+
+  for (let i = 0; i < maxLength; i++) {
+    const currentSegment = currentParts[i] ?? 0;
+    const minimalSegment = minimalParts[i] ?? 0;
+
+    if (currentSegment > minimalSegment) {
+      return true;
+    }
+
+    if (currentSegment < minimalSegment) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 export function isSmartFolder(context: RuleContext): boolean {
   if (!context.selection?.isEmpty) {
     const node = context.selection.first;
@@ -506,3 +560,5 @@ export const canDisplayKnowledgeRetrievalButton = (context: AcaRuleContext): boo
     navigation.isRecentFiles(context) ||
     navigation.isFavorites(context) ||
     ((navigation.isSearchResults(context) || navigation.isLibraryContent(context)) && !navigation.isLibraries(context)));
+
+export const isSSOEnabled = (context: AcaRuleContext): boolean => context.appConfig.get('authType') === 'OAUTH';

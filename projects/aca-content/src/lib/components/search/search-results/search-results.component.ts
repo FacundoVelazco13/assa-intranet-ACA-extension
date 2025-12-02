@@ -30,7 +30,6 @@ import {
   DocumentListComponent,
   ResetSearchDirective,
   SavedSearch,
-  SavedSearchesService,
   SearchConfiguration,
   SearchFilterChipsComponent,
   SearchFormComponent,
@@ -88,6 +87,8 @@ import { SaveSearchDirective } from '../search-save/directive/save-search.direct
 import { combineLatest, of } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatMenuModule } from '@angular/material/menu';
+import { IsFeatureSupportedInCurrentAcsPipe } from '../../../pipes/is-feature-supported.pipe';
+import { SavedSearchesContextService } from '../../../services/saved-searches-context.service';
 
 @Component({
   imports: [
@@ -121,7 +122,8 @@ import { MatMenuModule } from '@angular/material/menu';
     ViewerToolbarComponent,
     BulkActionsDropdownComponent,
     SearchAiInputContainerComponent,
-    SaveSearchDirective
+    SaveSearchDirective,
+    IsFeatureSupportedInCurrentAcsPipe
   ],
   selector: 'aca-search-results',
   templateUrl: './search-results.component.html',
@@ -145,13 +147,15 @@ export class SearchResultsComponent extends PageComponent implements OnInit {
   encodedQuery: string;
   searchConfig: SearchConfiguration;
 
+  private previousEncodedQuery: string;
+
   constructor(
     tagsService: TagService,
     private readonly queryBuilder: SearchQueryBuilderService,
     private readonly changeDetectorRef: ChangeDetectorRef,
     private readonly route: ActivatedRoute,
     private readonly translationService: TranslationService,
-    private readonly savedSearchesService: SavedSearchesService
+    private readonly savedSearchesService: SavedSearchesContextService
   ) {
     super();
 
@@ -247,6 +251,9 @@ export class SearchResultsComponent extends PageComponent implements OnInit {
         .subscribe((navigationStartEvent) => {
           const shouldExecuteQuery = this.shouldExecuteQuery(navigationStartEvent, this.encodedQuery);
           this.queryBuilder.userQuery = extractUserQueryFromEncodedQuery(this.encodedQuery);
+          if (!this.searchedWord && !this.queryBuilder.userQuery && this.encodedQuery) {
+            this.queryBuilder.userQuery = formatSearchTerm('*', this.searchConfig['app:fields']);
+          }
 
           if (shouldExecuteQuery) {
             this.queryBuilder.execute(false);
@@ -256,13 +263,18 @@ export class SearchResultsComponent extends PageComponent implements OnInit {
   }
 
   onSearchError(error: { message: any }) {
-    const { statusCode } = JSON.parse(error.message).error;
+    let message: string;
+    try {
+      const { statusCode } = JSON.parse(error.message).error;
 
-    const messageKey = `APP.BROWSE.SEARCH.ERRORS.${statusCode}`;
-    let message = this.translationService.instant(messageKey);
+      const messageKey = `APP.BROWSE.SEARCH.ERRORS.${statusCode}`;
+      message = this.translationService.instant(messageKey);
 
-    if (message === messageKey) {
-      message = this.translationService.instant(`APP.BROWSE.SEARCH.ERRORS.GENERIC`);
+      if (message === messageKey) {
+        message = this.translationService.instant(`APP.BROWSE.SEARCH.ERRORS.GENERIC`);
+      }
+    } catch {
+      message = error.message;
     }
 
     this.notificationService.showError(message);
@@ -349,10 +361,13 @@ export class SearchResultsComponent extends PageComponent implements OnInit {
   }
 
   private shouldExecuteQuery(navigationStartEvent: NavigationStart | null, query: string | undefined): boolean {
+    const hasQueryChanged = query !== this.previousEncodedQuery;
+    this.previousEncodedQuery = query;
+
     if (!navigationStartEvent || navigationStartEvent.navigationTrigger === 'popstate' || navigationStartEvent.navigationTrigger === 'hashchange') {
       return true;
     } else if (navigationStartEvent.navigationTrigger === 'imperative') {
-      return false;
+      return hasQueryChanged;
     } else {
       return !!query;
     }
