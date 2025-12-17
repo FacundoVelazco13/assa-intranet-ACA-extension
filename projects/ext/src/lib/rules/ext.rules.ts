@@ -33,7 +33,25 @@ export function canCreateInCurrentFolder(context: RuleContext): boolean {
  */
 export function isIntranetDocumentLibrary(context: RuleContext): boolean {
   const url = context.navigation?.url || '';
-  return url.startsWith('/intranet') && !url.includes('/details');
+  const pathElements = context.navigation?.currentFolder?.path?.elements || [];
+
+  return url.startsWith('/intranet') && pathElements.slice(-1)[0]?.name === 'documentLibrary';
+}
+/**
+ * Verifica si la ruta actual pertenece a la intranet.
+ * JSON ref: `ext.isIntranet`
+ */
+export function isIntranet(context: RuleContext): boolean {
+  const url = context.navigation?.url || '';
+  return url.startsWith('/intranet');
+}
+/**
+ * Verifica si la ruta actual no sea /intranet/search.
+ * JSON ref: `ext.isIntranetSearch`
+ */
+export function isIntranetSearch(context: RuleContext): boolean {
+  const url = context.navigation?.url || '';
+  return url.startsWith('/intranet/search');
 }
 
 /**

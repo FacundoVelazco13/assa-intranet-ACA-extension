@@ -1,0 +1,11 @@
+<adf-cloud-task-list [presetColumn]="'customSchema'">
+  <data-columns>
+    <data-column key="assignee" title="Assignee" class="full-width name-column">
+      <ng-template let-entry="$implicit">
+        <div>{{entry.row.obj.assignee}}</div>
+      </ng-template>
+    </data-column>
+  </data-columns>
+</adf-cloud-task-list>
+
+<adf-cloud-start-process [appName]="YOUR_APP_NAME"/>

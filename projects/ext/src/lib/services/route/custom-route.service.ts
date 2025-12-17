@@ -13,7 +13,7 @@ export class CustomRouteService {
         return ['intranet', 'oym', 'procedimientos', 'details', node.id];
       case OymNodeType.Politica:
         return ['intranet', 'oym', 'politicas', 'details', node.id];
-      case OymNodeType.Formulario:
+      case OymNodeType.FormularioRegistro:
         return ['intranet', 'oym', 'formularios', 'details', node.id];
       case AlfrescoNodeType.Folder:
         return ['personal-files', node.id];

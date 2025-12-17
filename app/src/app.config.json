@@ -31,11 +31,11 @@
     "skipIssuerCheck": true,
     "strictDiscoveryDocumentValidation": false
   },
-  "locale": "en",
+  "locale": "es",
   "application": {
-    "name": "Workspace",
+    "name": "",
     "version": "7.2.0",
-    "logo": "assets/images/app-logo.svg",
+    "logo": "assets/images/intranet-logo.png",
     "copyright": "APP.COPYRIGHT"
   },
   "pagination": {

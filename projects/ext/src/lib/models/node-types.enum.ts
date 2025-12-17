@@ -6,7 +6,7 @@
 export enum OymNodeType {
   Procedimiento = 'oym:procedimiento',
   Politica = 'oym:politica',
-  Formulario = 'oym:formularioRegistro'
+  FormularioRegistro = 'oym:formularioRegistro'
 }
 
 /**

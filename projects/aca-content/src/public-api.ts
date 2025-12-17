@@ -41,3 +41,19 @@ export * from './lib/components/sidenav/components/expand-menu.component';
 export * from './lib/directives/document-list.directive';
 export * from './lib/utils/aca-search-utils';
 export * from './lib/pipes/is-feature-supported.pipe';
+
+export { SearchInputComponent } from './lib/components/search/search-input/search-input.component';
+export { SearchActionMenuComponent } from './lib/components/search/search-action-menu/search-action-menu.component';
+export { SaveSearchDirective } from './lib/components/search/search-save/directive/save-search.directive';
+export { SavedSearchesContextService } from './lib/services/saved-searches-context.service';
+export { DocumentListDirective } from './lib/directives/document-list.directive';
+export { ThumbnailColumnComponent } from './lib/components/dl-custom-components/thumbnail-column/thumbnail-column.component';
+export { BulkActionsDropdownComponent } from './lib/components/bulk-actions-dropdown/bulk-actions-dropdown.component';
+export { SearchAiInputContainerComponent } from './lib/components/knowledge-retrieval/search-ai/search-ai-input-container/search-ai-input-container.component';
+
+export { SearchNavigationService } from './lib/components/search/search-navigation.service';
+export { SearchInputControlComponent } from './lib/components/search/search-input-control/search-input-control.component';
+export { SearchLibrariesQueryBuilderService } from './lib/components/search/search-libraries-results/search-libraries-query-builder.service';
+
+export { DatatableCellBadgesComponent } from './lib/components/dl-custom-components/datatable-cell-badges/datatable-cell-badges.component';
+export { LocationLinkComponent } from './lib/components/common/location-link/location-link.component';
