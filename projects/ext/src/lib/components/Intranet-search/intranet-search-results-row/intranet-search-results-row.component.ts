@@ -22,8 +22,8 @@
  * from Hyland Software. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, inject, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { NodeEntry, SearchEntryHighlight } from '@alfresco/js-api';
+import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, inject, OnInit, ViewEncapsulation } from '@angular/core';
+import { SearchEntryHighlight } from '@alfresco/js-api';
 import { BehaviorSubject } from 'rxjs';
 import { NameColumnComponent, NodesApiService } from '@alfresco/adf-content-services';
 import { CommonModule } from '@angular/common';
@@ -56,11 +56,6 @@ export class IntranetSearchResultsRowComponent extends NameColumnComponent imple
     '<': '&lt;',
     '>': '&gt;'
   };
-
-  node: NodeEntry;
-
-  @Input({ required: true })
-  context: any;
 
   name$ = new BehaviorSubject<string>('');
   title$ = new BehaviorSubject<string>('');

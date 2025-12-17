@@ -33,13 +33,9 @@ export class IntranetLocationLinkComponent extends NameColumnComponent implement
   private translationService = inject(TranslationService);
 
   private _path: PathInfo;
-  node: NodeEntry;
 
   nodeLocation$ = new BehaviorSubject(this.translationService.instant('APP.BROWSE.SEARCH.UNKNOWN_LOCATION'));
   displayText: Observable<string>;
-
-  @Input()
-  context: any;
 
   @Input()
   showLocation = false;
