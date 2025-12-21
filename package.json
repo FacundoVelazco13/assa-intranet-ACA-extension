@@ -67,7 +67,7 @@
     "@ngx-translate/core": "^16.0.4",
     "date-fns": "^4.1.0",
     "graphql-ws": "^6.0.6",
-    "katex": "^0.16.21",
+    "katex": "^0.16.27",
     "material-icons": "^1.13.12",
     "mermaid": "^11.10.1",
     "minimatch-browser": "^1.0.0",
