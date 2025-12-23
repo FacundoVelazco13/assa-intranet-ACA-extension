@@ -85,8 +85,6 @@ export class DossierFilesComponent implements OnInit {
   }
   customNavigateAction($event: any) {
     const node = $event.value as NodeEntry;
-    // eslint-disable-next-line no-console
-    console.log('DossierFilesComponent - handleNodeClick', node);
     if (node?.entry && !node.entry.isFolder) {
       this.previewFile.emit(node);
     }
@@ -98,17 +96,15 @@ export class DossierFilesComponent implements OnInit {
   // Por ahora estoy usando la ContentApi, pero lo mejor sería usar acciones.
   deleteFile($event: any) {
     const node = $event.value as NodeEntry;
-    const canDelete = this.canDeleteNode(node.entry);
-    const isLocked = this.isNodeLocked(node.entry);
-    if (!canDelete) {
+
+    if (!this.canDeleteNode(node.entry)) {
       this.notificationService.showError('No tiene permisos para eliminar este archivo.');
       return;
     }
-    if (isLocked) {
+    if (this.isNodeLocked(node.entry)) {
       this.notificationService.showError('El archivo esta bloqueado, alguien puede estar editandolo.');
       return;
     }
-
     // Delete directly without navigation side effects
     this.contentApi.deleteNode(node.entry.id, { permanent: false }).subscribe({
       next: () => {
@@ -146,6 +142,9 @@ export class DossierFilesComponent implements OnInit {
     }
     this.notificationService.showInfo('Intento de compartir');
     this.store.dispatch(new ShareNodeAction(node));
+  }
+  canCreateNode(node: Node): boolean {
+    return this.permissions.check(node, ['create']);
   }
   canDeleteNode(node: Node): boolean {
     return this.permissions.check(node, ['delete']);

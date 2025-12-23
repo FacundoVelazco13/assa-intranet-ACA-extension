@@ -90,6 +90,12 @@
       "path": "intranet/process",
       "component": "process-test.component",
       "auth": ["app.auth"]
+    },
+    {
+      "id" : "intranet.services.route",
+      "path" : "services",
+      "component" : "intranet-services-home.component",
+      "auth" : ["app.auth"]
     }
   ],
   "rules": [
@@ -216,32 +222,27 @@
           },
           {
             "id": "intranet.navbar.oym",
-            "icon": "account_tree",
             "title": "Organización y Métodos",
             "order": 400,
             "route": "intranet/oym",
             "children": [
               {
                 "id": "intranet.navbar.oym.dashboard",
-                "icon": "home",
                 "title": "Dashboard",
                 "route": "intranet/oym"
               },
               {
                 "id": "intranet.navbar.oym.procedimientos",
-                "icon": "schema",
                 "title": "Procedimientos",
                 "route": "intranet/oym/procedimientos"
               },
               {
                 "id": "intranet.navbar.oym.politicas",
-                "icon": "gavel",
                 "title": "Políticas",
                 "route": "intranet/oym/politicas"
               },
               {
                 "id": "intranet.navbar.oym.formularios",
-                "icon": "assignment",
                 "title": "Formularios",
                 "route": "intranet/oym/formularios"
               }

@@ -1,0 +1,34 @@
+<div class="dossier-info-container">
+  <mat-card class="dossier-info-main-card">
+    <mat-card-header>
+      <mat-card-title>{{ getPropertyValue({ key: 'cm:title', label: 'Title' }) }}</mat-card-title>
+      <mat-card-subtitle>{{ typeName }}</mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
+
+  <!-- Descripción Card destacada -->
+  <mat-card class="description-card">
+    <mat-card-content>
+      <div class="description-header">
+        <mat-icon class="description-icon">description</mat-icon>
+        <h3>Descripción</h3>
+      </div>
+      <p class="description-text">
+        {{ getPropertyValue({ key: 'cm:description', label: 'Descripción' }) }}
+      </p>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Grid de propiedades -->
+  <div class="properties-grid">
+    <mat-card class="property-card" *ngFor="let property of properties">
+      <mat-card-content>
+        <div class="property-icon-wrapper" *ngIf="property.icon">
+          <mat-icon class="property-icon">{{ property.icon }}</mat-icon>
+        </div>
+        <div class="property-label">{{ property.label }}</div>
+        <div class="property-value">{{ getPropertyValue(property) }}</div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

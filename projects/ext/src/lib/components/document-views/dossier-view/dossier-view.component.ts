@@ -1,7 +1,7 @@
 /* eslint-disable license-header/header */
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AppHookService, ContentApiService, PageComponent, PageLayoutComponent, ToolbarComponent } from '@alfresco/aca-shared';
+import { AppHookService, ContentApiService, PageComponent, PageLayoutComponent, ToolbarComponent, NodePermissionService } from '@alfresco/aca-shared';
 import { NavigateToPreviousPage, SetSelectedNodesAction, SetCurrentFolderAction } from '@alfresco/aca-shared/store';
 import { BreadcrumbComponent, ContentService, NodesApiService, PermissionListComponent } from '@alfresco/adf-content-services';
 import { CommonModule, Location } from '@angular/common';
@@ -16,8 +16,8 @@ import { ContentActionRef } from '@alfresco/adf-extensions';
 import { InfoDrawerButtonsDirective } from '@alfresco/adf-core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DossierFilesComponent } from '../dossier-files/dossier-files.component';
-import { MatCard, MatCardHeader, MatCardSubtitle, MatCardTitle, MatCardContent } from '@angular/material/card';
 import { DossierAssocsComponent } from '../dossier-assocs/dossier-assocs.component';
+import { DossierInfoComponent } from '../dossier-info/dossier-info.component';
 import { Node } from '@alfresco/js-api';
 
 @Component({
@@ -36,12 +36,8 @@ import { Node } from '@alfresco/js-api';
     PermissionListComponent,
     BreadcrumbComponent,
     DossierFilesComponent,
-    MatCard,
-    MatCardHeader,
-    MatCardSubtitle,
-    MatCardTitle,
-    MatCardContent,
-    DossierAssocsComponent
+    DossierAssocsComponent,
+    DossierInfoComponent
   ],
   selector: 'aca-dossier-view',
   templateUrl: './dossier-view.component.html',
@@ -54,16 +50,16 @@ export class DossierViewComponent extends PageComponent implements OnInit, OnDes
   activeTab = 1;
   aspectActions: Array<ContentActionRef> = [];
   nodeIcon: string;
-  canManagePermissions = true;
 
-  constructor(
-    private readonly route: ActivatedRoute,
-    private readonly contentApi: ContentApiService,
-    private readonly contentService: ContentService,
-    private readonly nodesApiService: NodesApiService,
-    private readonly appHookService: AppHookService,
-    private readonly location: Location
-  ) {
+  private readonly route: ActivatedRoute = inject(ActivatedRoute);
+  private readonly contentApi: ContentApiService = inject(ContentApiService);
+  private readonly contentService: ContentService = inject(ContentService);
+  private readonly nodesApiService: NodesApiService = inject(NodesApiService);
+  private readonly appHookService: AppHookService = inject(AppHookService);
+  private readonly location: Location = inject(Location);
+  private readonly permissions = inject(NodePermissionService);
+
+  constructor() {
     super();
   }
 
@@ -86,7 +82,6 @@ export class DossierViewComponent extends PageComponent implements OnInit, OnDes
         next: (node) => {
           this.node = node.entry;
           this.isLoading = false;
-          this.canManagePermissions = !this.isSmartFolder();
           this.setActiveTab(params.activeTab);
           this.store.dispatch(new SetSelectedNodesAction([{ entry: this.node }]));
           this.store.dispatch(new SetCurrentFolderAction(this.node));
@@ -120,7 +115,7 @@ export class DossierViewComponent extends PageComponent implements OnInit, OnDes
         this.activeTab = 1;
         break;
       case 'permissions':
-        if (!this.canManagePermissions) {
+        if (!this.canUpdatePermissions(this.node)) {
           this.activeTab = 0;
           break;
         }
@@ -137,14 +132,18 @@ export class DossierViewComponent extends PageComponent implements OnInit, OnDes
   }
   /**
    * ToReview
-   * Por como estoy pensando la función, debería funcionar.
-   * Aunque no me gusta la forma en que lo estoy haciendo.
+   * Funciona, pero no me parece la mejor forma de hacerlo.
    * El breadcrumb siempre tendrá esta forma. Por eso no creo que se rompa.
    */
   onBreadcrumbNavigate() {
     this.router.navigate(['../../'], { relativeTo: this.route });
   }
-
+  canUpdatePermissions(node: Node): boolean {
+    return this.permissions.check(node, ['updatePermissions']);
+  }
+  canCreate(node: Node): boolean {
+    return this.permissions.check(node, ['create']);
+  }
   customNodePath(node: Node): Node {
     if (!node?.path?.elements) {
       return node;
@@ -160,12 +159,12 @@ export class DossierViewComponent extends PageComponent implements OnInit, OnDes
     this.store.dispatch(new SetSelectedNodesAction([]));
     super.ngOnDestroy();
   }
-
-  private isSmartFolder(): boolean {
-    if (!this.node?.isFolder) {
-      return false;
-    }
-    const nodeAspects = this.node.aspectNames ?? [];
-    return nodeAspects.includes('smf:customConfigSmartFolder') || nodeAspects.includes('smf:systemConfigSmartFolder');
-  }
+  // Por ahora lo comento, no estamos trabajando con smart Folders, veremos luego.
+  /*   private isSmartFolder(): boolean {
+      if (!this.node?.isFolder) {
+        return false;
+      }
+      const nodeAspects = this.node.aspectNames ?? [];
+      return nodeAspects.includes('smf:customConfigSmartFolder') || nodeAspects.includes('smf:systemConfigSmartFolder');
+    } */
 }

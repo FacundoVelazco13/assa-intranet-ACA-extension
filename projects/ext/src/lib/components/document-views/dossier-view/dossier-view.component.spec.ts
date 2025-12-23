@@ -1,3 +1,4 @@
+/* eslint-disable license-header/header */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DossierViewComponent } from './dossier-view.component';
 

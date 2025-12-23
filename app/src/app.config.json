@@ -32,6 +32,12 @@
     "strictDiscoveryDocumentValidation": false
   },
   "locale": "es",
+  "languages": [
+    {
+      "key": "es",
+      "label": "Español"
+    }
+  ],
   "application": {
     "name": "",
     "version": "7.2.0",

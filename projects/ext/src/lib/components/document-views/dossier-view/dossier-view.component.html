@@ -27,27 +27,15 @@
         mat-align-tabs="start">
         <mat-tab label="Información del Dossier">
           <ng-template matTabContent>
-            <div *ngIf="node && !isLoading; else loading">
-              <mat-card class="dossier-info-card">
-                <mat-card-header>
-                  <mat-card-title>Descripción del Dossier</mat-card-title>
-                  <mat-card-subtitle>Información clave y resumen del expediente</mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                  <p>
-                    {{ node.properties['cm:description'] || 'No hay descripción disponible.' }}
-                  </p>
-                </mat-card-content>
-              </mat-card>
-            </div>
+            <aca-dossier-info *ngIf="node && !isLoading; else loading" [node]="node" />
           </ng-template>
         </mat-tab>
-        <mat-tab label="{{ 'APP.INFO_DRAWER.TABS.PROPERTIES' | translate }}">
+        <mat-tab *ngIf="canCreate(node)" label="Propiedades">
           <ng-template matTabContent>
             <app-metadata-tab *ngIf="node && !isLoading; else loading" [node]="node" />
           </ng-template>
         </mat-tab>
-        <mat-tab label="{{ 'APP.INFO_DRAWER.TABS.COMMENTS' | translate }}">
+        <mat-tab *ngIf="canCreate(node)" label="Comentarios">
           <ng-template matTabContent>
             <app-comments-tab *ngIf="node && !isLoading; else loading" [node]="node" />
           </ng-template>
@@ -64,7 +52,7 @@
               (previewFile)="showPreview($event)" />
           </ng-template>
         </mat-tab>
-        <mat-tab [disabled]="!canManagePermissions" label="{{ 'APP.INFO_DRAWER.TABS.PERMISSIONS' | translate }}">
+        <mat-tab *ngIf="canUpdatePermissions(node)" [disabled]="!canUpdatePermissions(node)" label="Permisos">
           <ng-template matTabContent>
             <adf-permission-list *ngIf="node && !isLoading; else loading" [nodeId]="node.id" />
           </ng-template>

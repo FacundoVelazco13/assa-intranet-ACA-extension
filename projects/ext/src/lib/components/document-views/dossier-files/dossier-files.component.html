@@ -9,9 +9,12 @@
         <content-action icon="visibility" target="document" title="Ver" (execute)="customNavigateAction($event)" />
         <content-action icon="cloud_download" target="document" title="Descargar" (execute)="downloadFile($event)" />
         <content-action icon="content_copy" target="document" title="Copiar" (execute)="copyFile($event)" />
-        <content-action icon="redo" target="document" title="Mover" (execute)="moveFile($event)" [disabled]="!canDeleteNode(node)" />
-        <content-action icon="delete" target="document" title="Eliminar" (execute)="deleteFile($event)" [disabled]="!canDeleteNode(node)" />
-        <content-action icon="share" target="document" title="Compartir enlace" (execute)="shareFile($event)" />
+        <content-action icon="redo" target="document" title="Mover" (execute)="moveFile($event)"
+          [disabled]="!canDeleteNode(node)" />
+        <content-action icon="delete" target="document" title="Eliminar" (execute)="deleteFile($event)"
+          [disabled]="!canDeleteNode(node)" />
+        <content-action icon="share" target="document" title="Compartir enlace" (execute)="shareFile($event)"
+          [disabled]="!canDeleteNode(node)" />
       </content-actions>
       <data-columns>
         <ng-container *ngFor="let column of columns; trackBy: trackByColumnId">
