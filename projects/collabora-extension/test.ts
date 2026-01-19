@@ -22,15 +22,14 @@
  * from Hyland Software. If not, see <http://www.gnu.org/licenses/>.
  */
 
-// CAMBIO CODIGO BASE : la importación siguiente daba dejó de estar disponible
-// import { MarkedOptions, MarkedRenderer } from 'ngx-markdown';
-// import { Tokens } from 'marked/lib/marked';
-import { MarkedOptions } from 'ngx-markdown';
-import { Renderer, Tokens } from 'marked';
+// This file is required by karma.conf.js and loads recursively all the .spec and framework files
 
-const renderer = new Renderer();
-renderer.link = ({ href, title, text }: Tokens.Link): string =>
-  `<a href="${href}" target="_blank" rel="noopener noreferrer" title="${title || ''}">${text}</a>`;
-export const searchAiMarkedOptions: MarkedOptions = {
-  renderer
-};
+import 'zone.js';
+import 'zone.js/testing';
+import { getTestBed } from '@angular/core/testing';
+import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
+
+// First, initialize the Angular testing environment.
+getTestBed().initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting(), {
+  teardown: { destroyAfterEach: false }
+});

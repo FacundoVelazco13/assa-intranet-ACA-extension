@@ -84,12 +84,6 @@
       "path": "intranet/search",
       "component": "intranet-search-result.component",
       "auth": ["app.auth"]
-    },
-    {
-      "id": "intranet.process.route",
-      "path": "intranet/process",
-      "component": "process-test.component",
-      "auth": ["app.auth"]
     }
   ],
   "rules": [

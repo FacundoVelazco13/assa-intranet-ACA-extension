@@ -1,0 +1,35 @@
+{
+  "$id": "collabora-extension",
+  "$version": "1.0.0",
+  "$vendor": "Your name or company name",
+  "$name": "collabora-extension",
+  "$description": "",
+  "$license": "MIT",
+
+  "routes": [
+    {
+      "id": "app.route.collabora-extension",
+      "parentRoute": "",
+      "path": "collabora-extension",
+      "layout": "app.layout.main",
+      "component": "collabora-extension.main.component",
+      "auth": ["app.auth"]
+    }
+  ],
+
+  "features": {
+    "navbar": [
+      {
+        "id": "collabora-extension.nav",
+        "items": [
+          {
+            "id": "collabora-extension.main",
+            "icon": "extension",
+            "title": "collabora-extension Extension",
+            "route": "collabora-extension"
+          }
+        ]
+      }
+    ]
+  }
+}
