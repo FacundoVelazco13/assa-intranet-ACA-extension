@@ -104,6 +104,11 @@
             "glob": "**/*",
             "input": "projects/collabora-extension/assets/i18n",
             "output": "./assets/collabora-extension/i18n"
+          },
+          {
+            "glob": "**/*",
+            "input": "projects/collabora-extension/assets/images",
+            "output": "./assets/collabora-extension/images"
           }
         ],
         "styles": [

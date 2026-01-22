@@ -28,6 +28,7 @@
       "payload": "$(context.selection.first)"
     }
   ],
+
   "rules": [
     {
       "id": "collabora.rules.canEditWithCollaboraOnline",
@@ -50,7 +51,7 @@
         "icon": "edit_collabora_online",
         "title": "COLLABORA.EDIT",
         "actions": {
-          "click": "collabora.plugin.actions.edit"
+          "click": "COLLABORA_EDIT"
         },
         "rules": {
           "visible": "collabora.canEditWithCollaboraOnline"
