@@ -14,6 +14,25 @@ export function getExtension(filename: string): string {
   return position >= 0 ? filename.substring(position + 1).toLowerCase() : '';
 }
 
+export function canViewWithCollaboraOnline(context: AcaRuleContext): boolean {
+  if (canUseCollaboraExtension(context)) {
+    // Usa context.selection.file en toolbar, o context.selection.first en viewer
+    const file = context.selection?.file || context.selection?.first;
+
+    if (!file?.entry) {
+      return false;
+    }
+    const extension: string = getExtension(file.entry.name);
+    const extCanView: string[] = context.appConfig.get('collabora.view');
+
+    if (!extension) {
+      return false;
+    }
+    return extCanView.includes(extension);
+  }
+  return false;
+}
+
 export function canEditWithCollaboraOnline(context: AcaRuleContext): boolean {
   if (canUseCollaboraExtension(context)) {
     // Usa context.selection.file en toolbar, o context.selection.first en viewer

@@ -26,6 +26,11 @@
       "id": "collabora.plugin.actions.edit",
       "type": "COLLABORA_EDIT",
       "payload": "$(context.selection.first)"
+    },
+    {
+      "id": "collabora.plugin.actions.view",
+      "type": "COLLABORA_VIEW",
+      "payload": "$(context.selection.first)"
     }
   ],
 
@@ -33,6 +38,10 @@
     {
       "id": "collabora.rules.canEditWithCollaboraOnline",
       "type": "collabora.canEditWithCollaboraOnline"
+    },
+    {
+      "id": "collabora.rules.canViewWithCollaboraOnline",
+      "type": "collabora.canViewWithCollaboraOnline"
     }
   ],
 
@@ -45,41 +54,55 @@
     ],
     "toolbar": [
       {
-        "id": "collabora.plugin.viewer.edit",
-        "type": "button",
-        "order": 350,
-        "icon": "adf:edit-collabora-online",
-        "title": "COLLABORA.EDIT",
-        "actions": {
-          "click": "collabora.plugin.actions.edit"
-        },
-        "rules": {
-          "visible": "collabora.canEditWithCollaboraOnline"
-        }
+        "id": "app.toolbar.more",
+        "children": [
+          {
+            "id": "collabora.plugin.viewer.view",
+            "type": "button",
+            "order": 89,
+            "icon": "adf:edit-collabora-online",
+            "title": "Ver con Collabora Online",
+            "actions": {
+              "click": "collabora.plugin.actions.view"
+            },
+            "rules": {
+              "visible": "collabora.canViewWithCollaboraOnline"
+            }
+          },
+          {
+            "id": "collabora.plugin.viewer.edit",
+            "type": "button",
+            "order": 89,
+            "icon": "adf:edit-collabora-online",
+            "title": "COLLABORA.EDIT",
+            "actions": {
+              "click": "collabora.plugin.actions.edit"
+            },
+            "rules": {
+              "visible": "collabora.canEditWithCollaboraOnline"
+            }
+          }
+        ]
       }
     ],
-    "shared": {
-      "toolbarActions": [
-        {
-          "id": "collabora.plugin.viewer.edit",
-          "type": "button",
-          "order": 350,
-          "icon": "adf:edit-collabora-online",
-          "title": "COLLABORA.EDIT",
-          "actions": {
-            "click": "collabora.plugin.actions.edit"
-          },
-          "rules": {
-            "visible": "collabora.canEditWithCollaboraOnline"
-          }
-        }
-      ]
-    },
     "contextMenu": [
+      {
+        "id": "collabora.plugin.viewer.view",
+        "type": "button",
+        "order": 449,
+        "icon": "adf:edit-collabora-online",
+        "title": "Ver con Collabora Online",
+        "actions": {
+          "click": "collabora.plugin.actions.view"
+        },
+        "rules": {
+          "visible": "collabora.canViewWithCollaboraOnline"
+        }
+      },
       {
         "id": "collabora.plugin.viewer.edit",
         "type": "button",
-        "order": 451,
+        "order": 449,
         "icon": "adf:edit-collabora-online",
         "title": "COLLABORA.EDIT",
         "actions": {
@@ -93,17 +116,39 @@
     "viewer": {
       "toolbarActions": [
         {
-          "id": "collabora.plugin.viewer.edit",
-          "type": "button",
-          "order": 200,
-          "icon": "adf:edit-collabora-online",
-          "title": "COLLABORA.EDIT",
-          "actions": {
-            "click": "collabora.plugin.actions.edit"
-          },
-          "rules": {
-            "visible": "collabora.canEditWithCollaboraOnline"
-          }
+          "id": "app.viewer.toolbar.more",
+          "children": [
+            {
+              "id": "aos.viewer.openWith.office",
+              "order": 2
+            },
+            {
+              "id": "collabora.plugin.viewer.view",
+              "type": "button",
+              "order": 1,
+              "icon": "adf:edit-collabora-online",
+              "title": "Ver con Collabora Online",
+              "actions": {
+                "click": "collabora.plugin.actions.view"
+              },
+              "rules": {
+                "visible": "collabora.canViewWithCollaboraOnline"
+              }
+            },
+            {
+              "id": "collabora.plugin.viewer.edit",
+              "type": "button",
+              "order": 1,
+              "icon": "adf:edit-collabora-online",
+              "title": "COLLABORA.EDIT",
+              "actions": {
+                "click": "collabora.plugin.actions.edit"
+              },
+              "rules": {
+                "visible": "collabora.canEditWithCollaboraOnline"
+              }
+            }
+          ]
         }
       ]
     }

@@ -18,7 +18,8 @@ export function provideCollaboraExtension(): (Provider | EnvironmentProviders)[]
         'collabora.view.component': CollaboraOnlineComponent
       },
       evaluators: {
-        'collabora.canEditWithCollaboraOnline': rules.canEditWithCollaboraOnline
+        'collabora.canEditWithCollaboraOnline': rules.canEditWithCollaboraOnline,
+        'collabora.canViewWithCollaboraOnline': rules.canViewWithCollaboraOnline
       }
     })
   ];

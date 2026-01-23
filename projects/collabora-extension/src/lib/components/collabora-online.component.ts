@@ -2,7 +2,7 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation, ViewChild, ElementRef, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ContentApiService } from '@alfresco/aca-shared';
+import { ContentApiService, AppService } from '@alfresco/aca-shared';
 import { NodeEntry } from '@alfresco/js-api';
 import {
   UserPreferencesService,
@@ -54,7 +54,8 @@ export class CollaboraOnlineComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private contentApi: ContentApiService,
     private router: Router,
-    private thumbnailService: ThumbnailService
+    private thumbnailService: ThumbnailService,
+    private appService: AppService
   ) {
     this.action = this.route.snapshot.params['action'] as CollaboraAction;
     this.nodeId = this.route.snapshot.params['nodeId'];
@@ -120,6 +121,9 @@ export class CollaboraOnlineComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    // Restaurar navbar al salir del editor
+    this.appService.setAppNavbarMode('expanded');
+
     if (this.listenerHandlePostMessage) {
       window.removeEventListener('message', this.listenerHandlePostMessage, true);
     }
@@ -175,6 +179,8 @@ export class CollaboraOnlineComponent implements OnInit, OnDestroy {
   }
 
   onBackButtonClick(): void {
+    // Restaurar navbar antes de navegar
+    this.appService.setAppNavbarMode('expanded');
     this.router.navigateByUrl(this.previousUrl);
   }
 
