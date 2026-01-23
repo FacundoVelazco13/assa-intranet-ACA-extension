@@ -13,7 +13,7 @@
       "auth": ["app.auth"],
       "children": [
         {
-          "id": "collabora.edit.route",
+          "id": "collabora.route.edit",
           "path": ":action/:nodeId",
           "component": "collabora.edit.component"
         }
@@ -51,7 +51,7 @@
         "icon": "edit_collabora_online",
         "title": "COLLABORA.EDIT",
         "actions": {
-          "click": "COLLABORA_EDIT"
+          "click": "collabora.plugin.actions.edit"
         },
         "rules": {
           "visible": "collabora.canEditWithCollaboraOnline"

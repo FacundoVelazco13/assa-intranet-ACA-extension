@@ -62,7 +62,6 @@ export class CollaboraOnlineComponent implements OnInit, OnDestroy {
 
   async ngOnInit(): Promise<void> {
     try {
-      // Get the node
       this.nodeEntry = await firstValueFrom(this.contentApi.getNode(this.nodeId));
       if (this.nodeEntry) {
         this.fileName = this.nodeEntry.entry.name;
@@ -82,15 +81,10 @@ export class CollaboraOnlineComponent implements OnInit, OnDestroy {
       // Get url du serveur collabora online
       // Esta función estaba generando el bug.
       const wopiHostUrl = await this.collaboraOnlineService.getLoolUrl();
-      // eslint-disable-next-line no-console
-      console.log('Collabora Lool URL:', wopiHostUrl);
       const wopiFileUrl = wopiHostUrl + 'wopi/files/' + this.nodeId;
-      // eslint-disable-next-line no-console
-      console.log('Wopi Lool URL:', wopiFileUrl);
+
       // Get token pour l'édition du document
       let responseToken: CollaboraTokenResponse = await this.collaboraOnlineService.getAccessToken(this.nodeId, this.action);
-      // eslint-disable-next-line no-console
-      console.log('Collabora Token Response:', responseToken);
       this.accessToken = responseToken.access_token;
       this.accessTokenTTL = responseToken.access_token_ttl;
 
@@ -99,10 +93,7 @@ export class CollaboraOnlineComponent implements OnInit, OnDestroy {
       }
 
       const wopiSrcUrl = responseToken.wopi_src_url;
-      this.iFrameUrl = wopiSrcUrl + 'WOPISrc=' + encodeURI(wopiFileUrl) + '&lang=' + this.locale;
-
-      // eslint-disable-next-line no-console
-      console.log('Collabora IFrame URL before permissions:', this.iFrameUrl);
+      this.iFrameUrl = wopiSrcUrl + 'WOPISrc=' + encodeURIComponent(wopiFileUrl) + '&lang=' + this.locale;
 
       if (this.action === 'view') {
         this.iFrameUrl += '&permission=readonly';
