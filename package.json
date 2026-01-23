@@ -43,7 +43,6 @@
     "@alfresco/adf-content-services": "8.2.1",
     "@alfresco/adf-core": "8.2.1",
     "@alfresco/adf-extensions": "8.2.1",
-    "@alfresco/adf-process-services-cloud": "^8.2.1",
     "@alfresco/eslint-plugin-eslint-angular": "8.2.1",
     "@alfresco/js-api": "9.2.1",
     "@angular/animations": "19.2.6",
@@ -79,6 +78,7 @@
     "zone.js": "0.15.0"
   },
   "devDependencies": {
+    "@alfresco/aca-generators": "^1.0.4",
     "@alfresco/adf-cli": "8.2.1",
     "@angular-devkit/build-angular": "19.2.15",
     "@angular-devkit/core": "19.2.7",

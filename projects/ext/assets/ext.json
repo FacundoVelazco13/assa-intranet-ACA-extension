@@ -84,18 +84,6 @@
       "path": "intranet/search",
       "component": "intranet-search-result.component",
       "auth": ["app.auth"]
-    },
-    {
-      "id": "intranet.process.route",
-      "path": "intranet/process",
-      "component": "process-test.component",
-      "auth": ["app.auth"]
-    },
-    {
-      "id" : "intranet.services.route",
-      "path" : "services",
-      "component" : "intranet-services-home.component",
-      "auth" : ["app.auth"]
     }
   ],
   "rules": [
@@ -127,7 +115,7 @@
   "features": {
     "icons": [
       {
-        "id": "gavel",
+        "id": "adf:tree-magic-stars-ai",
         "value": "./assets/images/three-magic-stars-ai.svg"
       },
       {
@@ -222,6 +210,7 @@
           },
           {
             "id": "intranet.navbar.oym",
+            "icon": "adf:colored-stars-ai",
             "title": "Organización y Métodos",
             "order": 400,
             "route": "intranet/oym",
@@ -238,6 +227,7 @@
               },
               {
                 "id": "intranet.navbar.oym.politicas",
+                "icon": "adf:tree-magic-stars-ai",
                 "title": "Políticas",
                 "route": "intranet/oym/politicas"
               },

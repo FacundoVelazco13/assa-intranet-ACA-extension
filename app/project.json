@@ -94,6 +94,16 @@
             "glob": "**/*",
             "input": "projects/ext/assets/i18n",
             "output": "./assets/ext/i18n"
+          },
+          {
+            "glob": "collabora-extension.json",
+            "input": "projects/collabora-extension/assets",
+            "output": "./assets/plugins"
+          },
+          {
+            "glob": "**/*",
+            "input": "projects/collabora-extension/assets/i18n",
+            "output": "./assets/collabora-extension/i18n"
           }
         ],
         "styles": [

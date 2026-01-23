@@ -15,7 +15,6 @@ import * as rules from './rules/ext.rules';
 import { IntranetPageComponentComponent } from './components/intranet-page/intranet-page.component.component';
 import { SearchEffects } from './store/effects';
 import { IntranetSearchResultComponent } from './components/Intranet-search/intranet-search-result/intranet-search-result.component';
-import { ProcessTestComponent } from './components/process-test/process-test.component';
 import { IntranetSearchResultsRowComponent } from './components/Intranet-search/intranet-search-results-row/intranet-search-results-row.component';
 import { IntranetRouterEffects } from './store/effects/intranet-router.effects';
 
@@ -33,7 +32,6 @@ export function provideExtExtension(): (Provider | EnvironmentProviders)[] {
         'dossier-view.component': DossierViewComponent,
         'intranet-page.component': IntranetPageComponentComponent,
         'intranet-search-result.component': IntranetSearchResultComponent,
-        'process-test.component': ProcessTestComponent,
         'intranet-search-results-row.component': IntranetSearchResultsRowComponent
       },
       evaluators: {
