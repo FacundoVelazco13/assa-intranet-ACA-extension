@@ -7,6 +7,7 @@ import { UserPreferencesService, UserPreferenceValues } from '@alfresco/adf-core
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
+import { CollaboraTokenResponse } from '../../models/collabora.models';
 
 @Component({
   selector: 'viewer-collabora-online',
@@ -49,14 +50,14 @@ export class ViewerCollaboraOnlineComponent implements OnInit, OnDestroy {
     const wopiFileUrl = wopiHostUrl + 'wopi/files/' + this.nodeId;
 
     // Get token pour l'édition du document
-    let responseToken: any = await this.collaboraOnlineService.getAccessToken(this.nodeId, 'edit');
+    let responseToken: CollaboraTokenResponse = await this.collaboraOnlineService.getAccessToken(this.nodeId, 'edit');
     this.accessToken = responseToken.access_token;
     this.accessTokenTTL = responseToken.access_token_ttl;
     if (!responseToken.wopi_src_url || responseToken.wopi_src_url === '') {
       responseToken = await this.collaboraOnlineService.getAccessToken(this.nodeId, 'view');
     }
     const wopiSrcUrl = responseToken.wopi_src_url;
-    this.iFrameUrl = wopiSrcUrl + 'WOPISrc=' + encodeURI(wopiFileUrl) + '&lang=' + this.locale;
+    this.iFrameUrl = wopiSrcUrl + 'WOPISrc=' + encodeURIComponent(wopiFileUrl) + '&lang=' + this.locale;
 
     // Remplissage du formulaire dynamique
     this.postForm.nativeElement.action = this.iFrameUrl;

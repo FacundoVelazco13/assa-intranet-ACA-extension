@@ -23,12 +23,12 @@
     "view": ["doc", "docx", "xls", "xlsx", "ppt", "pptx", "odt", "ods", "odp"]
   },
   "oauth2": {
-    "host": "{protocol}//{hostname}{:port}/auth/realms/alfresco",
+    "host": "",
     "clientId": "alfresco",
     "scope": "openid",
     "implicitFlow": false,
-    "codeFlow": true,
-    "silentLogin": true,
+    "codeFlow": false,
+    "silentLogin": false,
     "publicUrls": ["**/preview/s/*", "**/settings"],
     "redirectSilentIframeUri": "{protocol}//{hostname}{:port}/assets/silent-refresh.html",
     "redirectUri": "/",
