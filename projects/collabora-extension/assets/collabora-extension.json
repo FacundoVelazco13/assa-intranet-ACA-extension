@@ -39,8 +39,8 @@
   "features": {
     "icons": [
       {
-        "id": "edit_collabora_online",
-        "value": "./assets/collabora-extension/images/collabora-online-logo.svg"
+        "id": "adf:edit-collabora-online",
+        "value": "./assets/images/collabora-online-logo.svg"
       }
     ],
     "toolbar": [
@@ -48,7 +48,7 @@
         "id": "collabora.plugin.viewer.edit",
         "type": "button",
         "order": 350,
-        "icon": "edit_collabora_online",
+        "icon": "adf:edit-collabora-online",
         "title": "COLLABORA.EDIT",
         "actions": {
           "click": "collabora.plugin.actions.edit"
@@ -64,7 +64,7 @@
           "id": "collabora.plugin.viewer.edit",
           "type": "button",
           "order": 350,
-          "icon": "edit_collabora_online",
+          "icon": "adf:edit-collabora-online",
           "title": "COLLABORA.EDIT",
           "actions": {
             "click": "collabora.plugin.actions.edit"
@@ -80,7 +80,7 @@
         "id": "collabora.plugin.viewer.edit",
         "type": "button",
         "order": 451,
-        "icon": "edit_collabora_online",
+        "icon": "adf:edit-collabora-online",
         "title": "COLLABORA.EDIT",
         "actions": {
           "click": "collabora.plugin.actions.edit"
@@ -89,6 +89,23 @@
           "visible": "collabora.canEditWithCollaboraOnline"
         }
       }
-    ]
+    ],
+    "viewer": {
+      "toolbarActions": [
+        {
+          "id": "collabora.plugin.viewer.edit",
+          "type": "button",
+          "order": 200,
+          "icon": "adf:edit-collabora-online",
+          "title": "COLLABORA.EDIT",
+          "actions": {
+            "click": "collabora.plugin.actions.edit"
+          },
+          "rules": {
+            "visible": "collabora.canEditWithCollaboraOnline"
+          }
+        }
+      ]
+    }
   }
 }

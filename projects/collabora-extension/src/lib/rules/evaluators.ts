@@ -16,7 +16,8 @@ export function getExtension(filename: string): string {
 
 export function canEditWithCollaboraOnline(context: AcaRuleContext): boolean {
   if (canUseCollaboraExtension(context)) {
-    const { file } = context.selection;
+    // Usa context.selection.file en toolbar, o context.selection.first en viewer
+    const file = context.selection?.file || context.selection?.first;
 
     if (!file?.entry) {
       return false;
