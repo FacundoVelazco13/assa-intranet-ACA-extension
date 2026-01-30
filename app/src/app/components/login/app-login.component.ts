@@ -24,16 +24,70 @@
 
 import { LoginComponent } from '@alfresco/adf-core';
 import { Component, inject, ViewEncapsulation } from '@angular/core';
-import { TranslatePipe } from '@ngx-translate/core';
 import { AppSettingsService } from '@alfresco/aca-shared';
 
 @Component({
-  imports: [LoginComponent, TranslatePipe],
+  imports: [LoginComponent],
   templateUrl: './app-login.component.html',
   styles: [
     `
       .adf-login {
         background-color: var(--theme-white-background);
+      }
+      .adf-login .adf-login-logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        width: fit-content;
+        max-width: 100%;
+        min-width: 0;
+      }
+
+      .adf-login .mat-mdc-card-header.adf-login-card-header-text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .adf-login .mat-mdc-card-header-text {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+      }
+      .adf-login .mat-mdc-card-title {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+      }
+      .adf-login .adf-alfresco-logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 0;
+      }
+      .adf-login .adf-img-logo {
+        display: block;
+        margin: 0 auto;
+        max-width: 220px;
+        width: 100%;
+        height: auto;
+        padding: 0;
+      }
+      .adf-login .adf-login-logo img {
+        display: block;
+        margin: 0 auto;
+        max-width: 220px;
+        width: 100%;
+        height: auto;
+        padding: 0;
       }
     `
   ],

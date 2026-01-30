@@ -210,7 +210,6 @@
           },
           {
             "id": "intranet.navbar.oym",
-            "icon": "adf:colored-stars-ai",
             "title": "Organización y Métodos",
             "order": 400,
             "route": "intranet/oym",
@@ -227,7 +226,6 @@
               },
               {
                 "id": "intranet.navbar.oym.politicas",
-                "icon": "adf:tree-magic-stars-ai",
                 "title": "Políticas",
                 "route": "intranet/oym/politicas"
               },
