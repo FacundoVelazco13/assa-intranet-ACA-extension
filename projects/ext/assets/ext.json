@@ -216,7 +216,7 @@
             "children": [
               {
                 "id": "intranet.navbar.oym.dashboard",
-                "title": "Dashboard",
+                "title": "Inicio",
                 "route": "intranet/oym"
               },
               {
@@ -233,6 +233,108 @@
                 "id": "intranet.navbar.oym.formularios",
                 "title": "Formularios",
                 "route": "intranet/oym/formularios"
+              }
+            ]
+          },
+          {
+            "id": "intranet.navbar.gestion",
+            "title": "Gestión institucional",
+            "order": 410,
+            "route": "intranet/gestion",
+            "children": [
+              {
+                "id": "intranet.navbar.gestion.dashboard",
+                "title": "Inicio",
+                "route": "intranet/gestion"
+              },
+              {
+                "id": "intranet.navbar.gestion.notas.rosario",
+                "title": "Notas Rosario",
+                "route": "intranet/gestion/notas-rosario"
+              },
+              {
+                "id": "intranet.navbar.gestion.notas.santafe",
+                "title": "Notas Santa Fe",
+                "route": "intranet/gestion/notas-santafe"
+              },
+              {
+                "id": "intranet.navbar.gestion.expedientes",
+                "title": "Expedientes",
+                "route": "intranet/gestion/expedientes"
+              }
+            ]
+          },
+          {
+            "id": "intranet.navbar.higiene",
+            "title": "Higiene y seguridad",
+            "order": 420,
+            "route": "intranet/higiene",
+            "children": [
+              {
+                "id": "intranet.navbar.higiene.dashboard",
+                "title": "Inicio",
+                "route": "intranet/higiene"
+              },
+              {
+                "id": "intranet.navbar.higiene.normas",
+                "title": "Normas",
+                "route": "intranet/higiene/normas"
+              },
+              {
+                "id": "intranet.navbar.higiene.procedimientos",
+                "title": "Procedimientos",
+                "route": "intranet/higiene/procedimientos"
+              },
+              {
+                "id": "intranet.navbar.higiene.instructivos",
+                "title": "Instructivos",
+                "route": "intranet/higiene/instructivos"
+              },
+              {
+                "id": "intranet.navbar.higiene.fichas",
+                "title": "Fichas de riesgo local",
+                "route": "intranet/higiene/fichas"
+              }
+            ]
+          },
+          {
+            "id": "intranet.navbar.comercial",
+            "title": "Políticas comerciales",
+            "order": 430,
+            "route": "intranet/comercial",
+            "children": [
+              {
+                "id": "intranet.navbar.comercial.dashboard",
+                "title": "Inicio",
+                "route": "intranet/comercial"
+              },
+              {
+                "id": "intranet.navbar.comercial.micromedicion",
+                "title": "Micromedición",
+                "route": "intranet/comercial/micromedicion"
+              },
+              {
+                "id": "intranet.navbar.comercial.info",
+                "title": "Info Políticas comerciales",
+                "route": "intranet/comercial/info"
+              }
+            ]
+          },
+          {
+            "id": "intranet.navbar.rrhh",
+            "title": "Recursos Humanos",
+            "order": 440,
+            "route": "intranet/rrhh",
+            "children": [
+              {
+                "id": "intranet.navbar.rrhh.dashboard",
+                "title": "Inicio",
+                "route": "intranet/rrhh"
+              },
+              {
+                "id": "intranet.navbar.rrhh.consulta.cv",
+                "title": "Consulta CV",
+                "route": "intranet/rrhh/consulta-cv"
               }
             ]
           },
