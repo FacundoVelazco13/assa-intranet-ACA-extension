@@ -66,7 +66,7 @@
   },
   "sideNav": {
     "preserveState": true,
-    "expandedSidenav": false
+    "expandedSidenav": true
   },
   "content-metadata": {
     "presets": {
