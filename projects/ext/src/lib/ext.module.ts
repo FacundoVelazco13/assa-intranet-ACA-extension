@@ -17,6 +17,8 @@ import { SearchEffects } from './store/effects';
 import { IntranetSearchResultComponent } from './components/Intranet-search/intranet-search-result/intranet-search-result.component';
 import { IntranetSearchResultsRowComponent } from './components/Intranet-search/intranet-search-results-row/intranet-search-results-row.component';
 import { IntranetRouterEffects } from './store/effects/intranet-router.effects';
+import { GiDashboardComponent } from './components/dashboard/gi/gi-dashboard.component';
+import { ServicesRedirectComponent } from './components/dashboard/services-home/services-redirect.component';
 
 export function provideExtExtension(): (Provider | EnvironmentProviders)[] {
   return [
@@ -32,7 +34,9 @@ export function provideExtExtension(): (Provider | EnvironmentProviders)[] {
         'dossier-view.component': DossierViewComponent,
         'intranet-page.component': IntranetPageComponentComponent,
         'intranet-search-result.component': IntranetSearchResultComponent,
-        'intranet-search-results-row.component': IntranetSearchResultsRowComponent
+        'intranet-search-results-row.component': IntranetSearchResultsRowComponent,
+        'gi-dashboard.component': GiDashboardComponent,
+        'services-redirect.component': ServicesRedirectComponent
       },
       evaluators: {
         'ext.isDossier': rules.isDossier,

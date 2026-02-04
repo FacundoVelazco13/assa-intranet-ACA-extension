@@ -14,6 +14,73 @@
       "auth": ["app.auth"]
     },
     {
+      "id": "intranet.gi.route",
+      "path": "intranet/gi",
+      "component": "gi-dashboard.component",
+      "auth": ["app.auth"],
+      "children": [
+        {
+          "id": "intranet.gi.dashboard.route",
+          "path": "",
+          "component": "gi-dashboard.component"
+        },
+        {
+          "id": "intranet.gi.notas.rosario.route",
+          "path": "notas-rosario",
+          "component": "intranet-page.component",
+          "data": {
+            "root": "-root-",
+            "title": "Notas Rosario",
+            "sitePath": "Sites/GI/documentLibrary/Notas-rosario"
+          }
+        },
+        {
+          "id": "intranet.gi.notas.rosario.details.route",
+          "path": "notas-rosario/details/:nodeId",
+          "component": "dossier-view.component",
+          "data": {
+            "navigateSource": "gi/notas-rosario"
+          }
+        },
+        {
+          "id": "intranet.gi.notas.santafe.route",
+          "path": "notas-santafe",
+          "component": "intranet-page.component",
+          "data": {
+            "root": "-root-",
+            "title": "Notas Santa Fe",
+            "sitePath": "Sites/GI/documentLibrary/Notas-santafe"
+          }
+        },
+        {
+          "id": "intranet.gi.notas.santafe.details.route",
+          "path": "notas-santafe/details/:nodeId",
+          "component": "dossier-view.component",
+          "data": {
+            "navigateSource": "gi/notas-santafe"
+          }
+        },
+        {
+          "id": "intranet.gi.notas.expedientes.route",
+          "path": "expedientes",
+          "component": "intranet-page.component",
+          "data": {
+            "root": "-root-",
+            "title": "Expedientes",
+            "sitePath": "Sites/GI/documentLibrary/Expedientes"
+          }
+        },
+        {
+          "id": "intranet.gi.notas.expedientes.details.route",
+          "path": "expedientes/details/:nodeId",
+          "component": "dossier-view.component",
+          "data": {
+            "navigateSource": "gi/expedientes"
+          }
+        }
+      ]
+    },
+    {
       "id": "intranet.oym.route",
       "path": "intranet/oym",
       "auth": ["app.auth"],
@@ -83,6 +150,12 @@
       "id": "intranet.search.route",
       "path": "intranet/search",
       "component": "intranet-search-result.component",
+      "auth": ["app.auth"]
+    },
+    {
+      "id": "intranet.services.route",
+      "path": "services",
+      "component": "services-redirect.component",
       "auth": ["app.auth"]
     }
   ],
@@ -240,27 +313,27 @@
             "id": "intranet.navbar.gestion",
             "title": "Gestión institucional",
             "order": 410,
-            "route": "intranet/gestion",
+            "route": "intranet/gi",
             "children": [
               {
                 "id": "intranet.navbar.gestion.dashboard",
                 "title": "Inicio",
-                "route": "intranet/gestion"
+                "route": "intranet/gi"
               },
               {
                 "id": "intranet.navbar.gestion.notas.rosario",
                 "title": "Notas Rosario",
-                "route": "intranet/gestion/notas-rosario"
+                "route": "intranet/gi/notas-rosario"
               },
               {
                 "id": "intranet.navbar.gestion.notas.santafe",
                 "title": "Notas Santa Fe",
-                "route": "intranet/gestion/notas-santafe"
+                "route": "intranet/gi/notas-santafe"
               },
               {
                 "id": "intranet.navbar.gestion.expedientes",
                 "title": "Expedientes",
-                "route": "intranet/gestion/expedientes"
+                "route": "intranet/gi/expedientes"
               }
             ]
           },
