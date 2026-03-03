@@ -1,64 +1,424 @@
-/* stylelint-disable selector-class-pattern */
-:host {
-    .adf-card-container {
-        display: grid;
+/* stylelint-disable selector-class-pattern, no-descending-specificity */
 
-        /* Esto hará que cada tarjeta tenga un ancho mínimo de 400px y crezca para llenar el espacio */
-        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-        gap: 1.5rem; /* Aumenta el espacio entre las tarjetas */
-    }
+// Asegurar que el contenedor ocupe todo el espacio dentro de aca-page-layout
+:host {
+  display: block;
+  height: 100%;
 }
 
-.intranet-welcome-container {
-    padding: 2rem;
-    background-color: #fafafa;
-    border-radius: 8px;
-    max-width: 900px;
-    margin: 2rem auto;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+.home-dashboard-page {
+  min-height: 100%;
+  background-color: #fafafa;
 
-    h2 {
-        color: var(--theme-primary-color, #3f51b5);
-        margin-top: 0;
-        font-size: 1.8rem;
-        font-weight: 600;
+  /* background-color: #f0f4f8; */
+}
+
+.home-dashboard-container {
+  padding: 24px 32px 64px;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  min-height: 100%;
+
+  // Hero Card - Bienvenida
+  .welcome-card {
+    background: linear-gradient(135deg, #194c7b 0%, #4170a6 50%, #5c8dbd 100%);
+    box-shadow: 0 8px 24px rgba(25, 76, 123, 0.25);
+    border-radius: 12px;
+    border: none;
+
+    mat-card-content {
+      padding: 48px;
     }
 
-    h4 {
-        margin-top: 2rem;
-        margin-bottom: 1rem;
-        font-size: 1.2rem;
-        color: #444;
-        border-bottom: 1px solid #e0e0e0;
-        padding-bottom: 0.5rem;
-    }
+    .welcome-content {
+      text-align: center;
+      color: white;
 
-    p {
+      .welcome-icon {
+        font-size: 64px;
+        width: 64px;
+        height: 64px;
+        margin-bottom: 16px;
+        opacity: 0.9;
+      }
+
+      h2 {
+        font-size: 36px;
+        font-weight: 300;
+        margin: 0 0 8px;
+        letter-spacing: 1px;
+      }
+
+      .welcome-subtitle {
+        font-size: 18px;
+        font-weight: 500;
+        opacity: 0.9;
+        margin: 0 0 16px;
+      }
+
+      .welcome-description {
+        font-size: 16px;
+        opacity: 0.8;
+        margin: 0;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
         line-height: 1.6;
-        color: #616161;
+      }
     }
+  }
 
-    ul {
-        list-style-type: none;
-        padding-left: 0;
+  // Grid Principal de 2 columnas
+  .main-content-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 32px;
+    align-items: start;
 
-        li {
-            padding: 0.5rem 0;
-            color: #424242;
+    // Columna Izquierda - Info
+    .info-column {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
 
-            strong {
-                color: #212121;
-            }
+      .info-card {
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+        mat-card-header {
+          padding: 24px 24px 0;
+
+          .mat-card-avatar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #a0cbee 0%, #5c8dbd 100%);
+            border-radius: 50%;
+            color: white;
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+          }
+
+          mat-card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #194c7b;
+            margin: 0;
+          }
         }
+
+        mat-card-content {
+          padding: 20px 24px 24px;
+        }
+
+        .features-list {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 20px;
+
+          li {
+            display: flex;
+            gap: 16px;
+            padding: 16px;
+            background-color: #f8fafc;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+
+            mat-icon {
+              font-size: 28px;
+              width: 28px;
+              height: 28px;
+              color: #4170a6;
+              flex-shrink: 0;
+            }
+
+            div {
+              display: flex;
+              flex-direction: column;
+              gap: 4px;
+
+              strong {
+                color: #194c7b;
+                font-weight: 600;
+                font-size: 14px;
+              }
+
+              span {
+                color: #666;
+                font-size: 13px;
+                line-height: 1.4;
+              }
+            }
+
+            &:hover {
+              background-color: #e8f0f8;
+              transform: translateY(-2px);
+            }
+          }
+        }
+
+        .start-exploring {
+          margin: 24px 0 0;
+          padding: 16px;
+          background-color: #f0f4f8;
+          border-radius: 8px;
+          color: #4170a6;
+          font-style: italic;
+          text-align: center;
+          font-size: 14px;
+        }
+      }
+
+      // Card de Enlaces Externos
+      .external-links-card {
+        border-left: 4px solid #4170a6;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+        mat-card-header {
+          padding: 20px 20px 0;
+
+          .mat-card-avatar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #a0cbee 0%, #5c8dbd 100%);
+            border-radius: 50%;
+            color: white;
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+          }
+
+          mat-card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #194c7b;
+            margin: 0;
+          }
+        }
+
+        mat-card-content {
+          padding: 20px;
+        }
+
+        .external-links-list {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+
+          .external-link {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background-color: #f8fafc;
+            border-radius: 8px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+
+            mat-icon {
+              font-size: 24px;
+              color: #4170a6;
+              flex-shrink: 0;
+            }
+
+            div {
+              display: flex;
+              flex-direction: column;
+              gap: 2px;
+              flex: 1;
+
+              strong {
+                color: #194c7b;
+                font-weight: 600;
+                font-size: 14px;
+              }
+
+              span {
+                color: #888;
+                font-size: 12px;
+              }
+            }
+
+            &:hover {
+              background-color: #e8f0f8;
+              border-color: #a0cbee;
+              transform: translateX(4px);
+            }
+          }
+        }
+      }
     }
 
-    .start-exploring {
-        margin-top: 2rem;
-        font-style: italic;
-        color: #757575;
-        text-align: center;
-        padding: 1rem;
-        background-color: #f0f0f0;
-        border-radius: 4px;
+    // Columna Derecha - Accesos Rápidos
+    .access-column {
+      .quick-access-card {
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        position: sticky;
+        top: 24px;
+
+        mat-card-header {
+          padding: 24px 24px 0;
+
+          .mat-card-avatar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #a0cbee 0%, #5c8dbd 100%);
+            border-radius: 50%;
+            color: white;
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+          }
+
+          mat-card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #194c7b;
+            margin: 0;
+          }
+        }
+
+        mat-card-content {
+          padding: 20px 24px 24px;
+        }
+
+        .quick-access-list {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+
+          .access-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background-color: #f8fafc;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+
+            .access-icon-wrapper {
+              width: 48px;
+              height: 48px;
+              background: linear-gradient(135deg, #a0cbee 0%, #5c8dbd 100%);
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              flex-shrink: 0;
+
+              mat-icon {
+                font-size: 24px;
+                width: 24px;
+                height: 24px;
+                color: white;
+              }
+            }
+
+            .access-info {
+              display: flex;
+              flex-direction: column;
+              gap: 2px;
+              flex: 1;
+
+              .access-title {
+                color: #194c7b;
+                font-weight: 600;
+                font-size: 14px;
+              }
+
+              .access-desc {
+                color: #888;
+                font-size: 12px;
+              }
+            }
+
+            .access-arrow {
+              color: #a0cbee;
+              transition: transform 0.2s ease;
+            }
+
+            &:hover {
+              background-color: #e8f0f8;
+              border-color: #a0cbee;
+              transform: translateX(4px);
+
+              .access-arrow {
+                color: #4170a6;
+                transform: translateX(4px);
+              }
+            }
+          }
+        }
+      }
     }
+  }
+
+  // Espaciador inferior para evitar que el contenido choque con el borde
+  .bottom-spacer {
+    height: 48px;
+    flex-shrink: 0;
+  }
+
+  // Responsive
+  @media (max-width: 1024px) {
+    .main-content-grid {
+      grid-template-columns: 1fr;
+
+      .info-column {
+        .info-card {
+          .features-list {
+            grid-template-columns: 1fr;
+          }
+        }
+      }
+
+      .access-column {
+        .quick-access-card {
+          position: static;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 16px;
+    gap: 20px;
+
+    .welcome-card {
+      mat-card-content {
+        padding: 32px 20px;
+      }
+
+      .welcome-content {
+        h2 {
+          font-size: 28px;
+        }
+
+        .welcome-icon {
+          font-size: 48px;
+          width: 48px;
+          height: 48px;
+        }
+      }
+    }
+
+    .main-content-grid {
+      gap: 20px;
+    }
+  }
 }

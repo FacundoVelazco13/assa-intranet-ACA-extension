@@ -1,35 +1,162 @@
 <aca-page-layout>
-  <div class="aca-page-layout-header">
-    <h1 class="aca-page-title">
-      ¡Bienvenido a la Intranet 2.0!
-    </h1>
-  </div>
-  <div class="aca-page-layout-content">
-    <div class="intranet-welcome-container">
-      <h2>Nuevo Sistema de Gestión de Contenido</h2>
-      <p>
-        Esta es tu nueva plataforma centralizada para la gestión, colaboración y almacenamiento de todos los documentos importantes de la compañía.
-        Explora las diferentes secciones para familiarizarte con las nuevas herramientas a tu disposición.
-      </p>
+  <div class="aca-page-layout-content home-dashboard-page aca-scrollable">
+      <div class="home-dashboard-container">
+        <!-- Hero Section con texto de bienvenida -->
+        <mat-card class="welcome-card">
+          <mat-card-content>
+            <div class="welcome-content">
+              <mat-icon class="welcome-icon">water_drop</mat-icon>
+              <h2>Bienvenido a la Intranet 2.0</h2>
+              <p class="welcome-subtitle">Nuevo Sistema de Gestión de Contenido</p>
+              <p class="welcome-description">
+                Esta es tu nueva plataforma centralizada para la gestión, colaboración y almacenamiento de todos los documentos importantes de la
+                compañía.
+              </p>
+            </div>
+          </mat-card-content>
+        </mat-card>
 
-      <h4>Funcionalidades Principales:</h4>
-      <ul>
-        <li><strong>Biblioteca de Documentos:</strong> Accede a todos los archivos y carpetas de la organización.</li>
-        <li><strong>Mis Tareas:</strong> Gestiona tus flujos de trabajo y tareas pendientes.</li>
-        <li><strong>Búsqueda Avanzada:</strong> Encuentra cualquier documento en segundos.</li>
-        <li><strong>Colaboración en Equipo:</strong> Comparte y edita documentos con tus colegas de forma segura.</li>
-      </ul>
+        <!-- Layout de 2 columnas: Info + Accesos -->
+        <div class="main-content-grid">
+          <!-- Columna Izquierda: Texto informativo -->
+          <div class="info-column">
+            <mat-card class="info-card">
+              <mat-card-header>
+                <mat-icon mat-card-avatar>info</mat-icon>
+                <mat-card-title>Funcionalidades Principales</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <ul class="features-list">
+                  <li>
+                    <mat-icon>folder_open</mat-icon>
+                    <div>
+                      <strong>Biblioteca de Documentos</strong>
+                      <span>Accede a todos los archivos y carpetas de la organización</span>
+                    </div>
+                  </li>
+                  <li>
+                    <mat-icon>task</mat-icon>
+                    <div>
+                      <strong>Mis Tareas</strong>
+                      <span>Gestiona tus flujos de trabajo y tareas pendientes</span>
+                    </div>
+                  </li>
+                  <li>
+                    <mat-icon>search</mat-icon>
+                    <div>
+                      <strong>Búsqueda Avanzada</strong>
+                      <span>Encuentra cualquier documento en segundos</span>
+                    </div>
+                  </li>
+                  <li>
+                    <mat-icon>group</mat-icon>
+                    <div>
+                      <strong>Colaboración en Equipo</strong>
+                      <span>Comparte y edita documentos con tus colegas de forma segura</span>
+                    </div>
+                  </li>
+                </ul>
 
-      <p class="start-exploring">
-        Para comenzar, utiliza la barra de navegación de la izquierda para acceder a tu contenido.
-      </p>
+                <p class="start-exploring">Para comenzar, utiliza la barra de navegación de la izquierda o los accesos rápidos.</p>
+              </mat-card-content>
+            </mat-card>
 
-      <h4>Accesos directos a Aplicaciones:</h4>
-      <ul>
-        <li><strong>MiDrive: </strong><a href="https://midrive.aguassantafesinas.com.ar" target="_blank" rel="noopener noreferrer">midrive.aguassantafesinas.com.ar</a></li>
-        <li><strong>Guardias técnicas operativas: </strong><a href="http://aguas/gto" target="_blank" rel="noopener noreferrer">aguas/gto</a></li>
-        <li><strong>Caja chica digital: </strong><a href="http://aguas/cch/" target="_blank" rel="noopener noreferrer">aguas/cch/</a></li>
-      </ul>
+            <!-- Enlaces Externos -->
+            <mat-card class="external-links-card">
+              <mat-card-header>
+                <mat-icon mat-card-avatar>launch</mat-icon>
+                <mat-card-title>Accesos Directos a Aplicaciones</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <div class="external-links-list">
+                  <a href="https://midrive.aguassantafesinas.com.ar" target="_blank" rel="noopener noreferrer" class="external-link">
+                    <mat-icon>cloud</mat-icon>
+                    <div>
+                      <strong>MiDrive</strong>
+                      <span>midrive.aguassantafesinas.com.ar</span>
+                    </div>
+                  </a>
+
+                  <a href="http://aguas/gto" target="_blank" rel="noopener noreferrer" class="external-link">
+                    <mat-icon>engineering</mat-icon>
+                    <div>
+                      <strong>Guardias técnicas operativas</strong>
+                      <span>aguas/gto</span>
+                    </div>
+                  </a>
+
+                  <a href="http://aguas/cch/" target="_blank" rel="noopener noreferrer" class="external-link">
+                    <mat-icon>account_balance_wallet</mat-icon>
+                    <div>
+                      <strong>Caja chica digital</strong>
+                      <span>aguas/cch/</span>
+                    </div>
+                  </a>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+          <!-- Columna Derecha: Accesos rápidos -->
+          <div class="access-column">
+            <mat-card class="quick-access-card">
+              <mat-card-header>
+                <mat-icon mat-card-avatar>apps</mat-icon>
+                <mat-card-title>Accesos Rápidos</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <div class="quick-access-list">
+                  <div class="access-item" routerLink="/personal-files">
+                    <div class="access-icon-wrapper">
+                      <mat-icon>folder</mat-icon>
+                    </div>
+                    <div class="access-info">
+                      <span class="access-title">Biblioteca</span>
+                      <span class="access-desc">Archivos y carpetas</span>
+                    </div>
+                    <mat-icon class="access-arrow">chevron_right</mat-icon>
+                  </div>
+
+                  <div class="access-item" routerLink="/search">
+                    <div class="access-icon-wrapper">
+                      <mat-icon>search</mat-icon>
+                    </div>
+                    <div class="access-info">
+                      <span class="access-title">Búsqueda</span>
+                      <span class="access-desc">Buscar documentos</span>
+                    </div>
+                    <mat-icon class="access-arrow">chevron_right</mat-icon>
+                  </div>
+
+                  <div class="access-item" routerLink="/favorites">
+                    <div class="access-icon-wrapper">
+                      <mat-icon>star</mat-icon>
+                    </div>
+                    <div class="access-info">
+                      <span class="access-title">Favoritos</span>
+                      <span class="access-desc">Documentos guardados</span>
+                    </div>
+                    <mat-icon class="access-arrow">chevron_right</mat-icon>
+                  </div>
+
+                  <div class="access-item" routerLink="/recent-files">
+                    <div class="access-icon-wrapper">
+                      <mat-icon>history</mat-icon>
+                    </div>
+                    <div class="access-info">
+                      <span class="access-title">Recientes</span>
+                      <span class="access-desc">Últimos archivos vistos</span>
+                    </div>
+                    <mat-icon class="access-arrow">chevron_right</mat-icon>
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+
+        <!-- Espaciador inferior para evitar que el contenido choque con el borde -->
+        <div class="bottom-spacer"></div>
+      </div>
     </div>
-  </div>
 </aca-page-layout>
