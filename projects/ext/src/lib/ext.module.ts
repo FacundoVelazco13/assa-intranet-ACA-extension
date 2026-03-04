@@ -12,7 +12,7 @@ import { AssociationEffects } from './store/effects/association.effects';
 import { DossierEffects } from './store/effects/dossier.effects';
 import { FilesEffects } from './store/effects/files.effects';
 import * as rules from './rules/ext.rules';
-import { IntranetPageComponentComponent } from './components/intranet-page/intranet-page.component.component';
+import { IntranetPageComponent } from './components/intranet-page/intranet-page.component';
 import { SearchEffects } from './store/effects';
 import { IntranetSearchResultComponent } from './components/Intranet-search/intranet-search-result/intranet-search-result.component';
 import { IntranetSearchResultsRowComponent } from './components/Intranet-search/intranet-search-results-row/intranet-search-results-row.component';
@@ -32,7 +32,7 @@ export function provideExtExtension(): (Provider | EnvironmentProviders)[] {
         'docs-dashboard.component': DocsDashboardComponent,
         'oym-dashboard.component': OymDashboardComponent,
         'dossier-view.component': DossierViewComponent,
-        'intranet-page.component': IntranetPageComponentComponent,
+        'intranet-page.component': IntranetPageComponent,
         'intranet-search-result.component': IntranetSearchResultComponent,
         'intranet-search-results-row.component': IntranetSearchResultsRowComponent,
         'gi-dashboard.component': GiDashboardComponent,

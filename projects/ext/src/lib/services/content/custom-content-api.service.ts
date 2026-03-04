@@ -6,6 +6,7 @@ import { NotificationService, PaginationModel } from '@alfresco/adf-core';
 import { ContentService, NodeAction } from '@alfresco/adf-content-services';
 import { Subject } from 'rxjs';
 import { CustomNodeActionsService } from '../node-actions/custom-node-actions.service';
+import { getAssocByType } from '../../utils/content-types.utils';
 
 @Injectable({
   providedIn: 'root'
@@ -27,8 +28,6 @@ export class CustomContentApiService {
       this.notificationService.showError('No tiene permisos para crear asociaciones en este nodo');
       return;
     }
-
-    /* const destinationSelection = this.nodeActionsService.getContentNodeSelection(NodeAction.CHOOSE, [sourceNode], focusedElementOnCloseSelector); */
     const destinationSelection = this.nodesCustomActionService.getCustomContentNodeSelection(
       NodeAction.CHOOSE,
       [sourceNode],
@@ -42,7 +41,7 @@ export class CustomContentApiService {
         }
 
         const targetNode = selections[0];
-        this.createAssociation(sourceNode.entry.id, targetNode.id)
+        this.createAssociation(sourceNode.entry.id, targetNode.id, getAssocByType(sourceNode.entry.nodeType, targetNode.nodeType))
           .then(() => {
             this.notificationService.showInfo(`Asociación creada con "${targetNode.name}"`);
 
@@ -90,7 +89,7 @@ export class CustomContentApiService {
     this.nodesApi = this.contentApi.nodesApi;
     await this.nodesApi.createAssociation(sourceNodeId, {
       targetId: targetNodeId,
-      assocType: assocType || 'assa:general_assoc'
+      assocType: assocType || 'oym:association'
     });
   }
 

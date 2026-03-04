@@ -57,11 +57,11 @@ import { HttpErrorResponse } from '@angular/common/http';
     DataColumnComponent,
     CustomEmptyContentTemplateDirective
   ],
-  templateUrl: './intranet-page.component.component.html',
-  styleUrl: './intranet-page.component.component.scss',
+  templateUrl: './intranet-page.component.html',
+  styleUrl: './intranet-page.component.scss',
   encapsulation: ViewEncapsulation.None
 })
-export class IntranetPageComponentComponent extends PageComponent implements OnInit, OnDestroy {
+export class IntranetPageComponent extends PageComponent implements OnInit, OnDestroy {
   isValidPath = true;
   selectedNode: NodeEntry;
   queryParams = null;

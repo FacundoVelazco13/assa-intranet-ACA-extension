@@ -15,3 +15,11 @@ export function getNameByTypeCode(type: string): string {
       return 'Documento';
   }
 }
+
+export function getAssocByType(source: string, target: string): string {
+  if (source === target) {
+    const area = source.split(':')[0];
+    return `${area}:association`;
+  }
+  return 'assa:association';
+}

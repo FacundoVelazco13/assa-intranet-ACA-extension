@@ -41,9 +41,8 @@ export function getPropertiesByType(nodeType: string): PropertyConfig[] {
   switch (nodeType) {
     case OymNodeType.Procedimiento:
       return [
-        { key: 'oym:numeroProcedimiento', label: 'N° de Procedimiento', icon: 'confirmation_number', defaultValue: '-' },
         {
-          key: 'oym:esVigente',
+          key: 'assa:esVigente',
           label: 'Vigencia',
           icon: 'event_available',
           defaultValue: '-',
