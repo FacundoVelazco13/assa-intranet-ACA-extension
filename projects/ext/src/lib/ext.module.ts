@@ -8,6 +8,7 @@ import { CustomMenuComponent } from './components/navbar/custom-menu/custom-menu
 import { HomeDashboardComponent } from './components/dashboard/home/home-dashboard.component';
 import { OymDashboardComponent } from './components/dashboard/oym/oym-dashboard.component';
 import { DossierViewComponent } from './components/document-views/dossier-view/dossier-view.component';
+import { RecordViewComponent } from './components/document-views/record-view/record-view.component';
 import { AssociationEffects } from './store/effects/association.effects';
 import { DossierEffects } from './store/effects/dossier.effects';
 import { FilesEffects } from './store/effects/files.effects';
@@ -32,6 +33,7 @@ export function provideExtExtension(): (Provider | EnvironmentProviders)[] {
         'docs-dashboard.component': DocsDashboardComponent,
         'oym-dashboard.component': OymDashboardComponent,
         'dossier-view.component': DossierViewComponent,
+        'record-view.component': RecordViewComponent,
         'intranet-page.component': IntranetPageComponent,
         'intranet-search-result.component': IntranetSearchResultComponent,
         'intranet-search-results-row.component': IntranetSearchResultsRowComponent,

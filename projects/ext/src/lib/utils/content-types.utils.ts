@@ -23,3 +23,12 @@ export function getAssocByType(source: string, target: string): string {
   }
   return 'assa:association';
 }
+
+/**
+ * Determina si un nodo es un record basado en su tipo.
+ * Agregar aquí los tipos de nodos que deben mostrarse como records.
+ */
+export function isRecordNodeType(nodeType: string): boolean {
+  const recordTypes = ['hys:ppye'];
+  return recordTypes.includes(nodeType);
+}

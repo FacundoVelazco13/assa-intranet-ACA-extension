@@ -1,0 +1,120 @@
+app-details-manager {
+  .aca-details-buttons {
+    display: flex;
+
+    .aca-close-details-button {
+      display: flex;
+      margin-right: 15px;
+      margin-top: 12px;
+      outline: none;
+      border-radius: 4px;
+
+      &:focus {
+        background-color: var(--theme-selected-background-color);
+        outline: 2px solid var(--theme-blue-button-color);
+        border-radius: 4px;
+      }
+    }
+  }
+}
+
+.aca-details-container {
+  background-color: var(--theme-card-background-color);
+  width: 100%;
+}
+
+.aca-details-tabs {
+  margin-top: 40px;
+  height: calc(100% - 136px);
+
+  > div {
+    height: 100%;
+  }
+
+  div[role='tab'] {
+    &:first-of-type {
+      margin-left: 50px;
+    }
+
+    padding: 0 12px;
+    min-width: 95px;
+    letter-spacing: 0.25px;
+    height: 32px;
+  }
+}
+
+.aca-details-title {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--theme-metadata-property-panel-title-color);
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+
+.aca-details-breadcrumb {
+  font-size: 18px;
+  margin-left: 20px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+
+  &-library {
+    font-weight: 900;
+  }
+
+  &-icon {
+    display: inline-block;
+    vertical-align: text-bottom;
+  }
+}
+
+.aca-record-info-container {
+  padding: 24px;
+}
+
+.aca-record-info-card {
+  background: var(--theme-card-background-color);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  h3 {
+    color: var(--theme-primary-color, #3f51b5);
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  p {
+    color: var(--theme-text-color-lighter, rgba(0, 0, 0, 0.54));
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+}
+
+.aca-record-metadata {
+  margin-top: 24px;
+
+  .aca-metadata-row {
+    display: flex;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--theme-border-color, rgba(0, 0, 0, 0.12));
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .aca-metadata-label {
+    font-weight: 600;
+    color: var(--theme-text-color, #212121);
+    min-width: 150px;
+  }
+
+  .aca-metadata-value {
+    color: var(--theme-text-color-lighter, rgba(0, 0, 0, 0.54));
+    flex: 1;
+  }
+}

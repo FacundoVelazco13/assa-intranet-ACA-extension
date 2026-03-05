@@ -1,0 +1,76 @@
+<aca-page-layout>
+  <div class="aca-page-layout-header">
+    <adf-breadcrumb [root]="title" [folderNode]="node" [transform]="customNodePath" (navigate)="onBreadcrumbNavigate()" />
+    <aca-toolbar [items]="actions" />
+  </div>
+
+  <div class="aca-page-layout-content">
+    <div class="aca-details-container">
+      <div class="aca-details-title">
+        <div class="aca-details-breadcrumb" role="heading" aria-level="2" *ngIf="node">
+          <span class="aca-details-breadcrumb-library">
+            <img class="aca-details-breadcrumb-icon" alt="{{ 'APP.INFO_DRAWER.ICON' | translate }}" src="{{ nodeIcon }}" />
+            {{ node.name }}
+          </span>
+        </div>
+        <div class="aca-details-buttons">
+          <aca-toolbar [items]="aspectActions" info-drawer-buttons />
+          <button
+            class="aca-close-details-button"
+            mat-icon-button
+            data-automation-id="close-library"
+            title="{{ 'APP.INFO_DRAWER.REDUCE_PANEL' | translate }}"
+            (click)="goBack()"
+          >
+            <mat-icon>keyboard_return</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <mat-tab-group [selectedIndex]="activeTab" class="aca-details-tabs" animationDuration="0" mat-stretch-tabs="false" mat-align-tabs="start">
+        <mat-tab label="Información del Registro">
+          <ng-template matTabContent>
+            <div *ngIf="node && !isLoading; else loading" class="aca-record-info-container">
+              <div class="aca-record-info-card">
+                <h3>{{ node.name }}</h3>
+                <p *ngIf="node.properties?.['cm:description']">{{ node.properties['cm:description'] }}</p>
+                <div class="aca-record-metadata">
+                  <div class="aca-metadata-row">
+                    <span class="aca-metadata-label">Tipo:</span>
+                    <span class="aca-metadata-value">{{ node.nodeType }}</span>
+                  </div>
+                  <div class="aca-metadata-row">
+                    <span class="aca-metadata-label">Creado:</span>
+                    <span class="aca-metadata-value">{{ node.createdAt | date: 'medium' }}</span>
+                  </div>
+                  <div class="aca-metadata-row">
+                    <span class="aca-metadata-label">Modificado:</span>
+                    <span class="aca-metadata-value">{{ node.modifiedAt | date: 'medium' }}</span>
+                  </div>
+                  <div class="aca-metadata-row">
+                    <span class="aca-metadata-label">Creado por:</span>
+                    <span class="aca-metadata-value">{{ node.createdByUser?.displayName }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </mat-tab>
+        <mat-tab *ngIf="canCreate(node)" label="Propiedades">
+          <ng-template matTabContent>
+            <app-metadata-tab *ngIf="node && !isLoading; else loading" [node]="node" />
+          </ng-template>
+        </mat-tab>
+        <mat-tab *ngIf="canUpdatePermissions(node)" [disabled]="!canUpdatePermissions(node)" label="Permisos">
+          <ng-template matTabContent>
+            <adf-permission-list *ngIf="node && !isLoading; else loading" [nodeId]="node.id" />
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</aca-page-layout>
+
+<ng-template #loading>
+  <mat-progress-bar color="primary" mode="indeterminate" />
+</ng-template>

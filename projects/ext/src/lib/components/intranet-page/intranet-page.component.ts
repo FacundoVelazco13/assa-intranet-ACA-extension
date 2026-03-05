@@ -35,6 +35,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HttpErrorResponse } from '@angular/common/http';
+import { isRecordNodeType } from '../../utils/content-types.utils';
 
 @Component({
   selector: 'aca-intranet-page.component',
@@ -73,7 +74,6 @@ export class IntranetPageComponent extends PageComponent implements OnInit, OnDe
   private nodePath: PathElement[];
   private _errorTranslationKey = 'APP.MESSAGES.ERRORS.MISSING_CONTENT';
 
-  // 2. Inyectamos los servicios necesarios con `inject`
   private readonly nodesApi = inject(NodesApiService);
   private readonly nodeActionsService = inject(NodeActionsService);
   private readonly route = inject(ActivatedRoute);
@@ -135,7 +135,7 @@ export class IntranetPageComponent extends PageComponent implements OnInit, OnDe
   navigateTo(node: NodeEntry) {
     if (node?.entry) {
       this.selectedNode = node;
-      const { isFolder } = node.entry;
+      const { isFolder, nodeType } = node.entry;
       let id: string;
       if (isFolder) {
         if (node.entry.nodeType === 'app:folderlink') {
@@ -144,11 +144,26 @@ export class IntranetPageComponent extends PageComponent implements OnInit, OnDe
       }
       id = node.entry.id;
       this.documentList.resetNewFolderPagination();
-      this.navigate(id);
+
+      // Determinar si es un record basado en el nodeType
+      if (isRecordNodeType(nodeType)) {
+        this.navigateToRecord(id);
+      } else {
+        this.navigateToDossier(id);
+      }
     }
   }
-  navigate(nodeId: string = null) {
+
+  navigateToDossier(nodeId: string) {
     this.router.navigate(['details', nodeId], { relativeTo: this.route });
+  }
+
+  navigateToRecord(nodeId: string) {
+    this.router.navigate(['record', nodeId], { relativeTo: this.route });
+  }
+
+  navigate(nodeId: string = null) {
+    this.navigateToDossier(nodeId);
   }
   customNodePath(node: Node): Node {
     if (!node?.path?.elements) {

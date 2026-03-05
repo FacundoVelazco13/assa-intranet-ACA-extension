@@ -43,6 +43,14 @@
           }
         },
         {
+          "id": "intranet.gi.notas.rosario.record.route",
+          "path": "notas-rosario/record/:nodeId",
+          "component": "record-view.component",
+          "data": {
+            "navigateSource": "gi/notas-rosario"
+          }
+        },
+        {
           "id": "intranet.gi.notas.santafe.route",
           "path": "notas-santafe",
           "component": "intranet-page.component",
@@ -61,6 +69,14 @@
           }
         },
         {
+          "id": "intranet.gi.notas.santafe.record.route",
+          "path": "notas-santafe/record/:nodeId",
+          "component": "record-view.component",
+          "data": {
+            "navigateSource": "gi/notas-santafe"
+          }
+        },
+        {
           "id": "intranet.gi.notas.expedientes.route",
           "path": "expedientes",
           "component": "intranet-page.component",
@@ -74,6 +90,14 @@
           "id": "intranet.gi.notas.expedientes.details.route",
           "path": "expedientes/details/:nodeId",
           "component": "dossier-view.component",
+          "data": {
+            "navigateSource": "gi/expedientes"
+          }
+        },
+        {
+          "id": "intranet.gi.notas.expedientes.record.route",
+          "path": "expedientes/record/:nodeId",
+          "component": "record-view.component",
           "data": {
             "navigateSource": "gi/expedientes"
           }
@@ -109,6 +133,14 @@
           }
         },
         {
+          "id": "intranet.oym.procedimientos.record.route",
+          "path": "procedimientos/record/:nodeId",
+          "component": "record-view.component",
+          "data": {
+            "navigateSource": "oym/procedimientos"
+          }
+        },
+        {
           "id": "intranet.oym.politicas.route",
           "path": "politicas",
           "component": "intranet-page.component",
@@ -127,6 +159,14 @@
           }
         },
         {
+          "id": "intranet.oym.politicas.record.route",
+          "path": "politicas/record/:nodeId",
+          "component": "record-view.component",
+          "data": {
+            "navigateSource": "oym/politicas"
+          }
+        },
+        {
           "id": "intranet.oym.formularios.route",
           "path": "formularios",
           "component": "intranet-page.component",
@@ -140,6 +180,14 @@
           "id": "intranet.oym.formularios.details.route",
           "path": "formularios/details/:nodeId",
           "component": "dossier-view.component",
+          "data": {
+            "navigateSource": "oym/formularios"
+          }
+        },
+        {
+          "id": "intranet.oym.formularios.record.route",
+          "path": "formularios/record/:nodeId",
+          "component": "record-view.component",
           "data": {
             "navigateSource": "oym/formularios"
           }
