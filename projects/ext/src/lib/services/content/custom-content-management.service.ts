@@ -4,6 +4,7 @@ import { NotificationService } from '@alfresco/adf-core';
 import { inject, Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateDossierDialogComponent } from '../../components/DossierDialog/create-dossier-dialog.component';
+import { CreateRecordDialogComponent } from '../../components/RecordDialog/create-record-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,25 @@ export class CustomContentManagementService {
 
     dialogInstance.afterClosed().subscribe((dossier) => {
       if (dossier) {
+        this.documentListService.reload();
+      }
+      this.focusAfterClose(this.createMenuButtonSelector);
+    });
+  }
+
+  CreateRecordDialog(parentNodeId: string) {
+    const dialogInstance = this.dialogRef.open(CreateRecordDialogComponent, {
+      data: { parentNodeId },
+      panelClass: 'ext-create-record-dialog-container',
+      role: 'dialog'
+    });
+
+    dialogInstance.componentInstance.createError.subscribe((message: string) => {
+      this.notificationService.showError(message);
+    });
+
+    dialogInstance.afterClosed().subscribe((record) => {
+      if (record) {
         this.documentListService.reload();
       }
       this.focusAfterClose(this.createMenuButtonSelector);

@@ -12,6 +12,7 @@ import { RecordViewComponent } from './components/document-views/record-view/rec
 import { AssociationEffects } from './store/effects/association.effects';
 import { DossierEffects } from './store/effects/dossier.effects';
 import { FilesEffects } from './store/effects/files.effects';
+import { RecordEffects } from './store/effects/record.effects';
 import * as rules from './rules/ext.rules';
 import { IntranetPageComponent } from './components/intranet-page/intranet-page.component';
 import { SearchEffects } from './store/effects';
@@ -25,7 +26,7 @@ export function provideExtExtension(): (Provider | EnvironmentProviders)[] {
   return [
     provideTranslations('ext', 'assets/ext'),
     provideExtensionConfig(['ext.json']),
-    provideEffects([AssociationEffects, DossierEffects, FilesEffects, SearchEffects, IntranetRouterEffects]),
+    provideEffects([AssociationEffects, DossierEffects, FilesEffects, SearchEffects, IntranetRouterEffects, RecordEffects]),
     provideExtensions({
       components: {
         'home-dashboard.component': HomeDashboardComponent,
@@ -46,6 +47,7 @@ export function provideExtExtension(): (Provider | EnvironmentProviders)[] {
         'ext.isIntranetDocumentLibrary': rules.isIntranetDocumentLibrary,
         'ext.isIntranet': rules.isIntranet,
         'ext.isIntranetSearch': rules.isIntranetSearch,
+        'ext.isRecordCreationContext': rules.isRecordCreationContext,
         'ext.debugContext': rules.debugContext
       }
     })

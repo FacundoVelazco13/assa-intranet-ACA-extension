@@ -13,7 +13,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MetadataTabComponent } from '@alfresco/aca-content';
 import { first } from 'rxjs/operators';
 import { ContentActionRef } from '@alfresco/adf-extensions';
-import { InfoDrawerButtonsDirective } from '@alfresco/adf-core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Node } from '@alfresco/js-api';
 
@@ -28,7 +27,6 @@ import { Node } from '@alfresco/js-api';
     MetadataTabComponent,
     PageLayoutComponent,
     ToolbarComponent,
-    InfoDrawerButtonsDirective,
     PermissionListComponent,
     BreadcrumbComponent
   ],
@@ -130,6 +128,10 @@ export class RecordViewComponent extends PageComponent implements OnInit, OnDest
 
   canCreate(node: Node): boolean {
     return this.permissions.check(node, ['create']);
+  }
+
+  canUpdate(node: Node): boolean {
+    return this.permissions.check(node, ['update']);
   }
 
   customNodePath(node: Node): Node {

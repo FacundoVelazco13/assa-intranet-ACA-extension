@@ -1,0 +1,40 @@
+<h2 class="aca-create-record-dialog-title" mat-dialog-title>Crear Record</h2>
+
+<mat-dialog-content class="aca-create-record-dialog-content">
+  <form [formGroup]="form" (submit)="submit()">
+    <mat-form-field class="aca-full-width">
+      <mat-label>Nombre del record</mat-label>
+      <input id="record-name-input" aria-label="Nombre del record" matInput required formControlName="name" />
+      <mat-hint *ngIf="form.controls['name'].dirty">
+        <span *ngIf="form.controls['name'].errors?.required"> El nombre es obligatorio </span>
+        <span *ngIf="!form.controls['name'].errors?.required && form.controls['name'].errors?.message">
+          {{ form.controls['name'].errors?.message }}
+        </span>
+      </mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="aca-full-width">
+      <mat-label>Tipo de record</mat-label>
+      <mat-select id="record-type-select" formControlName="nodeType" required>
+        <mat-option *ngFor="let type of recordTypes" [value]="type.value">
+          {{ type.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="aca-full-width">
+      <mat-label>Descripción</mat-label>
+      <textarea id="record-description-input" matInput aria-label="Descripción" rows="4" formControlName="description"> </textarea>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions class="aca-dialog-buttons">
+  <span class="aca-fill-remaining-space"></span>
+
+  <button mat-button id="record-cancel-button" mat-dialog-close>Cancelar</button>
+
+  <button class="aca-dialog-action-button" id="record-create-button" mat-button (click)="submit()" [disabled]="!form.valid || disableSubmitButton">
+    Crear
+  </button>
+</mat-dialog-actions>

@@ -195,6 +195,186 @@
       ]
     },
     {
+      "id": "intranet.hys.route",
+      "path": "intranet/hys",
+      "auth": ["app.auth"],
+      "children": [
+        {
+          "id": "intranet.hys.dashboard.route",
+          "path": "",
+          "component": "hys-dashboard.component"
+        },
+        {
+          "id": "intranet.hys.normas.route",
+          "path": "normas",
+          "component": "intranet-page.component",
+          "data": {
+            "root": "-root-",
+            "title": "Normas",
+            "sitePath": "Sites/hys/documentLibrary/Normas"
+          }
+        },
+        {
+          "id": "intranet.hys.normas.details.route",
+          "path": "normas/details/:nodeId",
+          "component": "dossier-view.component",
+          "data": {
+            "navigateSource": "hys/normas"
+          }
+        },
+        {
+          "id": "intranet.hys.normas.record.route",
+          "path": "normas/record/:nodeId",
+          "component": "record-view.component",
+          "data": {
+            "navigateSource": "hys/normas"
+          }
+        },
+        {
+          "id": "intranet.hys.procedimientos.route",
+          "path": "procedimientos",
+          "component": "intranet-page.component",
+          "data": {
+            "root": "-root-",
+            "title": "Procedimientos",
+            "sitePath": "Sites/hys/documentLibrary/Procedimientos"
+          }
+        },
+        {
+          "id": "intranet.hys.procedimientos.details.route",
+          "path": "procedimientos/details/:nodeId",
+          "component": "dossier-view.component",
+          "data": {
+            "navigateSource": "hys/procedimientos"
+          }
+        },
+        {
+          "id": "intranet.hys.procedimientos.record.route",
+          "path": "procedimientos/record/:nodeId",
+          "component": "record-view.component",
+          "data": {
+            "navigateSource": "hys/procedimientos"
+          }
+        },
+        {
+          "id": "intranet.hys.instructivos.route",
+          "path": "instructivos",
+          "component": "intranet-page.component",
+          "data": {
+            "root": "-root-",
+            "title": "Instructivos",
+            "sitePath": "Sites/hys/documentLibrary/Instructivos"
+          }
+        },
+        {
+          "id": "intranet.hys.instructivos.details.route",
+          "path": "instructivos/details/:nodeId",
+          "component": "dossier-view.component",
+          "data": {
+            "navigateSource": "hys/instructivos"
+          }
+        },
+        {
+          "id": "intranet.hys.instructivos.record.route",
+          "path": "instructivos/record/:nodeId",
+          "component": "record-view.component",
+          "data": {
+            "navigateSource": "hys/instructivos"
+          }
+        },
+        {
+          "id": "intranet.hys.fichas.route",
+          "path": "fichas",
+          "component": "intranet-page.component",
+          "data": {
+            "root": "-root-",
+            "title": "Fichas de riesgo local",
+            "sitePath": "Sites/hys/documentLibrary/Fichas"
+          }
+        },
+        {
+          "id": "intranet.hys.fichas.details.route",
+          "path": "fichas/details/:nodeId",
+          "component": "dossier-view.component",
+          "data": {
+            "navigateSource": "hys/fichas"
+          }
+        },
+        {
+          "id": "intranet.hys.fichas.record.route",
+          "path": "fichas/record/:nodeId",
+          "component": "record-view.component",
+          "data": {
+            "navigateSource": "hys/fichas"
+          }
+        }
+      ]
+    },
+    {
+      "id": "intranet.pc.route",
+      "path": "intranet/pc",
+      "auth": ["app.auth"],
+      "children": [
+        {
+          "id": "intranet.pc.dashboard.route",
+          "path": "",
+          "component": "pc-dashboard.component"
+        },
+        {
+          "id": "intranet.pc.micromedicion.route",
+          "path": "micromedicion",
+          "component": "intranet-page.component",
+          "data": {
+            "root": "-root-",
+            "title": "Micromedición",
+            "sitePath": "Sites/pc/documentLibrary/Micromedicion"
+          }
+        },
+        {
+          "id": "intranet.pc.micromedicion.details.route",
+          "path": "micromedicion/details/:nodeId",
+          "component": "dossier-view.component",
+          "data": {
+            "navigateSource": "pc/micromedicion"
+          }
+        },
+        {
+          "id": "intranet.pc.micromedicion.record.route",
+          "path": "micromedicion/record/:nodeId",
+          "component": "record-view.component",
+          "data": {
+            "navigateSource": "pc/micromedicion"
+          }
+        },
+        {
+          "id": "intranet.pc.info.route",
+          "path": "info",
+          "component": "intranet-page.component",
+          "data": {
+            "root": "-root-",
+            "title": "Info Políticas comerciales",
+            "sitePath": "Sites/pc/documentLibrary/Info"
+          }
+        },
+        {
+          "id": "intranet.pc.info.details.route",
+          "path": "info/details/:nodeId",
+          "component": "dossier-view.component",
+          "data": {
+            "navigateSource": "pc/info"
+          }
+        },
+        {
+          "id": "intranet.pc.info.record.route",
+          "path": "info/record/:nodeId",
+          "component": "record-view.component",
+          "data": {
+            "navigateSource": "pc/info"
+          }
+        }
+      ]
+    },
+    {
       "id": "intranet.search.route",
       "path": "intranet/search",
       "component": "intranet-search-result.component",
@@ -385,32 +565,32 @@
             "id": "intranet.navbar.higiene",
             "title": "Higiene y seguridad",
             "order": 420,
-            "route": "intranet/higiene",
+            "route": "intranet/hys",
             "children": [
               {
                 "id": "intranet.navbar.higiene.dashboard",
                 "title": "Inicio",
-                "route": "intranet/higiene"
+                "route": "intranet/hys"
               },
               {
                 "id": "intranet.navbar.higiene.normas",
                 "title": "Normas",
-                "route": "intranet/higiene/normas"
+                "route": "intranet/hys/normas"
               },
               {
                 "id": "intranet.navbar.higiene.procedimientos",
                 "title": "Procedimientos",
-                "route": "intranet/higiene/procedimientos"
+                "route": "intranet/hys/procedimientos"
               },
               {
                 "id": "intranet.navbar.higiene.instructivos",
                 "title": "Instructivos",
-                "route": "intranet/higiene/instructivos"
+                "route": "intranet/hys/instructivos"
               },
               {
                 "id": "intranet.navbar.higiene.fichas",
                 "title": "Fichas de riesgo local",
-                "route": "intranet/higiene/fichas"
+                "route": "intranet/hys/fichas"
               }
             ]
           },
@@ -418,22 +598,22 @@
             "id": "intranet.navbar.comercial",
             "title": "Políticas comerciales",
             "order": 430,
-            "route": "intranet/comercial",
+            "route": "intranet/pc",
             "children": [
               {
                 "id": "intranet.navbar.comercial.dashboard",
                 "title": "Inicio",
-                "route": "intranet/comercial"
+                "route": "intranet/pc"
               },
               {
                 "id": "intranet.navbar.comercial.micromedicion",
                 "title": "Micromedición",
-                "route": "intranet/comercial/micromedicion"
+                "route": "intranet/pc/micromedicion"
               },
               {
                 "id": "intranet.navbar.comercial.info",
                 "title": "Info Políticas comerciales",
-                "route": "intranet/comercial/info"
+                "route": "intranet/pc/info"
               }
             ]
           },
@@ -510,6 +690,23 @@
         },
         "rules": {
           "visible": ["ext.isIntranetDocumentLibrary", "ext.canCreateInCurrentFolder"]
+        }
+      },
+      {
+        "id": "ext.toolbar.createRecord",
+        "type": "button",
+        "order": 25,
+        "title": "Crear Record",
+        "description": "Crear nuevo registro",
+        "icon": "note_add",
+        "data": {
+          "color": "primary"
+        },
+        "actions": {
+          "click": "CREATE_RECORD"
+        },
+        "rules": {
+          "visible": ["ext.isRecordCreationContext", "ext.canCreateInCurrentFolder"]
         }
       },
       {

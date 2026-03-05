@@ -72,26 +72,8 @@ app-details-manager {
 
 .aca-record-info-container {
   padding: 24px;
-}
-
-.aca-record-info-card {
-  background: var(--theme-card-background-color);
-  border-radius: 8px;
-  padding: 24px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-  h3 {
-    color: var(--theme-primary-color, #3f51b5);
-    font-size: 1.5rem;
-    font-weight: 500;
-    margin-bottom: 16px;
-  }
-
-  p {
-    color: var(--theme-text-color-lighter, rgba(0, 0, 0, 0.54));
-    line-height: 1.6;
-    margin-bottom: 24px;
-  }
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .aca-record-metadata {
@@ -116,5 +98,51 @@ app-details-manager {
   .aca-metadata-value {
     color: var(--theme-text-color-lighter, rgba(0, 0, 0, 0.54));
     flex: 1;
+  }
+}
+
+.aca-record-info-card {
+  background: var(--theme-card-background-color);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+
+  h3 {
+    color: var(--theme-primary-color, #3f51b5);
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 16px;
+    flex-shrink: 0;
+  }
+
+  p {
+    color: var(--theme-text-color-lighter, rgba(0, 0, 0, 0.54));
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .aca-record-metadata {
+    flex-shrink: 0;
+  }
+
+  .aca-record-description {
+    background-color: var(--theme-background-color, #f5f5f5);
+    border-left: 4px solid var(--theme-primary-color, #3f51b5);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 0;
+    margin-top: 24px;
+    overflow-y: auto;
+    padding: 16px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    flex: 1;
+    min-height: 100px;
   }
 }

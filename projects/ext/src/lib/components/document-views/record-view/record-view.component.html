@@ -14,7 +14,6 @@
           </span>
         </div>
         <div class="aca-details-buttons">
-          <aca-toolbar [items]="aspectActions" info-drawer-buttons />
           <button
             class="aca-close-details-button"
             mat-icon-button
@@ -33,7 +32,6 @@
             <div *ngIf="node && !isLoading; else loading" class="aca-record-info-container">
               <div class="aca-record-info-card">
                 <h3>{{ node.name }}</h3>
-                <p *ngIf="node.properties?.['cm:description']">{{ node.properties['cm:description'] }}</p>
                 <div class="aca-record-metadata">
                   <div class="aca-metadata-row">
                     <span class="aca-metadata-label">Tipo:</span>
@@ -52,11 +50,12 @@
                     <span class="aca-metadata-value">{{ node.createdByUser?.displayName }}</span>
                   </div>
                 </div>
+                <p *ngIf="node.properties?.['cm:description']" class="aca-record-description">{{ node.properties['cm:description'] }}</p>
               </div>
             </div>
           </ng-template>
         </mat-tab>
-        <mat-tab *ngIf="canCreate(node)" label="Propiedades">
+        <mat-tab *ngIf="canUpdate(node)" label="Propiedades">
           <ng-template matTabContent>
             <app-metadata-tab *ngIf="node && !isLoading; else loading" [node]="node" />
           </ng-template>

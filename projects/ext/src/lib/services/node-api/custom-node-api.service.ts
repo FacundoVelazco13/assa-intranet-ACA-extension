@@ -22,4 +22,14 @@ export class CustomNodeApiService {
       nodeType: 'cm:folder'
     });
   }
+
+  createRecord(parentId: string, recordData: { name: string; description?: string; nodeType: string }): Observable<Node> {
+    return this.nodesApi.createNode(parentId, {
+      name: recordData.name,
+      nodeType: recordData.nodeType,
+      properties: {
+        'cm:description': recordData.description
+      }
+    });
+  }
 }

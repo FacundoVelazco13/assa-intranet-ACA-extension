@@ -35,7 +35,16 @@ export function isIntranetDocumentLibrary(context: RuleContext): boolean {
   const url = context.navigation?.url || '';
   const pathElements = context.navigation?.currentFolder?.path?.elements || [];
 
-  return url.startsWith('/intranet') && pathElements.slice(-1)[0]?.name === 'documentLibrary';
+  return url.startsWith('/intranet') && pathElements.slice(-1)[0]?.name === 'documentLibrary' && !url.includes('/hys/fichas');
+}
+/**
+ * Placeholder para la rule de contexto de creación de records.
+ * El usuario definirá la lógica correcta posteriormente.
+ * JSON ref: `ext.isRecordCreationContext`
+ */
+export function isRecordCreationContext(context: RuleContext): boolean {
+  const url = context.navigation?.url || '';
+  return url.startsWith('/intranet/hys/fichas') && !url.includes('/record');
 }
 /**
  * Verifica si la ruta actual pertenece a la intranet.
