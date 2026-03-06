@@ -9,7 +9,7 @@ import {
 import { Component, EventEmitter, inject, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { Node, NodeEntry, NodePaging } from '@alfresco/js-api';
 import { PaginationDirective } from '@alfresco/aca-shared';
-import { NavigateRouteAction } from '@alfresco/aca-shared/store';
+import { NavigateUrlAction } from '@alfresco/aca-shared/store';
 import { DocumentListComponent, ContentActionListComponent, ContentActionComponent } from '@alfresco/adf-content-services';
 import { DocumentListPresetRef, DynamicColumnComponent } from '@alfresco/adf-extensions';
 import { CommonModule } from '@angular/common';
@@ -17,10 +17,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CustomContentApiService } from '../../../services/content/custom-content-api.service';
 import { Store } from '@ngrx/store';
-import { CustomRouteService } from '../../../services/route/custom-route.service';
 import { DeleteAssociationAction, DELETE_ASSOCIATION_SUCCESS } from '../../../store/actions/association.actions';
 import { Actions, ofType } from '@ngrx/effects';
 import { filter } from 'rxjs/operators';
+import { getIntranetRouteByType } from '../../../utils/intranet.navigation.utils';
+import { isRecordNodeType } from '../../../utils/content-types.utils';
 
 @Component({
   imports: [
@@ -62,7 +63,6 @@ export class DossierAssocsComponent implements OnInit {
 
   private readonly customContentApi: CustomContentApiService = inject(CustomContentApiService);
   private readonly store = inject(Store);
-  private readonly customRouteService = inject(CustomRouteService);
   private readonly actions$ = inject(Actions);
 
   ngOnInit() {
@@ -102,8 +102,13 @@ export class DossierAssocsComponent implements OnInit {
     const node = (event as CustomEvent).detail?.node as NodeEntry;
     if (node?.entry) {
       if (node.entry.isFolder) {
-        const route = this.customRouteService.getNavigationRouteForNode(node.entry);
-        this.store.dispatch(new NavigateRouteAction(route));
+        const route = getIntranetRouteByType(node.entry.nodeType);
+
+        if (isRecordNodeType(node.entry.nodeType)) {
+          this.store.dispatch(new NavigateUrlAction(`${route}/record/${node.entry.id}`));
+        } else {
+          this.store.dispatch(new NavigateUrlAction(`${route}/details/${node.entry.id}`));
+        }
       } else {
         this.previewFile.emit(node);
       }
@@ -113,8 +118,12 @@ export class DossierAssocsComponent implements OnInit {
     const node = $event.value as NodeEntry;
     if (node?.entry) {
       if (node.entry.isFolder) {
-        const route = this.customRouteService.getNavigationRouteForNode(node.entry);
-        this.store.dispatch(new NavigateRouteAction(route));
+        const route = getIntranetRouteByType(node.entry.nodeType);
+        if (isRecordNodeType(node.entry.nodeType)) {
+          this.store.dispatch(new NavigateUrlAction(`${route}/record/${node.entry.id}`));
+        } else {
+          this.store.dispatch(new NavigateUrlAction(`${route}/details/${node.entry.id}`));
+        }
       } else {
         this.previewFile.emit(node);
       }

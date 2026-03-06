@@ -14,6 +14,7 @@ import {
 } from '@alfresco/adf-content-services';
 import {
   infoDrawerPreview,
+  NavigateToFolder,
   SetInfoDrawerPreviewStateAction,
   SetInfoDrawerStateAction,
   SetSearchItemsTotalCountAction,
@@ -56,6 +57,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatMenuModule } from '@angular/material/menu';
 import { IntranetSearchInputComponent } from '../intranet-search-input-component/intranet-search-input.component';
 import { NavigateToIntranetFolder } from '../../../store/actions/intranet-router.actions';
+import { isIntranetNode } from '../../../utils/content-types.utils';
 
 @Component({
   selector: 'aca-intranet-search-result',
@@ -283,8 +285,12 @@ export class IntranetSearchResultComponent extends PageComponent implements OnIn
 
   onNodeDoubleClick(node: NodeEntry) {
     if (node?.entry) {
-      if (node.entry.isFolder) {
+      if (isIntranetNode(node.entry)) {
         this.store.dispatch(new NavigateToIntranetFolder(node));
+        return;
+      }
+      if (node.entry.isFolder) {
+        this.store.dispatch(new NavigateToFolder(node));
         return;
       }
       this.showPreview(node, { path: this.router.url });
