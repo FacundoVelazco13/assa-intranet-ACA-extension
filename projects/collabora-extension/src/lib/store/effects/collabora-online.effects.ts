@@ -1,4 +1,8 @@
-/* eslint-disable license-header/header */
+/*
+ * SPDX-FileCopyrightText: 2025 Jeci SARL - https://jeci.fr
+ * SPDX-FileCopyrightText: 2026 Facundo Velazco - https://github.com/FacundoVelazco13
+ * SPDX-License-Identifier: Apache-2.0
+ */
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map } from 'rxjs/operators';

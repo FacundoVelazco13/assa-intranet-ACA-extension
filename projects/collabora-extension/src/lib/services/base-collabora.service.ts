@@ -1,4 +1,8 @@
-/* eslint-disable license-header/header */
+/*
+ * SPDX-FileCopyrightText: 2025 Jeci SARL - https://jeci.fr
+ * SPDX-FileCopyrightText: 2026 Facundo Velazco - https://github.com/FacundoVelazco13
+ * SPDX-License-Identifier: Apache-2.0
+ */
 import { AlfrescoApiService } from '@alfresco/adf-content-services';
 import { AppConfigService } from '@alfresco/adf-core';
 import { Injectable, inject } from '@angular/core';

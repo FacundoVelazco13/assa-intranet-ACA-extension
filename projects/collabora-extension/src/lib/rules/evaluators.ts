@@ -1,4 +1,8 @@
-/* eslint-disable license-header/header */
+/*
+ * SPDX-FileCopyrightText: 2025 Jeci SARL - https://jeci.fr
+ * SPDX-FileCopyrightText: 2026 Facundo Velazco - https://github.com/FacundoVelazco13
+ * SPDX-License-Identifier: Apache-2.0
+ */
 
 import { AcaRuleContext } from '@alfresco/aca-shared/rules';
 
@@ -16,7 +20,6 @@ export function getExtension(filename: string): string {
 
 export function canViewWithCollaboraOnline(context: AcaRuleContext): boolean {
   if (canUseCollaboraExtension(context)) {
-    // Usa context.selection.file en toolbar, o context.selection.first en viewer
     const file = context.selection?.file || context.selection?.first;
 
     if (!file?.entry) {
@@ -35,7 +38,6 @@ export function canViewWithCollaboraOnline(context: AcaRuleContext): boolean {
 
 export function canEditWithCollaboraOnline(context: AcaRuleContext): boolean {
   if (canUseCollaboraExtension(context)) {
-    // Usa context.selection.file en toolbar, o context.selection.first en viewer
     const file = context.selection?.file || context.selection?.first;
 
     if (!file?.entry) {

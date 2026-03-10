@@ -4,7 +4,7 @@
   "$vendor": "Facundo Velazco",
   "$name": "collabora-extension",
   "$description": "Collabora Online plugin",
-  "$license": "MIT",
+  "$license": "Apache-2.0",
 
   "routes": [
     {
@@ -61,7 +61,7 @@
             "type": "button",
             "order": 89,
             "icon": "adf:edit-collabora-online",
-            "title": "Ver con Collabora Online",
+            "title": "COLLABORA.VIEW",
             "actions": {
               "click": "collabora.plugin.actions.view"
             },
@@ -91,7 +91,7 @@
         "type": "button",
         "order": 449,
         "icon": "adf:edit-collabora-online",
-        "title": "Ver con Collabora Online",
+        "title": "COLLABORA.VIEW",
         "actions": {
           "click": "collabora.plugin.actions.view"
         },
@@ -127,7 +127,7 @@
               "type": "button",
               "order": 1,
               "icon": "adf:edit-collabora-online",
-              "title": "Ver con Collabora Online",
+              "title": "COLLABORA.VIEW",
               "actions": {
                 "click": "collabora.plugin.actions.view"
               },

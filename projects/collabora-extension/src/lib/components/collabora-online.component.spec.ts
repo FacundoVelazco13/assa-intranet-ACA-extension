@@ -1,20 +1,25 @@
-/* eslint-disable license-header/header */
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+/*
+ * SPDX-FileCopyrightText: 2025 Jeci SARL - https://jeci.fr
+ * SPDX-FileCopyrightText: 2026 Facundo Velazco - https://github.com/FacundoVelazco13
+ * SPDX-License-Identifier: Apache-2.0
+ */
+import { TestBed } from '@angular/core/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { UserPreferencesService, ThumbnailService } from '@alfresco/adf-core';
 import { CollaboraOnlineComponent } from './collabora-online.component';
 import { CollaboraOnlineService } from '../services/collabora-online.service';
-import { UserPreferencesService, ThumbnailService } from '@alfresco/adf-core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ContentApiService } from '@alfresco/aca-shared';
+import { AppService, ContentApiService } from '@alfresco/aca-shared';
 import { of } from 'rxjs';
+import { provideHttpClient } from '@angular/common/http';
+import { TranslateService, TranslateStore } from '@ngx-translate/core';
 
 describe('CollaboraOnlineComponent', () => {
-  let component: CollaboraOnlineComponent;
-  let fixture: ComponentFixture<CollaboraOnlineComponent>;
-
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CollaboraOnlineComponent],
       providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
         {
           provide: CollaboraOnlineService,
           useValue: {
@@ -48,20 +53,38 @@ describe('CollaboraOnlineComponent', () => {
         },
         {
           provide: Router,
-          useValue: { navigateByUrl: jasmine.createSpy('navigateByUrl') }
+          useValue: { navigateByUrl: jasmine.createSpy('navigateByUrl'), url: '/test' }
         },
         {
           provide: ThumbnailService,
           useValue: { getMimeTypeIcon: jasmine.createSpy('getMimeTypeIcon').and.returnValue('adf:file-word') }
+        },
+        {
+          provide: AppService,
+          useValue: { setAppNavbarMode: jasmine.createSpy('setAppNavbarMode') }
+        },
+        {
+          provide: TranslateService,
+          useValue: {
+            instant: jasmine.createSpy('instant').and.callFake((key: string) => key),
+            get: jasmine.createSpy('get').and.returnValue(of('')),
+            stream: jasmine.createSpy('stream').and.returnValue(of('')),
+            onLangChange: of(),
+            onTranslationChange: of(),
+            onDefaultLangChange: of()
+          }
+        },
+        {
+          provide: TranslateStore,
+          useValue: {}
         }
       ]
     });
-
-    fixture = TestBed.createComponent(CollaboraOnlineComponent);
-    component = fixture.componentInstance;
   });
 
-  it('should create', () => {
+  it('should be created', () => {
+    const fixture = TestBed.createComponent(CollaboraOnlineComponent);
+    const component = fixture.componentInstance;
     expect(component).toBeTruthy();
   });
 });

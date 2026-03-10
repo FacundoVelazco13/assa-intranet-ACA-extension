@@ -1,6 +1,7 @@
 {
-    "COLLABORA": {
-        "SAVE_CLOSE": "Guardar y cerrar",
-        "EDIT": "Editar con Collabora™ Online"
-    }
+  "COLLABORA": {
+    "SAVE_CLOSE": "Guardar y cerrar",
+    "EDIT": "Editar con Collabora™ Online",
+    "VIEW": "Ver con Collabora Online"
+  }
 }

@@ -1,4 +1,9 @@
-/* eslint-disable license-header/header */
+/*
+ * SPDX-FileCopyrightText: 2025 Jeci SARL - https://jeci.fr
+ * SPDX-FileCopyrightText: 2026 Facundo Velazco - https://github.com/FacundoVelazco13
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 import { provideTranslations } from '@alfresco/adf-core';
 import { provideExtensionConfig, provideExtensions } from '@alfresco/adf-extensions';
 import { EnvironmentProviders, Provider } from '@angular/core';

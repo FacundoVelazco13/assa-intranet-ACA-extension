@@ -9,7 +9,16 @@ module.exports = function (config) {
     ...baseConfig,
     coverageReporter: {
       ...baseConfig.coverageReporter,
-      dir: join(__dirname, '../../coverage/collabora-extension')
+      dir: join(__dirname, '../../coverage/collabora-extension'),
+      reporters: [{ type: 'html' }, { type: 'text-summary' }],
+      thresholds: {
+        global: {
+          statements: 20,
+          branches: 0,
+          functions: 20,
+          lines: 20
+        }
+      }
     },
     files: [
       '../../node_modules/katex/dist/katex.min.js',

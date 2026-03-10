@@ -1,13 +1,15 @@
-/* eslint-disable license-header/header */
-/* eslint-disable @angular-eslint/component-selector */
+/*
+ * SPDX-FileCopyrightText: 2025 Jeci SARL - https://jeci.fr
+ * SPDX-FileCopyrightText: 2026 Facundo Velazco - https://github.com/FacundoVelazco13
+ * SPDX-License-Identifier: Apache-2.0
+ */
 
-import { Component, Input, OnInit, ViewEncapsulation, ViewChild, ElementRef, OnDestroy } from '@angular/core';
-import { CollaboraOnlineService } from '../../services/collabora-online.service';
-import { UserPreferencesService, UserPreferenceValues } from '@alfresco/adf-core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CollaboraTokenResponse } from '../../models/collabora.models';
+import { ActivatedRoute } from '@angular/router';
+import { UserPreferencesService } from '@alfresco/adf-core';
+import { CollaboraOnlineService } from '../../services/collabora-online.service';
+import { CollaboraBaseComponent } from '../base/collabora-base.component';
 
 @Component({
   selector: 'viewer-collabora-online',
@@ -16,60 +18,12 @@ import { CollaboraTokenResponse } from '../../models/collabora.models';
   imports: [CommonModule],
   encapsulation: ViewEncapsulation.None
 })
-export class ViewerCollaboraOnlineComponent implements OnInit, OnDestroy {
-  @ViewChild('form') postForm: ElementRef;
-  @ViewChild('access_token') inputToken: ElementRef;
-  @ViewChild('access_token_ttl') inputTokenTTL: ElementRef;
-  @ViewChild('loleafletFrame') loleafletFrame: ElementRef;
-
-  @Input()
-  nodeId: string;
-
-  accessToken: string;
-  accessTokenTTL: string;
-  iFrameUrl: string;
-  locale: string;
-
-  private onDestroy$ = new Subject<boolean>();
-
-  constructor(
-    private collaboraOnlineService: CollaboraOnlineService,
-    private userPreferencesService: UserPreferencesService
-  ) {}
-
-  async ngOnInit() {
-    this.userPreferencesService
-      .select(UserPreferenceValues.Locale)
-      .pipe(takeUntil(this.onDestroy$))
-      .subscribe((locale) => (this.locale = locale));
-
-    // eslint-disable-next-line no-console
-    console.log('Node id : ' + this.nodeId);
-    // Get url du serveur collabora online
-    const wopiHostUrl = await this.collaboraOnlineService.getLoolUrl();
-    const wopiFileUrl = wopiHostUrl + 'wopi/files/' + this.nodeId;
-
-    // Get token pour l'édition du document
-    let responseToken: CollaboraTokenResponse = await this.collaboraOnlineService.getAccessToken(this.nodeId, 'edit');
-    this.accessToken = responseToken.access_token;
-    this.accessTokenTTL = responseToken.access_token_ttl;
-    if (!responseToken.wopi_src_url || responseToken.wopi_src_url === '') {
-      responseToken = await this.collaboraOnlineService.getAccessToken(this.nodeId, 'view');
-    }
-    const wopiSrcUrl = responseToken.wopi_src_url;
-    this.iFrameUrl = wopiSrcUrl + 'WOPISrc=' + encodeURIComponent(wopiFileUrl) + '&lang=' + this.locale;
-
-    // Remplissage du formulaire dynamique
-    this.postForm.nativeElement.action = this.iFrameUrl;
-    this.inputToken.nativeElement.value = this.accessToken;
-    this.inputTokenTTL.nativeElement.value = this.accessTokenTTL;
-
-    // Déclenchement du post
-    this.postForm.nativeElement.submit();
+export class ViewerCollaboraOnlineComponent extends CollaboraBaseComponent implements OnInit {
+  constructor(route: ActivatedRoute, collaboraOnlineService: CollaboraOnlineService, userPreferencesService: UserPreferencesService) {
+    super(route, collaboraOnlineService, userPreferencesService);
   }
 
-  ngOnDestroy() {
-    this.onDestroy$.next(true);
-    this.onDestroy$.complete();
+  async ngOnInit(): Promise<void> {
+    return super.ngOnInit();
   }
 }
