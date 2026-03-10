@@ -383,7 +383,7 @@
     {
       "id": "intranet.services.route",
       "path": "services",
-      "component": "services-redirect.component",
+      "component": "people-list.component",
       "auth": ["app.auth"]
     }
   ],

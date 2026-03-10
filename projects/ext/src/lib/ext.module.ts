@@ -1,4 +1,3 @@
-/* eslint-disable license-header/header */
 import { provideTranslations } from '@alfresco/adf-core';
 import { provideExtensionConfig, provideExtensions } from '@alfresco/adf-extensions';
 import { EnvironmentProviders, Provider } from '@angular/core';
@@ -21,6 +20,7 @@ import { IntranetSearchResultsRowComponent } from './components/Intranet-search/
 import { IntranetRouterEffects } from './store/effects/intranet-router.effects';
 import { GiDashboardComponent } from './components/dashboard/gi/gi-dashboard.component';
 import { ServicesRedirectComponent } from './components/dashboard/services-home/services-redirect.component';
+import { PeopleListComponent } from './components/Services/people/people-list.component';
 
 export function provideExtExtension(): (Provider | EnvironmentProviders)[] {
   return [
@@ -39,7 +39,8 @@ export function provideExtExtension(): (Provider | EnvironmentProviders)[] {
         'intranet-search-result.component': IntranetSearchResultComponent,
         'intranet-search-results-row.component': IntranetSearchResultsRowComponent,
         'gi-dashboard.component': GiDashboardComponent,
-        'services-redirect.component': ServicesRedirectComponent
+        'services-redirect.component': ServicesRedirectComponent,
+        'people-list.component': PeopleListComponent
       },
       evaluators: {
         'ext.isDossier': rules.isDossier,
