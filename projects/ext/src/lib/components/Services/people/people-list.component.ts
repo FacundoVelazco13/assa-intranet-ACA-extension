@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, inject, DestroyRef } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
@@ -9,41 +9,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
-import { AdfHttpClient, RequestOptions } from '@alfresco/adf-core/api';
-import { from } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { PageLayoutComponent } from '@alfresco/aca-shared';
-
-export interface Person {
-  friendlyname: string;
-  email: string;
-  org_name: string;
-  employee_number: string;
-  location_name: string;
-  mobile_phone: string;
-}
-export interface ApiResponse {
-  success: boolean;
-  statusCode: number;
-  operation: string;
-  // eslint-disable-next-line prettier/prettier
-  class: string;
-  key: string;
-  data: DataResponse;
-}
-export interface DataResponse {
-  code: number;
-  message: string;
-  objects: PersonObject[];
-}
-
-export interface PersonObject {
-  code: number;
-  // eslint-disable-next-line prettier/prettier
-  class: string;
-  key: string;
-  fields: Person;
-}
+import { ItopPerson } from '../../../models/itop-types';
+import { ItopService } from '../../../services/itop/itop.service';
 
 @Component({
   selector: 'aca-people-list',
@@ -66,74 +34,37 @@ export interface PersonObject {
   encapsulation: ViewEncapsulation.None
 })
 export class PeopleListComponent implements OnInit {
-  private readonly adfHttpClient = inject(AdfHttpClient);
-  private readonly destroyRef = inject(DestroyRef);
   private readonly snackBar = inject(MatSnackBar);
+  private readonly itopService = inject(ItopService);
 
-  private url = 'alfresco/s/api/itop/mock';
-
-  private opts: RequestOptions = {
-    httpMethod: 'GET',
-    contentTypes: ['application/json'],
-    accepts: ['application/json']
-  };
-
-  people: Person[] = [];
+  people: ItopPerson[] = [];
 
   displayedColumns: string[] = ['friendlyname', 'email', 'org_name', 'employee_number', 'location_name', 'mobile_phone'];
 
   isLoading = true;
   searchQuery = '';
 
-  filteredPeople: Person[] = [];
-  paginatedPeople: Person[] = [];
+  filteredPeople: ItopPerson[] = [];
+  paginatedPeople: ItopPerson[] = [];
 
   pageSize = 10;
   pageIndex = 0;
   pageSizeOptions: number[] = [5, 10, 25, 50, 100];
   totalItems = 0;
 
-  ngOnInit() {
+  async ngOnInit() {
     this.isLoading = true;
-
-    from(this.adfHttpClient.request(this.url, this.opts))
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe({
-        next: (response) => {
-          const { success, statusCode, operation, class: itop_class, key, data } = response as ApiResponse;
-
-          if (!success) {
-            this.showError(`API responded with error: ${statusCode} - ${operation} on ${itop_class} (${key})`);
-            this.isLoading = false;
-            return;
-          }
-
-          const { code, message, objects } = data as DataResponse;
-
-          if (!objects) {
-            this.showError(`API response missing 'objects', code: ${code}, message: ${message}`);
-            this.isLoading = false;
-            return;
-          }
-
-          Object.values(objects).map((person_objects: PersonObject) => {
-            const { fields } = person_objects;
-
-            if (fields) {
-              this.people.push(fields);
-            }
-            this.filteredPeople = [...this.people];
-            this.totalItems = this.filteredPeople.length;
-            this.updatePaginatedData();
-            this.isLoading = false;
-          });
-        },
-        error: (error) => {
-          console.error('Error fetching people data:', error);
-          this.showError('Error al cargar personas');
-          this.isLoading = false;
-        }
-      });
+    try {
+      this.people = await this.itopService.getItopPeople();
+      this.filteredPeople = [...this.people];
+      this.totalItems = this.filteredPeople.length;
+      this.updatePaginatedData();
+      this.isLoading = false;
+    } catch (error) {
+      console.error('Error fetching people data:', error);
+      this.showError('Error al cargar los datos de personas.');
+      this.isLoading = false;
+    }
   }
 
   private showError(message: string): void {
