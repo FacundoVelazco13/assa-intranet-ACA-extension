@@ -1,32 +1,35 @@
-import { AdfHttpClient, RequestOptions } from '@alfresco/adf-core/api';
-import { Injectable, inject } from '@angular/core';
+import { AdfHttpClient } from '@alfresco/adf-core/api';
+import { Injectable } from '@angular/core';
 import { ItopApiResponse, ItopDataResponse, ItopPerson, ItopPersonObject } from '../../models/itop-types';
+import { BaseItopService } from './base-itop.service';
+import { AlfrescoApiService } from '@alfresco/adf-content-services';
+import { AppConfigService } from '@alfresco/adf-core';
+import { firstValueFrom } from 'rxjs';
 
 const principal_url = 'alfresco/s/api/itop/data';
 const mock_url = 'alfresco/s/api/itop/mock';
 
-const opts: RequestOptions = {
-  httpMethod: 'GET',
-  contentTypes: ['application/json'],
-  accepts: ['application/json']
-};
-
 @Injectable({
   providedIn: 'root'
 })
-export class ItopService {
-  private readonly adfHttpClient = inject(AdfHttpClient);
+export class ItopService extends BaseItopService {
+  constructor(
+    protected adfHttpClient: AdfHttpClient,
+    protected apiService: AlfrescoApiService,
+    protected appConfig: AppConfigService
+  ) {
+    super(adfHttpClient);
+  }
 
   async getItopPeople(): Promise<ItopPerson[]> {
     const people: ItopPerson[] = [];
-
     let response: ItopApiResponse;
 
     try {
-      response = await this.adfHttpClient.request(principal_url, opts);
+      response = await firstValueFrom(this.get(principal_url));
     } catch (error) {
       try {
-        response = await this.adfHttpClient.request(mock_url, opts);
+        response = await firstValueFrom(this.get(mock_url));
       } catch (mockError) {
         console.error('Error fetching data from both primary and mock endpoints:', error, mockError);
         throw new Error('Failed to fetch data from both primary and mock endpoints.');
