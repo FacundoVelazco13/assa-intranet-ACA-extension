@@ -22,4 +22,9 @@ export class HomeNavbarComponent {
     this.router.navigate([this.route]);
     this.appService.appNavNarMode$.next('collapsed');
   }
+
+  isRouteActive(): boolean {
+    const currentUrl = this.router.url.split('?')[0]; // Remove query params
+    return currentUrl.startsWith('/' + this.route) || currentUrl.startsWith(this.route);
+  }
 }

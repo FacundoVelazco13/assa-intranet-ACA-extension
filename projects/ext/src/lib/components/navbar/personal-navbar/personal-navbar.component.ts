@@ -66,6 +66,11 @@ export class PersonalNavbarComponent {
     this.isOpen = !this.isOpen;
   }
 
+  isRouteActive(route: string): boolean {
+    const currentUrl = this.router.url.split('?')[0]; // Remove query params
+    return currentUrl.startsWith('/' + route) || currentUrl.startsWith(route);
+  }
+
   onNavigate(route: string): void {
     this.router.navigate([route]);
     // Mantener el dropdown abierto para continuar explorando

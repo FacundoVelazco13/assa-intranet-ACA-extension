@@ -16,6 +16,7 @@
         @for (item of items; track item.id) {
           <a 
             class="navbar-dropdown__item"
+            [class.navbar-dropdown__item--active]="isRouteActive(item.route)"
             (click)="onNavigate(item.route)"
             [title]="item.title">
             {{ item.title }}

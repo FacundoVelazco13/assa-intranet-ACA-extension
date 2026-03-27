@@ -1,6 +1,7 @@
 <div class="navbar-home-wrapper">
   <button 
     class="navbar-button navbar-button--home"
+    [class.navbar-button--active]="isRouteActive()"
     (click)="onNavigate()"
     aria-label="Navigate to home">
     <span class="navbar-button__text">{{ title }}</span>
