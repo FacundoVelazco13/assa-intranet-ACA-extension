@@ -1,7 +1,9 @@
-import { Component, inject, ViewEncapsulation } from '@angular/core';
+import { Component, inject, ViewEncapsulation, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { AppService } from '@alfresco/aca-shared';
+import { Subject } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
 
 interface NavSubItem {
   id: string;
@@ -25,9 +27,10 @@ interface NavSectionGroup {
   styleUrl: './admin-sections-navbar.component.scss',
   encapsulation: ViewEncapsulation.None
 })
-export class AdminSectionsNavbarComponent {
+export class AdminSectionsNavbarComponent implements OnInit, OnDestroy {
   private appService = inject(AppService);
   private router = inject(Router);
+  private destroy$ = new Subject<void>();
 
   title = 'Documentos Corporativos';
   mainDropdownOpen = false;
@@ -78,6 +81,46 @@ export class AdminSectionsNavbarComponent {
       ]
     }
   ];
+
+  ngOnInit(): void {
+    // Detect current active section on init
+    this.updateActiveSectionFromRoute();
+
+    // Listen to route changes and update active section
+    this.router.events
+      .pipe(
+        filter((event) => event instanceof NavigationEnd),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(() => {
+        this.updateActiveSectionFromRoute();
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  private updateActiveSectionFromRoute(): void {
+    const currentUrl = this.router.url.split('?')[0];
+
+    // Find which section the current route belongs to
+    const activeSection = this.sections.find((section) => {
+      const baseRoute = section.homeRoute.split('/')[1]; // Get the identifier (oym, gi, hys, pc)
+      return currentUrl.includes(baseRoute);
+    });
+
+    // Update sections state
+    this.sections.forEach((section) => {
+      section.isOpen = section === activeSection;
+    });
+
+    // Open main dropdown if we're in any admin section
+    if (activeSection) {
+      this.mainDropdownOpen = true;
+    }
+  }
 
   toggleMainDropdown(): void {
     this.mainDropdownOpen = !this.mainDropdownOpen;

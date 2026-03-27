@@ -1,7 +1,9 @@
-import { Component, inject, ViewEncapsulation } from '@angular/core';
+import { Component, inject, ViewEncapsulation, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { AppService } from '@alfresco/aca-shared';
+import { Subject } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
 
 interface NavItem {
   id: string;
@@ -17,9 +19,10 @@ interface NavItem {
   styleUrl: './personal-navbar.component.scss',
   encapsulation: ViewEncapsulation.None
 })
-export class PersonalNavbarComponent {
+export class PersonalNavbarComponent implements OnInit, OnDestroy {
   private appService = inject(AppService);
   private router = inject(Router);
+  private destroy$ = new Subject<void>();
 
   title = 'Personal';
   isOpen = false;
@@ -61,6 +64,32 @@ export class PersonalNavbarComponent {
       route: 'trashcan'
     }
   ];
+
+  ngOnInit(): void {
+    // Detect if current route is a personal route
+    this.updateOpenStateFromRoute();
+
+    // Listen to route changes
+    this.router.events
+      .pipe(
+        filter((event) => event instanceof NavigationEnd),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(() => {
+        this.updateOpenStateFromRoute();
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  private updateOpenStateFromRoute(): void {
+    const currentUrl = this.router.url.split('?')[0];
+    // Check if current route matches any personal item
+    this.isOpen = this.items.some((item) => currentUrl === '/' + item.route || currentUrl === item.route);
+  }
 
   toggleDropdown(): void {
     this.isOpen = !this.isOpen;
