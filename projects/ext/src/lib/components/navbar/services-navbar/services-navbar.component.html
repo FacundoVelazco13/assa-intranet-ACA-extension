@@ -1,0 +1,27 @@
+<div class="navbar-services-wrapper">
+  <button 
+    class="navbar-button navbar-button--dropdown"
+    [class.navbar-button--open]="isOpen"
+    (click)="toggleDropdown()"
+    aria-label="Toggle services menu">
+    <span class="navbar-button__text">{{ title }}</span>
+    <span class="navbar-button__toggle-icon" [class.navbar-button__toggle-icon--open]="isOpen">
+      ▼
+    </span>
+  </button>
+
+  @if (isOpen) {
+    <nav class="navbar-dropdown">
+      <div class="navbar-dropdown__items">
+        @for (item of items; track item.id) {
+          <a 
+            class="navbar-dropdown__item"
+            (click)="onNavigate(item.route)"
+            [title]="item.title">
+            {{ item.title }}
+          </a>
+        }
+      </div>
+    </nav>
+  }
+</div>

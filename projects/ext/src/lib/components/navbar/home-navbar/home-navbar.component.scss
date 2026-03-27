@@ -1,0 +1,47 @@
+/* stylelint-disable selector-class-pattern */
+
+.navbar-home-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.navbar-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 8px 16px;
+  min-height: 32px;
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 400;
+  transition: all 0.2s ease;
+  text-align: left;
+  color: var(--theme-text-color, #212121);
+
+  &:hover {
+    background-color: var(--theme-hover-background, #f5f5f5);
+  }
+
+  &:active,
+  &:focus {
+    outline: none;
+    background-color: var(--theme-active-background, #e8e8e8);
+  }
+
+  &--home {
+    font-weight: 400;
+  }
+
+  &__text {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
