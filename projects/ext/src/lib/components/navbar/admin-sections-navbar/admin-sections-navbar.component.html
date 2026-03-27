@@ -1,0 +1,49 @@
+<div class="navbar-admin-wrapper">
+  <button 
+    class="navbar-button navbar-button--dropdown"
+    [class.navbar-button--open]="mainDropdownOpen"
+    (click)="toggleMainDropdown()"
+    aria-label="Toggle admin sections menu">
+    <span class="navbar-button__text">{{ title }}</span>
+    <span class="navbar-button__toggle-icon" [class.navbar-button__toggle-icon--open]="mainDropdownOpen">
+      ▼
+    </span>
+  </button>
+
+  @if (mainDropdownOpen) {
+    <nav class="navbar-dropdown navbar-dropdown--admin">
+      <div class="navbar-dropdown__sections">
+        @for (section of sections; track trackBySectionId($index, section)) {
+          <div 
+            class="navbar-section"
+            [class.navbar-section--open]="section.isOpen">
+            <button 
+              class="navbar-section__header"
+              [class.navbar-section__header--open]="section.isOpen"
+              [class.navbar-section__header--active]="isRouteActive(section.homeRoute)"
+              (click)="toggleSection(section)"
+              [attr.aria-expanded]="section.isOpen">
+              <span class="navbar-section__title">{{ section.title }}</span>
+              <span class="navbar-section__toggle" [class.navbar-section__toggle--open]="section.isOpen">
+                ▼
+              </span>
+            </button>
+
+            @if (section.isOpen) {
+              <div class="navbar-section__items">
+                @for (item of section.items; track trackByItemId($index, item)) {
+                  <a 
+                    class="navbar-section__item"
+                    [class.navbar-section__item--active]="isRouteActive(item.route)"
+                    (click)="onNavigate(item.route)">
+                    {{ item.title }}
+                  </a>
+                }
+              </div>
+            }
+          </div>
+        }
+      </div>
+    </nav>
+  }
+</div>

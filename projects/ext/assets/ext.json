@@ -5,7 +5,6 @@
   "$name": "ext",
   "$description": "",
   "$license": "MIT",
-
   "rules": [
     {
       "id": "ext.rules.isDossier",
@@ -52,207 +51,20 @@
         "id": "intranet.navbar.primary",
         "items": [
           {
-            "id": "intranet.navbar.dashboard",
-            "order": 100,
-            "title": "Inicio",
-            "description": "dashboard",
-            "route": "intranet/dashboard"
+            "id": "home-navbar",
+            "component": "home-navbar.component"
           },
           {
-            "id": "intranet.navbar.personal",
-            "order": 200,
-            "title": "Personal",
-            "description": "Gestión de documentos personales",
-            "data": {
-              "canBeInactive": true
-            },
-            "children": [
-              {
-                "id": "app.navbar.personalFiles",
-                "order": 100,
-                "title": "APP.BROWSE.PERSONAL.SIDENAV_LINK.LABEL",
-                "description": "APP.BROWSE.PERSONAL.SIDENAV_LINK.TOOLTIP",
-                "route": "personal-files"
-              },
-              {
-                "id": "app.navbar.libraries.files",
-                "order": 200,
-                "title": "APP.BROWSE.LIBRARIES.MENU.MY_LIBRARIES.SIDENAV_LINK.LABEL",
-                "description": "APP.BROWSE.LIBRARIES.MENU.MY_LIBRARIES.SIDENAV_LINK.TOOLTIP",
-                "route": "libraries"
-              },
-              {
-                "id": "app.navbar.libraries.favorite",
-                "order": 300,
-                "title": "APP.BROWSE.LIBRARIES.MENU.FAVORITE_LIBRARIES.SIDENAV_LINK.LABEL",
-                "description": "APP.BROWSE.LIBRARIES.MENU.FAVORITE_LIBRARIES.SIDENAV_LINK.TOOLTIP",
-                "route": "favorite/libraries"
-              },
-              {
-                "id": "app.navbar.recentFiles",
-                "order": 400,
-                "title": "APP.BROWSE.RECENT.SIDENAV_LINK.LABEL",
-                "description": "APP.BROWSE.RECENT.SIDENAV_LINK.TOOLTIP",
-                "route": "recent-files"
-              },
-              {
-                "id": "app.navbar.favorites",
-                "order": 500,
-                "title": "APP.BROWSE.FAVORITES.SIDENAV_LINK.LABEL",
-                "description": "APP.BROWSE.FAVORITES.SIDENAV_LINK.TOOLTIP",
-                "route": "favorites"
-              },
-              {
-                "id": "app.navbar.shared",
-                "order": 600,
-                "title": "APP.BROWSE.SHARED.SIDENAV_LINK.LABEL",
-                "description": "APP.BROWSE.SHARED.SIDENAV_LINK.TOOLTIP",
-                "route": "shared"
-              },
-              {
-                "id": "app.navbar.trashcan",
-                "order": 700,
-                "title": "APP.BROWSE.TRASHCAN.SIDENAV_LINK.LABEL",
-                "description": "APP.BROWSE.TRASHCAN.SIDENAV_LINK.TOOLTIP",
-                "route": "trashcan"
-              }
-            ]
+            "id": "personal-navbar",
+            "component": "personal-navbar.component"
           },
           {
-            "id": "intranet.navbar.documents",
-            "order": 300,
-            "title": "Documentos",
-            "description": "Gestión documental"
+            "id": "admin-sections-navbar",
+            "component": "admin-sections-navbar.component"
           },
           {
-            "id": "intranet.navbar.oym",
-            "title": "Organización y Métodos",
-            "order": 400,
-            "route": "intranet/oym",
-            "children": [
-              {
-                "id": "intranet.navbar.oym.dashboard",
-                "title": "Inicio",
-                "route": "intranet/oym"
-              },
-              {
-                "id": "intranet.navbar.oym.procedimientos",
-                "title": "Procedimientos",
-                "route": "intranet/oym/procedimientos"
-              },
-              {
-                "id": "intranet.navbar.oym.politicas",
-                "title": "Políticas",
-                "route": "intranet/oym/politicas"
-              },
-              {
-                "id": "intranet.navbar.oym.formularios",
-                "title": "Formularios",
-                "route": "intranet/oym/formularios"
-              }
-            ]
-          },
-          {
-            "id": "intranet.navbar.gestion",
-            "title": "Gestión institucional",
-            "order": 410,
-            "route": "intranet/gi",
-            "children": [
-              {
-                "id": "intranet.navbar.gestion.dashboard",
-                "title": "Inicio",
-                "route": "intranet/gi"
-              },
-              {
-                "id": "intranet.navbar.gestion.notas",
-                "title": "Notas",
-                "route": "intranet/gi/notas"
-              },
-              {
-                "id": "intranet.navbar.gestion.respuestas",
-                "title": "Respuestas a notas",
-                "route": "intranet/gi/respuestas"
-              },
-              {
-                "id": "intranet.navbar.gestion.expedientes",
-                "title": "Expedientes",
-                "route": "intranet/gi/expedientes"
-              }
-            ]
-          },
-          {
-            "id": "intranet.navbar.higiene",
-            "title": "Higiene y seguridad",
-            "order": 420,
-            "route": "intranet/hys",
-            "children": [
-              {
-                "id": "intranet.navbar.higiene.dashboard",
-                "title": "Inicio",
-                "route": "intranet/hys"
-              },
-              {
-                "id": "intranet.navbar.higiene.normas",
-                "title": "Normas",
-                "route": "intranet/hys/normas"
-              },
-              {
-                "id": "intranet.navbar.higiene.procedimientos",
-                "title": "Procedimientos",
-                "route": "intranet/hys/procedimientos"
-              },
-              {
-                "id": "intranet.navbar.higiene.instructivos",
-                "title": "Instructivos",
-                "route": "intranet/hys/instructivos"
-              },
-              {
-                "id": "intranet.navbar.higiene.fichas",
-                "title": "Fichas de riesgo local",
-                "route": "intranet/hys/fichas"
-              }
-            ]
-          },
-          {
-            "id": "intranet.navbar.comercial",
-            "title": "Políticas comerciales",
-            "order": 430,
-            "route": "intranet/pc",
-            "children": [
-              {
-                "id": "intranet.navbar.comercial.dashboard",
-                "title": "Inicio",
-                "route": "intranet/pc"
-              },
-              {
-                "id": "intranet.navbar.comercial.micromedicion",
-                "title": "Micromedición",
-                "route": "intranet/pc/micromedicion"
-              },
-              {
-                "id": "intranet.navbar.comercial.info",
-                "title": "Info Políticas comerciales",
-                "route": "intranet/pc/info"
-              }
-            ]
-          },
-          {
-            "id": "intranet.navbar.services",
-            "order": 500,
-            "title": "Servicios",
-            "description": "Gestión de servicios",
-            "data": {
-              "canBeInactive": true
-            },
-            "children": [
-              {
-                "id": "intranet.navbar.customService",
-                "order": 200,
-                "title": "Guia telefonica",
-                "description": "Guia telefonica interna",
-                "route": "intranet/services"
-              }
-            ]
+            "id": "services-navbar",
+            "component": "services-navbar.component"
           }
         ]
       }
@@ -269,7 +81,10 @@
           "color": "primary"
         },
         "rules": {
-          "visible": ["ext.isDossier", "ext.canCreateInCurrentFolder"]
+          "visible": [
+            "ext.isDossier",
+            "ext.canCreateInCurrentFolder"
+          ]
         },
         "children": [
           {
@@ -308,7 +123,10 @@
           "click": "CREATE_DOSSIER"
         },
         "rules": {
-          "visible": ["ext.isIntranetDocumentLibrary", "ext.canCreateInCurrentFolder"]
+          "visible": [
+            "ext.isIntranetDocumentLibrary",
+            "ext.canCreateInCurrentFolder"
+          ]
         }
       },
       {
@@ -325,13 +143,19 @@
           "click": "CREATE_RECORD"
         },
         "rules": {
-          "visible": ["ext.isRecordCreationContext", "ext.canCreateInCurrentFolder"]
+          "visible": [
+            "ext.isRecordCreationContext",
+            "ext.canCreateInCurrentFolder"
+          ]
         }
       },
       {
         "id": "app.toolbar.search",
         "rules": {
-          "visible": ["!app.navigation.isSearchResults", "!ext.isIntranet"]
+          "visible": [
+            "!app.navigation.isSearchResults",
+            "!ext.isIntranet"
+          ]
         }
       },
       {
@@ -347,7 +171,10 @@
           "click": "INTRANET-SEARCH"
         },
         "rules": {
-          "visible": ["ext.isIntranet", "!ext.isIntranetSearch"]
+          "visible": [
+            "ext.isIntranet",
+            "!ext.isIntranetSearch"
+          ]
         }
       },
       {
@@ -382,8 +209,18 @@
         "name": "General",
         "default": true,
         "filterWithContains": true,
-        "app:fields": ["cm:name", "cm:title", "cm:description", "TEXT", "TAG"],
-        "include": ["path", "allowableOperations", "properties"],
+        "app:fields": [
+          "cm:name",
+          "cm:title",
+          "cm:description",
+          "TEXT",
+          "TAG"
+        ],
+        "include": [
+          "path",
+          "allowableOperations",
+          "properties"
+        ],
         "sorting": {
           "options": [
             {
@@ -455,25 +292,45 @@
         "aca:triggeredOnChange": false,
         "resetButton": true,
         "filterQueries": [
-          { "query": "+TYPE:'cm:folder' OR +TYPE:'cm:content'" },
+          {
+            "query": "+TYPE:'cm:folder' OR +TYPE:'cm:content'"
+          },
           {
             "query": "-TYPE:'cm:thumbnail' AND -TYPE:'cm:failedThumbnail' AND -TYPE:'cm:rating'"
           },
-          { "query": "-cm:creator:System" },
+          {
+            "query": "-cm:creator:System"
+          },
           {
             "query": "-TYPE:'st:site' AND -ASPECT:'st:siteContainer' AND -ASPECT:'sys:hidden'"
           },
           {
             "query": "-TYPE:'dl:dataList' AND -TYPE:'dl:todoList' AND -TYPE:'dl:issue'"
           },
-          { "query": "-TYPE:'fm:topic' AND -TYPE:'fm:post'" },
-          { "query": "-TYPE:'lnk:link'" },
-          { "query": "-TYPE:'cm:systemfolder'" },
-          { "query": "-TYPE:'bpm:package'" },
-          { "query": "-PATH:'//cm:wiki/*'" },
-          { "query": "-PATH:'*/cm:avatars/*' AND -PATH:'*/cm:emailtemplates/*'" },
-          { "query": "-cm:name:*avatar*.jpg AND -cm:name:*avatar*.png AND -cm:name:*avatar*.gif" },
-          { "query": "-ASPECT:'cm:workingcopy' AND -ASPECT:'sys:temporary'" }
+          {
+            "query": "-TYPE:'fm:topic' AND -TYPE:'fm:post'"
+          },
+          {
+            "query": "-TYPE:'lnk:link'"
+          },
+          {
+            "query": "-TYPE:'cm:systemfolder'"
+          },
+          {
+            "query": "-TYPE:'bpm:package'"
+          },
+          {
+            "query": "-PATH:'//cm:wiki/*'"
+          },
+          {
+            "query": "-PATH:'*/cm:avatars/*' AND -PATH:'*/cm:emailtemplates/*'"
+          },
+          {
+            "query": "-cm:name:*avatar*.jpg AND -cm:name:*avatar*.png AND -cm:name:*avatar*.gif"
+          },
+          {
+            "query": "-ASPECT:'cm:workingcopy' AND -ASPECT:'sys:temporary'"
+          }
         ],
         "facetFields": {
           "expanded": true,
@@ -705,7 +562,12 @@
                 "hideDefaultAction": true,
                 "allowOnlyPredefinedValues": false,
                 "field": "SITE",
-                "autocompleteOptions": [{ "value": "_REPOSITORY_", "query": "PATH:'/app:company_home/\/*'" }]
+                "autocompleteOptions": [
+                  {
+                    "value": "_REPOSITORY_",
+                    "query": "PATH:'/app:company_home//*'"
+                  }
+                ]
               }
             }
           },
@@ -723,7 +585,9 @@
               }
             },
             "rules": {
-              "visible": ["app.areTagsEnabled"]
+              "visible": [
+                "app.areTagsEnabled"
+              ]
             }
           },
           {
@@ -740,7 +604,9 @@
               }
             },
             "rules": {
-              "visible": ["app.areCategoriesEnabled"]
+              "visible": [
+                "app.areCategoriesEnabled"
+              ]
             }
           }
         ],
@@ -771,8 +637,18 @@
         "name": "Organización y Métodos",
         "default": false,
         "filterWithContains": true,
-        "app:fields": ["cm:name", "cm:title", "cm:description", "TEXT", "TAG"],
-        "include": ["path", "allowableOperations", "properties"],
+        "app:fields": [
+          "cm:name",
+          "cm:title",
+          "cm:description",
+          "TEXT",
+          "TAG"
+        ],
+        "include": [
+          "path",
+          "allowableOperations",
+          "properties"
+        ],
         "sorting": {
           "options": [
             {
@@ -816,19 +692,45 @@
         "aca:triggeredOnChange": false,
         "resetButton": true,
         "filterQueries": [
-          { "query": "+TYPE:'oym:folder' OR +TYPE:'oym:content'" },
-          { "query": "-TYPE:'cm:thumbnail' AND -TYPE:'cm:failedThumbnail' AND -TYPE:'cm:rating'" },
-          { "query": "-cm:creator:System" },
-          { "query": "-TYPE:'st:site' AND -ASPECT:'st:siteContainer' AND -ASPECT:'sys:hidden'" },
-          { "query": "-TYPE:'dl:dataList' AND -TYPE:'dl:todoList' AND -TYPE:'dl:issue'" },
-          { "query": "-TYPE:'fm:topic' AND -TYPE:'fm:post'" },
-          { "query": "-TYPE:'lnk:link'" },
-          { "query": "-TYPE:'cm:systemfolder'" },
-          { "query": "-TYPE:'bpm:package'" },
-          { "query": "-PATH:'//cm:wiki/*'" },
-          { "query": "-PATH:'*/cm:avatars/*' AND -PATH:'*/cm:emailtemplates/*'" },
-          { "query": "-cm:name:*avatar*.jpg AND -cm:name:*avatar*.png AND -cm:name:*avatar*.gif" },
-          { "query": "-ASPECT:'cm:workingcopy' AND -ASPECT:'sys:temporary'" }
+          {
+            "query": "+TYPE:'oym:folder' OR +TYPE:'oym:content'"
+          },
+          {
+            "query": "-TYPE:'cm:thumbnail' AND -TYPE:'cm:failedThumbnail' AND -TYPE:'cm:rating'"
+          },
+          {
+            "query": "-cm:creator:System"
+          },
+          {
+            "query": "-TYPE:'st:site' AND -ASPECT:'st:siteContainer' AND -ASPECT:'sys:hidden'"
+          },
+          {
+            "query": "-TYPE:'dl:dataList' AND -TYPE:'dl:todoList' AND -TYPE:'dl:issue'"
+          },
+          {
+            "query": "-TYPE:'fm:topic' AND -TYPE:'fm:post'"
+          },
+          {
+            "query": "-TYPE:'lnk:link'"
+          },
+          {
+            "query": "-TYPE:'cm:systemfolder'"
+          },
+          {
+            "query": "-TYPE:'bpm:package'"
+          },
+          {
+            "query": "-PATH:'//cm:wiki/*'"
+          },
+          {
+            "query": "-PATH:'*/cm:avatars/*' AND -PATH:'*/cm:emailtemplates/*'"
+          },
+          {
+            "query": "-cm:name:*avatar*.jpg AND -cm:name:*avatar*.png AND -cm:name:*avatar*.gif"
+          },
+          {
+            "query": "-ASPECT:'cm:workingcopy' AND -ASPECT:'sys:temporary'"
+          }
         ],
         "facetFields": {
           "expanded": true,
@@ -878,12 +780,30 @@
                 "hideDefaultAction": true,
                 "field": "TYPE",
                 "options": [
-                  { "name": "Procedimientos", "value": "TYPE:'oym:procedimiento'" },
-                  { "name": "Politicas", "value": "TYPE:'oym:politica'" },
-                  { "name": "Formularios de Registro", "value": "TYPE:'oym:formulario'" },
-                  { "name": "Archivos asociados a Procedimientos", "value": "TYPE:'oym:archivo-procedimiento'" },
-                  { "name": "Archivos asociados a Politicas", "value": "TYPE:'oym:archivo-politica'" },
-                  { "name": "Archivos asociados a Formularios", "value": "TYPE:'oym:archivo-formulario'" }
+                  {
+                    "name": "Procedimientos",
+                    "value": "TYPE:'oym:procedimiento'"
+                  },
+                  {
+                    "name": "Politicas",
+                    "value": "TYPE:'oym:politica'"
+                  },
+                  {
+                    "name": "Formularios de Registro",
+                    "value": "TYPE:'oym:formulario'"
+                  },
+                  {
+                    "name": "Archivos asociados a Procedimientos",
+                    "value": "TYPE:'oym:archivo-procedimiento'"
+                  },
+                  {
+                    "name": "Archivos asociados a Politicas",
+                    "value": "TYPE:'oym:archivo-politica'"
+                  },
+                  {
+                    "name": "Archivos asociados a Formularios",
+                    "value": "TYPE:'oym:archivo-formulario'"
+                  }
                 ]
               }
             }
@@ -935,8 +855,18 @@
         "name": "Gestión Institucional",
         "default": false,
         "filterWithContains": true,
-        "app:fields": ["cm:name", "cm:title", "cm:description", "TEXT", "TAG"],
-        "include": ["path", "allowableOperations", "properties"],
+        "app:fields": [
+          "cm:name",
+          "cm:title",
+          "cm:description",
+          "TEXT",
+          "TAG"
+        ],
+        "include": [
+          "path",
+          "allowableOperations",
+          "properties"
+        ],
         "sorting": {
           "options": [
             {
@@ -980,19 +910,45 @@
         "aca:triggeredOnChange": false,
         "resetButton": true,
         "filterQueries": [
-          { "query": "+TYPE:'gi:folder' OR +TYPE:'gi:content'" },
-          { "query": "-TYPE:'cm:thumbnail' AND -TYPE:'cm:failedThumbnail' AND -TYPE:'cm:rating'" },
-          { "query": "-cm:creator:System" },
-          { "query": "-TYPE:'st:site' AND -ASPECT:'st:siteContainer' AND -ASPECT:'sys:hidden'" },
-          { "query": "-TYPE:'dl:dataList' AND -TYPE:'dl:todoList' AND -TYPE:'dl:issue'" },
-          { "query": "-TYPE:'fm:topic' AND -TYPE:'fm:post'" },
-          { "query": "-TYPE:'lnk:link'" },
-          { "query": "-TYPE:'cm:systemfolder'" },
-          { "query": "-TYPE:'bpm:package'" },
-          { "query": "-PATH:'//cm:wiki/*'" },
-          { "query": "-PATH:'*/cm:avatars/*' AND -PATH:'*/cm:emailtemplates/*'" },
-          { "query": "-cm:name:*avatar*.jpg AND -cm:name:*avatar*.png AND -cm:name:*avatar*.gif" },
-          { "query": "-ASPECT:'cm:workingcopy' AND -ASPECT:'sys:temporary'" }
+          {
+            "query": "+TYPE:'gi:folder' OR +TYPE:'gi:content'"
+          },
+          {
+            "query": "-TYPE:'cm:thumbnail' AND -TYPE:'cm:failedThumbnail' AND -TYPE:'cm:rating'"
+          },
+          {
+            "query": "-cm:creator:System"
+          },
+          {
+            "query": "-TYPE:'st:site' AND -ASPECT:'st:siteContainer' AND -ASPECT:'sys:hidden'"
+          },
+          {
+            "query": "-TYPE:'dl:dataList' AND -TYPE:'dl:todoList' AND -TYPE:'dl:issue'"
+          },
+          {
+            "query": "-TYPE:'fm:topic' AND -TYPE:'fm:post'"
+          },
+          {
+            "query": "-TYPE:'lnk:link'"
+          },
+          {
+            "query": "-TYPE:'cm:systemfolder'"
+          },
+          {
+            "query": "-TYPE:'bpm:package'"
+          },
+          {
+            "query": "-PATH:'//cm:wiki/*'"
+          },
+          {
+            "query": "-PATH:'*/cm:avatars/*' AND -PATH:'*/cm:emailtemplates/*'"
+          },
+          {
+            "query": "-cm:name:*avatar*.jpg AND -cm:name:*avatar*.png AND -cm:name:*avatar*.gif"
+          },
+          {
+            "query": "-ASPECT:'cm:workingcopy' AND -ASPECT:'sys:temporary'"
+          }
         ],
         "facetFields": {
           "expanded": true,
@@ -1042,12 +998,30 @@
                 "hideDefaultAction": true,
                 "field": "TYPE",
                 "options": [
-                  { "name": "Expedientes", "value": "TYPE:'gi:expediente'" },
-                  { "name": "Notas", "value": "TYPE:'gi:nota'" },
-                  { "name": "Respuestas", "value": "TYPE:'gi:respuesta'" },
-                  { "name": "Archivos de Expediente", "value": "TYPE:'gi:archivo-expediente'" },
-                  { "name": "Archivos de Nota", "value": "TYPE:'gi:archivo-nota'" },
-                  { "name": "Archivos de Respuesta", "value": "TYPE:'gi:archivo-respuesta'" }
+                  {
+                    "name": "Expedientes",
+                    "value": "TYPE:'gi:expediente'"
+                  },
+                  {
+                    "name": "Notas",
+                    "value": "TYPE:'gi:nota'"
+                  },
+                  {
+                    "name": "Respuestas",
+                    "value": "TYPE:'gi:respuesta'"
+                  },
+                  {
+                    "name": "Archivos de Expediente",
+                    "value": "TYPE:'gi:archivo-expediente'"
+                  },
+                  {
+                    "name": "Archivos de Nota",
+                    "value": "TYPE:'gi:archivo-nota'"
+                  },
+                  {
+                    "name": "Archivos de Respuesta",
+                    "value": "TYPE:'gi:archivo-respuesta'"
+                  }
                 ]
               }
             }
@@ -1099,8 +1073,18 @@
         "name": "Higiene y Seguridad",
         "default": false,
         "filterWithContains": true,
-        "app:fields": ["cm:name", "cm:title", "cm:description", "TEXT", "TAG"],
-        "include": ["path", "allowableOperations", "properties"],
+        "app:fields": [
+          "cm:name",
+          "cm:title",
+          "cm:description",
+          "TEXT",
+          "TAG"
+        ],
+        "include": [
+          "path",
+          "allowableOperations",
+          "properties"
+        ],
         "sorting": {
           "options": [
             {
@@ -1144,19 +1128,45 @@
         "aca:triggeredOnChange": false,
         "resetButton": true,
         "filterQueries": [
-          { "query": "+TYPE:'hys:folder' OR +TYPE:'hys:content'" },
-          { "query": "-TYPE:'cm:thumbnail' AND -TYPE:'cm:failedThumbnail' AND -TYPE:'cm:rating'" },
-          { "query": "-cm:creator:System" },
-          { "query": "-TYPE:'st:site' AND -ASPECT:'st:siteContainer' AND -ASPECT:'sys:hidden'" },
-          { "query": "-TYPE:'dl:dataList' AND -TYPE:'dl:todoList' AND -TYPE:'dl:issue'" },
-          { "query": "-TYPE:'fm:topic' AND -TYPE:'fm:post'" },
-          { "query": "-TYPE:'lnk:link'" },
-          { "query": "-TYPE:'cm:systemfolder'" },
-          { "query": "-TYPE:'bpm:package'" },
-          { "query": "-PATH:'//cm:wiki/*'" },
-          { "query": "-PATH:'*/cm:avatars/*' AND -PATH:'*/cm:emailtemplates/*'" },
-          { "query": "-cm:name:*avatar*.jpg AND -cm:name:*avatar*.png AND -cm:name:*avatar*.gif" },
-          { "query": "-ASPECT:'cm:workingcopy' AND -ASPECT:'sys:temporary'" }
+          {
+            "query": "+TYPE:'hys:folder' OR +TYPE:'hys:content'"
+          },
+          {
+            "query": "-TYPE:'cm:thumbnail' AND -TYPE:'cm:failedThumbnail' AND -TYPE:'cm:rating'"
+          },
+          {
+            "query": "-cm:creator:System"
+          },
+          {
+            "query": "-TYPE:'st:site' AND -ASPECT:'st:siteContainer' AND -ASPECT:'sys:hidden'"
+          },
+          {
+            "query": "-TYPE:'dl:dataList' AND -TYPE:'dl:todoList' AND -TYPE:'dl:issue'"
+          },
+          {
+            "query": "-TYPE:'fm:topic' AND -TYPE:'fm:post'"
+          },
+          {
+            "query": "-TYPE:'lnk:link'"
+          },
+          {
+            "query": "-TYPE:'cm:systemfolder'"
+          },
+          {
+            "query": "-TYPE:'bpm:package'"
+          },
+          {
+            "query": "-PATH:'//cm:wiki/*'"
+          },
+          {
+            "query": "-PATH:'*/cm:avatars/*' AND -PATH:'*/cm:emailtemplates/*'"
+          },
+          {
+            "query": "-cm:name:*avatar*.jpg AND -cm:name:*avatar*.png AND -cm:name:*avatar*.gif"
+          },
+          {
+            "query": "-ASPECT:'cm:workingcopy' AND -ASPECT:'sys:temporary'"
+          }
         ],
         "facetFields": {
           "expanded": true,
@@ -1206,13 +1216,34 @@
                 "hideDefaultAction": true,
                 "field": "TYPE",
                 "options": [
-                  { "name": "Normas", "value": "TYPE:'hys:normas'" },
-                  { "name": "Instructivos", "value": "TYPE:'hys:instructivos'" },
-                  { "name": "Procedimientos HyS", "value": "TYPE:'hys:procedimientos'" },
-                  { "name": "PPyE", "value": "TYPE:'hys:ppye'" },
-                  { "name": "Archivos de Norma", "value": "TYPE:'hys:archivo-norma'" },
-                  { "name": "Archivos de Instructivo", "value": "TYPE:'hys:archivo-instructivo'" },
-                  { "name": "Archivos de Procedimiento", "value": "TYPE:'hys:archivo-procedimiento'" }
+                  {
+                    "name": "Normas",
+                    "value": "TYPE:'hys:normas'"
+                  },
+                  {
+                    "name": "Instructivos",
+                    "value": "TYPE:'hys:instructivos'"
+                  },
+                  {
+                    "name": "Procedimientos HyS",
+                    "value": "TYPE:'hys:procedimientos'"
+                  },
+                  {
+                    "name": "PPyE",
+                    "value": "TYPE:'hys:ppye'"
+                  },
+                  {
+                    "name": "Archivos de Norma",
+                    "value": "TYPE:'hys:archivo-norma'"
+                  },
+                  {
+                    "name": "Archivos de Instructivo",
+                    "value": "TYPE:'hys:archivo-instructivo'"
+                  },
+                  {
+                    "name": "Archivos de Procedimiento",
+                    "value": "TYPE:'hys:archivo-procedimiento'"
+                  }
                 ]
               }
             }
@@ -1264,8 +1295,18 @@
         "name": "Políticas Comerciales",
         "default": false,
         "filterWithContains": true,
-        "app:fields": ["cm:name", "cm:title", "cm:description", "TEXT", "TAG"],
-        "include": ["path", "allowableOperations", "properties"],
+        "app:fields": [
+          "cm:name",
+          "cm:title",
+          "cm:description",
+          "TEXT",
+          "TAG"
+        ],
+        "include": [
+          "path",
+          "allowableOperations",
+          "properties"
+        ],
         "sorting": {
           "options": [
             {
@@ -1309,19 +1350,45 @@
         "aca:triggeredOnChange": false,
         "resetButton": true,
         "filterQueries": [
-          { "query": "+TYPE:'pc:folder' OR +TYPE:'pc:content'" },
-          { "query": "-TYPE:'cm:thumbnail' AND -TYPE:'cm:failedThumbnail' AND -TYPE:'cm:rating'" },
-          { "query": "-cm:creator:System" },
-          { "query": "-TYPE:'st:site' AND -ASPECT:'st:siteContainer' AND -ASPECT:'sys:hidden'" },
-          { "query": "-TYPE:'dl:dataList' AND -TYPE:'dl:todoList' AND -TYPE:'dl:issue'" },
-          { "query": "-TYPE:'fm:topic' AND -TYPE:'fm:post'" },
-          { "query": "-TYPE:'lnk:link'" },
-          { "query": "-TYPE:'cm:systemfolder'" },
-          { "query": "-TYPE:'bpm:package'" },
-          { "query": "-PATH:'//cm:wiki/*'" },
-          { "query": "-PATH:'*/cm:avatars/*' AND -PATH:'*/cm:emailtemplates/*'" },
-          { "query": "-cm:name:*avatar*.jpg AND -cm:name:*avatar*.png AND -cm:name:*avatar*.gif" },
-          { "query": "-ASPECT:'cm:workingcopy' AND -ASPECT:'sys:temporary'" }
+          {
+            "query": "+TYPE:'pc:folder' OR +TYPE:'pc:content'"
+          },
+          {
+            "query": "-TYPE:'cm:thumbnail' AND -TYPE:'cm:failedThumbnail' AND -TYPE:'cm:rating'"
+          },
+          {
+            "query": "-cm:creator:System"
+          },
+          {
+            "query": "-TYPE:'st:site' AND -ASPECT:'st:siteContainer' AND -ASPECT:'sys:hidden'"
+          },
+          {
+            "query": "-TYPE:'dl:dataList' AND -TYPE:'dl:todoList' AND -TYPE:'dl:issue'"
+          },
+          {
+            "query": "-TYPE:'fm:topic' AND -TYPE:'fm:post'"
+          },
+          {
+            "query": "-TYPE:'lnk:link'"
+          },
+          {
+            "query": "-TYPE:'cm:systemfolder'"
+          },
+          {
+            "query": "-TYPE:'bpm:package'"
+          },
+          {
+            "query": "-PATH:'//cm:wiki/*'"
+          },
+          {
+            "query": "-PATH:'*/cm:avatars/*' AND -PATH:'*/cm:emailtemplates/*'"
+          },
+          {
+            "query": "-cm:name:*avatar*.jpg AND -cm:name:*avatar*.png AND -cm:name:*avatar*.gif"
+          },
+          {
+            "query": "-ASPECT:'cm:workingcopy' AND -ASPECT:'sys:temporary'"
+          }
         ],
         "facetFields": {
           "expanded": true,
@@ -1371,12 +1438,30 @@
                 "hideDefaultAction": true,
                 "field": "TYPE",
                 "options": [
-                  { "name": "Micromedición", "value": "TYPE:'pc:micromedicion'" },
-                  { "name": "Información", "value": "TYPE:'pc:info'" },
-                  { "name": "Obras", "value": "TYPE:'pc:obra'" },
-                  { "name": "Archivos de Micromedición", "value": "TYPE:'pc:archivo-micromedicion'" },
-                  { "name": "Archivos de Información", "value": "TYPE:'pc:archivo-info'" },
-                  { "name": "Archivos de Obra", "value": "TYPE:'pc:archivo-obra'" }
+                  {
+                    "name": "Micromedición",
+                    "value": "TYPE:'pc:micromedicion'"
+                  },
+                  {
+                    "name": "Información",
+                    "value": "TYPE:'pc:info'"
+                  },
+                  {
+                    "name": "Obras",
+                    "value": "TYPE:'pc:obra'"
+                  },
+                  {
+                    "name": "Archivos de Micromedición",
+                    "value": "TYPE:'pc:archivo-micromedicion'"
+                  },
+                  {
+                    "name": "Archivos de Información",
+                    "value": "TYPE:'pc:archivo-info'"
+                  },
+                  {
+                    "name": "Archivos de Obra",
+                    "value": "TYPE:'pc:archivo-obra'"
+                  }
                 ]
               }
             }
@@ -1428,8 +1513,18 @@
         "name": "Call Center",
         "default": false,
         "filterWithContains": true,
-        "app:fields": ["cm:name", "cm:title", "cm:description", "TEXT", "TAG"],
-        "include": ["path", "allowableOperations", "properties"],
+        "app:fields": [
+          "cm:name",
+          "cm:title",
+          "cm:description",
+          "TEXT",
+          "TAG"
+        ],
+        "include": [
+          "path",
+          "allowableOperations",
+          "properties"
+        ],
         "sorting": {
           "options": [
             {
@@ -1473,19 +1568,45 @@
         "aca:triggeredOnChange": false,
         "resetButton": true,
         "filterQueries": [
-          { "query": "+TYPE:'cc:folder' OR +TYPE:'cc:content'" },
-          { "query": "-TYPE:'cm:thumbnail' AND -TYPE:'cm:failedThumbnail' AND -TYPE:'cm:rating'" },
-          { "query": "-cm:creator:System" },
-          { "query": "-TYPE:'st:site' AND -ASPECT:'st:siteContainer' AND -ASPECT:'sys:hidden'" },
-          { "query": "-TYPE:'dl:dataList' AND -TYPE:'dl:todoList' AND -TYPE:'dl:issue'" },
-          { "query": "-TYPE:'fm:topic' AND -TYPE:'fm:post'" },
-          { "query": "-TYPE:'lnk:link'" },
-          { "query": "-TYPE:'cm:systemfolder'" },
-          { "query": "-TYPE:'bpm:package'" },
-          { "query": "-PATH:'//cm:wiki/*'" },
-          { "query": "-PATH:'*/cm:avatars/*' AND -PATH:'*/cm:emailtemplates/*'" },
-          { "query": "-cm:name:*avatar*.jpg AND -cm:name:*avatar*.png AND -cm:name:*avatar*.gif" },
-          { "query": "-ASPECT:'cm:workingcopy' AND -ASPECT:'sys:temporary'" }
+          {
+            "query": "+TYPE:'cc:folder' OR +TYPE:'cc:content'"
+          },
+          {
+            "query": "-TYPE:'cm:thumbnail' AND -TYPE:'cm:failedThumbnail' AND -TYPE:'cm:rating'"
+          },
+          {
+            "query": "-cm:creator:System"
+          },
+          {
+            "query": "-TYPE:'st:site' AND -ASPECT:'st:siteContainer' AND -ASPECT:'sys:hidden'"
+          },
+          {
+            "query": "-TYPE:'dl:dataList' AND -TYPE:'dl:todoList' AND -TYPE:'dl:issue'"
+          },
+          {
+            "query": "-TYPE:'fm:topic' AND -TYPE:'fm:post'"
+          },
+          {
+            "query": "-TYPE:'lnk:link'"
+          },
+          {
+            "query": "-TYPE:'cm:systemfolder'"
+          },
+          {
+            "query": "-TYPE:'bpm:package'"
+          },
+          {
+            "query": "-PATH:'//cm:wiki/*'"
+          },
+          {
+            "query": "-PATH:'*/cm:avatars/*' AND -PATH:'*/cm:emailtemplates/*'"
+          },
+          {
+            "query": "-cm:name:*avatar*.jpg AND -cm:name:*avatar*.png AND -cm:name:*avatar*.gif"
+          },
+          {
+            "query": "-ASPECT:'cm:workingcopy' AND -ASPECT:'sys:temporary'"
+          }
         ],
         "facetFields": {
           "expanded": true,
@@ -1535,8 +1656,14 @@
                 "hideDefaultAction": true,
                 "field": "TYPE",
                 "options": [
-                  { "name": "Contenedores CC", "value": "TYPE:'cc:folder'" },
-                  { "name": "Documentos CC", "value": "TYPE:'cc:content'" }
+                  {
+                    "name": "Contenedores CC",
+                    "value": "TYPE:'cc:folder'"
+                  },
+                  {
+                    "name": "Documentos CC",
+                    "value": "TYPE:'cc:content'"
+                  }
                 ]
               }
             }
@@ -1588,8 +1715,18 @@
         "name": "Recursos Humanos",
         "default": false,
         "filterWithContains": true,
-        "app:fields": ["cm:name", "cm:title", "cm:description", "TEXT", "TAG"],
-        "include": ["path", "allowableOperations", "properties"],
+        "app:fields": [
+          "cm:name",
+          "cm:title",
+          "cm:description",
+          "TEXT",
+          "TAG"
+        ],
+        "include": [
+          "path",
+          "allowableOperations",
+          "properties"
+        ],
         "sorting": {
           "options": [
             {
@@ -1633,19 +1770,45 @@
         "aca:triggeredOnChange": false,
         "resetButton": true,
         "filterQueries": [
-          { "query": "+TYPE:'rrhh:folder' OR +TYPE:'rrhh:content'" },
-          { "query": "-TYPE:'cm:thumbnail' AND -TYPE:'cm:failedThumbnail' AND -TYPE:'cm:rating'" },
-          { "query": "-cm:creator:System" },
-          { "query": "-TYPE:'st:site' AND -ASPECT:'st:siteContainer' AND -ASPECT:'sys:hidden'" },
-          { "query": "-TYPE:'dl:dataList' AND -TYPE:'dl:todoList' AND -TYPE:'dl:issue'" },
-          { "query": "-TYPE:'fm:topic' AND -TYPE:'fm:post'" },
-          { "query": "-TYPE:'lnk:link'" },
-          { "query": "-TYPE:'cm:systemfolder'" },
-          { "query": "-TYPE:'bpm:package'" },
-          { "query": "-PATH:'//cm:wiki/*'" },
-          { "query": "-PATH:'*/cm:avatars/*' AND -PATH:'*/cm:emailtemplates/*'" },
-          { "query": "-cm:name:*avatar*.jpg AND -cm:name:*avatar*.png AND -cm:name:*avatar*.gif" },
-          { "query": "-ASPECT:'cm:workingcopy' AND -ASPECT:'sys:temporary'" }
+          {
+            "query": "+TYPE:'rrhh:folder' OR +TYPE:'rrhh:content'"
+          },
+          {
+            "query": "-TYPE:'cm:thumbnail' AND -TYPE:'cm:failedThumbnail' AND -TYPE:'cm:rating'"
+          },
+          {
+            "query": "-cm:creator:System"
+          },
+          {
+            "query": "-TYPE:'st:site' AND -ASPECT:'st:siteContainer' AND -ASPECT:'sys:hidden'"
+          },
+          {
+            "query": "-TYPE:'dl:dataList' AND -TYPE:'dl:todoList' AND -TYPE:'dl:issue'"
+          },
+          {
+            "query": "-TYPE:'fm:topic' AND -TYPE:'fm:post'"
+          },
+          {
+            "query": "-TYPE:'lnk:link'"
+          },
+          {
+            "query": "-TYPE:'cm:systemfolder'"
+          },
+          {
+            "query": "-TYPE:'bpm:package'"
+          },
+          {
+            "query": "-PATH:'//cm:wiki/*'"
+          },
+          {
+            "query": "-PATH:'*/cm:avatars/*' AND -PATH:'*/cm:emailtemplates/*'"
+          },
+          {
+            "query": "-cm:name:*avatar*.jpg AND -cm:name:*avatar*.png AND -cm:name:*avatar*.gif"
+          },
+          {
+            "query": "-ASPECT:'cm:workingcopy' AND -ASPECT:'sys:temporary'"
+          }
         ],
         "facetFields": {
           "expanded": true,
@@ -1695,8 +1858,14 @@
                 "hideDefaultAction": true,
                 "field": "TYPE",
                 "options": [
-                  { "name": "Contenedores RRHH", "value": "TYPE:'rrhh:folder'" },
-                  { "name": "Documentos RRHH", "value": "TYPE:'rrhh:content'" }
+                  {
+                    "name": "Contenedores RRHH",
+                    "value": "TYPE:'rrhh:folder'"
+                  },
+                  {
+                    "name": "Documentos RRHH",
+                    "value": "TYPE:'rrhh:content'"
+                  }
                 ]
               }
             }
@@ -1748,8 +1917,18 @@
         "name": "Planificación y Control",
         "default": false,
         "filterWithContains": true,
-        "app:fields": ["cm:name", "cm:title", "cm:description", "TEXT", "TAG"],
-        "include": ["path", "allowableOperations", "properties"],
+        "app:fields": [
+          "cm:name",
+          "cm:title",
+          "cm:description",
+          "TEXT",
+          "TAG"
+        ],
+        "include": [
+          "path",
+          "allowableOperations",
+          "properties"
+        ],
         "sorting": {
           "options": [
             {
@@ -1793,19 +1972,45 @@
         "aca:triggeredOnChange": false,
         "resetButton": true,
         "filterQueries": [
-          { "query": "+TYPE:'pyc:folder' OR +TYPE:'pyc:content'" },
-          { "query": "-TYPE:'cm:thumbnail' AND -TYPE:'cm:failedThumbnail' AND -TYPE:'cm:rating'" },
-          { "query": "-cm:creator:System" },
-          { "query": "-TYPE:'st:site' AND -ASPECT:'st:siteContainer' AND -ASPECT:'sys:hidden'" },
-          { "query": "-TYPE:'dl:dataList' AND -TYPE:'dl:todoList' AND -TYPE:'dl:issue'" },
-          { "query": "-TYPE:'fm:topic' AND -TYPE:'fm:post'" },
-          { "query": "-TYPE:'lnk:link'" },
-          { "query": "-TYPE:'cm:systemfolder'" },
-          { "query": "-TYPE:'bpm:package'" },
-          { "query": "-PATH:'//cm:wiki/*'" },
-          { "query": "-PATH:'*/cm:avatars/*' AND -PATH:'*/cm:emailtemplates/*'" },
-          { "query": "-cm:name:*avatar*.jpg AND -cm:name:*avatar*.png AND -cm:name:*avatar*.gif" },
-          { "query": "-ASPECT:'cm:workingcopy' AND -ASPECT:'sys:temporary'" }
+          {
+            "query": "+TYPE:'pyc:folder' OR +TYPE:'pyc:content'"
+          },
+          {
+            "query": "-TYPE:'cm:thumbnail' AND -TYPE:'cm:failedThumbnail' AND -TYPE:'cm:rating'"
+          },
+          {
+            "query": "-cm:creator:System"
+          },
+          {
+            "query": "-TYPE:'st:site' AND -ASPECT:'st:siteContainer' AND -ASPECT:'sys:hidden'"
+          },
+          {
+            "query": "-TYPE:'dl:dataList' AND -TYPE:'dl:todoList' AND -TYPE:'dl:issue'"
+          },
+          {
+            "query": "-TYPE:'fm:topic' AND -TYPE:'fm:post'"
+          },
+          {
+            "query": "-TYPE:'lnk:link'"
+          },
+          {
+            "query": "-TYPE:'cm:systemfolder'"
+          },
+          {
+            "query": "-TYPE:'bpm:package'"
+          },
+          {
+            "query": "-PATH:'//cm:wiki/*'"
+          },
+          {
+            "query": "-PATH:'*/cm:avatars/*' AND -PATH:'*/cm:emailtemplates/*'"
+          },
+          {
+            "query": "-cm:name:*avatar*.jpg AND -cm:name:*avatar*.png AND -cm:name:*avatar*.gif"
+          },
+          {
+            "query": "-ASPECT:'cm:workingcopy' AND -ASPECT:'sys:temporary'"
+          }
         ],
         "facetFields": {
           "expanded": true,
@@ -1855,8 +2060,14 @@
                 "hideDefaultAction": true,
                 "field": "TYPE",
                 "options": [
-                  { "name": "Contenedores PyC", "value": "TYPE:'pyc:folder'" },
-                  { "name": "Documentos PyC", "value": "TYPE:'pyc:content'" }
+                  {
+                    "name": "Contenedores PyC",
+                    "value": "TYPE:'pyc:folder'"
+                  },
+                  {
+                    "name": "Documentos PyC",
+                    "value": "TYPE:'pyc:content'"
+                  }
                 ]
               }
             }
@@ -1908,8 +2119,18 @@
         "name": "Administración y Finanzas",
         "default": false,
         "filterWithContains": true,
-        "app:fields": ["cm:name", "cm:title", "cm:description", "TEXT", "TAG"],
-        "include": ["path", "allowableOperations", "properties"],
+        "app:fields": [
+          "cm:name",
+          "cm:title",
+          "cm:description",
+          "TEXT",
+          "TAG"
+        ],
+        "include": [
+          "path",
+          "allowableOperations",
+          "properties"
+        ],
         "sorting": {
           "options": [
             {
@@ -1953,19 +2174,45 @@
         "aca:triggeredOnChange": false,
         "resetButton": true,
         "filterQueries": [
-          { "query": "+TYPE:'ayf:folder' OR +TYPE:'ayf:content'" },
-          { "query": "-TYPE:'cm:thumbnail' AND -TYPE:'cm:failedThumbnail' AND -TYPE:'cm:rating'" },
-          { "query": "-cm:creator:System" },
-          { "query": "-TYPE:'st:site' AND -ASPECT:'st:siteContainer' AND -ASPECT:'sys:hidden'" },
-          { "query": "-TYPE:'dl:dataList' AND -TYPE:'dl:todoList' AND -TYPE:'dl:issue'" },
-          { "query": "-TYPE:'fm:topic' AND -TYPE:'fm:post'" },
-          { "query": "-TYPE:'lnk:link'" },
-          { "query": "-TYPE:'cm:systemfolder'" },
-          { "query": "-TYPE:'bpm:package'" },
-          { "query": "-PATH:'//cm:wiki/*'" },
-          { "query": "-PATH:'*/cm:avatars/*' AND -PATH:'*/cm:emailtemplates/*'" },
-          { "query": "-cm:name:*avatar*.jpg AND -cm:name:*avatar*.png AND -cm:name:*avatar*.gif" },
-          { "query": "-ASPECT:'cm:workingcopy' AND -ASPECT:'sys:temporary'" }
+          {
+            "query": "+TYPE:'ayf:folder' OR +TYPE:'ayf:content'"
+          },
+          {
+            "query": "-TYPE:'cm:thumbnail' AND -TYPE:'cm:failedThumbnail' AND -TYPE:'cm:rating'"
+          },
+          {
+            "query": "-cm:creator:System"
+          },
+          {
+            "query": "-TYPE:'st:site' AND -ASPECT:'st:siteContainer' AND -ASPECT:'sys:hidden'"
+          },
+          {
+            "query": "-TYPE:'dl:dataList' AND -TYPE:'dl:todoList' AND -TYPE:'dl:issue'"
+          },
+          {
+            "query": "-TYPE:'fm:topic' AND -TYPE:'fm:post'"
+          },
+          {
+            "query": "-TYPE:'lnk:link'"
+          },
+          {
+            "query": "-TYPE:'cm:systemfolder'"
+          },
+          {
+            "query": "-TYPE:'bpm:package'"
+          },
+          {
+            "query": "-PATH:'//cm:wiki/*'"
+          },
+          {
+            "query": "-PATH:'*/cm:avatars/*' AND -PATH:'*/cm:emailtemplates/*'"
+          },
+          {
+            "query": "-cm:name:*avatar*.jpg AND -cm:name:*avatar*.png AND -cm:name:*avatar*.gif"
+          },
+          {
+            "query": "-ASPECT:'cm:workingcopy' AND -ASPECT:'sys:temporary'"
+          }
         ],
         "facetFields": {
           "expanded": true,
@@ -2015,8 +2262,14 @@
                 "hideDefaultAction": true,
                 "field": "TYPE",
                 "options": [
-                  { "name": "Contenedores AyF", "value": "TYPE:'ayf:folder'" },
-                  { "name": "Documentos AyF", "value": "TYPE:'ayf:content'" }
+                  {
+                    "name": "Contenedores AyF",
+                    "value": "TYPE:'ayf:folder'"
+                  },
+                  {
+                    "name": "Documentos AyF",
+                    "value": "TYPE:'ayf:content'"
+                  }
                 ]
               }
             }

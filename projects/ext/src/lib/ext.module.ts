@@ -4,6 +4,10 @@ import { EnvironmentProviders, Provider } from '@angular/core';
 import { provideEffects } from '@ngrx/effects';
 import { DocsDashboardComponent } from './components/navbar/docs-section/docs/docs-dashboard.component';
 import { CustomMenuComponent } from './components/navbar/custom-menu/custom-menu.component';
+import { HomeNavbarComponent } from './components/navbar/home-navbar/home-navbar.component';
+import { PersonalNavbarComponent } from './components/navbar/personal-navbar/personal-navbar.component';
+import { AdminSectionsNavbarComponent } from './components/navbar/admin-sections-navbar/admin-sections-navbar.component';
+import { ServicesNavbarComponent } from './components/navbar/services-navbar/services-navbar.component';
 import { HomeDashboardComponent } from './components/dashboard/home/home-dashboard.component';
 import { OymDashboardComponent } from './components/dashboard/oym/oym-dashboard.component';
 import { DossierViewComponent } from './components/document-views/dossier-view/dossier-view.component';
@@ -31,6 +35,10 @@ export function provideExtExtension(): (Provider | EnvironmentProviders)[] {
       components: {
         'home-dashboard.component': HomeDashboardComponent,
         'custom-menu.component': CustomMenuComponent,
+        'home-navbar.component': HomeNavbarComponent,
+        'personal-navbar.component': PersonalNavbarComponent,
+        'admin-sections-navbar.component': AdminSectionsNavbarComponent,
+        'services-navbar.component': ServicesNavbarComponent,
         'docs-dashboard.component': DocsDashboardComponent,
         'oym-dashboard.component': OymDashboardComponent,
         'dossier-view.component': DossierViewComponent,

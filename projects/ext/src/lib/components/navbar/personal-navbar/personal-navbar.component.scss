@@ -1,0 +1,132 @@
+/* stylelint-disable selector-class-pattern */
+
+.navbar-personal-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 8px 16px;
+  min-height: 32px;
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  text-align: left;
+  color: var(--theme-text-color, #212121);
+
+  &:hover {
+    background-color: var(--theme-hover-background, #efefef);
+  }
+
+  &:active,
+  &:focus {
+    outline: none;
+    background-color: var(--theme-active-background, #e8e8e8);
+  }
+
+  &__text {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__toggle-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+    font-size: 12px;
+    color: var(--theme-text-muted, #757575);
+
+    &--open {
+      transform: rotate(180deg);
+    }
+  }
+
+  &--dropdown {
+    font-weight: 500;
+  }
+
+  &--open {
+    background-color: var(--theme-active-background, #e8e8e8);
+  }
+}
+
+.navbar-dropdown {
+  width: 100%;
+  background: var(--theme-background-light, #fff);
+  border-top: 1px solid var(--theme-border-color, #e0e0e0);
+  animation: slide-down 0.2s ease;
+  max-height: calc(100vh - 150px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    flex: 1;
+    overflow: auto hidden;
+  }
+
+  &__item {
+    display: block;
+    padding: 12px 24px;
+    color: var(--theme-text-color, #212121);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-left: 4px solid transparent;
+
+    &:hover {
+      background-color: var(--theme-hover-background, #efefef);
+      padding-left: 28px;
+      border-left-color: var(--theme-primary-color, #06c);
+    }
+
+    &:active {
+      background-color: var(--theme-active-background, #e8e8e8);
+    }
+
+    &--active {
+      background-color: var(--theme-hover-background, #efefef);
+      padding-left: 28px;
+      border-left-color: var(--theme-primary-color, #06c);
+
+      &:hover {
+        background-color: var(--theme-hover-background, #efefef);
+      }
+    }
+  }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
