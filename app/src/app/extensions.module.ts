@@ -1,4 +1,3 @@
-/* eslint-disable license-header/header */
 import { EnvironmentProviders, NgModule, Provider } from '@angular/core';
 import { provideFolderRulesExtension } from '@alfresco/aca-content/folder-rules';
 import { provideAosExtension } from '@alfresco/aca-content/ms-office';

@@ -1,4 +1,3 @@
-/* eslint-disable license-header/header */
 import { Component, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';

@@ -31,10 +31,11 @@ import { environment } from '../environments/environment';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { provideRouter, withHashLocation } from '@angular/router';
-import { CONTENT_LAYOUT_ROUTES, ContentServiceExtensionModule } from '@alfresco/aca-content';
 import { SHELL_APP_SERVICE, SHELL_AUTH_TOKEN, provideShellRoutes } from '@alfresco/adf-core/shell';
 import { APP_ROUTES } from './app.routes';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import { CONTENT_LAYOUT_ROUTES, ContentServiceExtensionModule } from '@alfresco/aca-content';
+import { INTRANET_LAYOUT_ROUTES } from '@alfresco/ext';
 
 registerLocaleData(localeEs);
 
@@ -51,7 +52,7 @@ export const AppConfig: ApplicationConfig = {
     provideApplicationExtensions(),
     provideRouter(APP_ROUTES, withHashLocation()),
     environment.e2e ? provideNoopAnimations() : provideAnimations(),
-    provideShellRoutes(CONTENT_LAYOUT_ROUTES),
+    provideShellRoutes([...INTRANET_LAYOUT_ROUTES, ...CONTENT_LAYOUT_ROUTES]),
     {
       provide: SHELL_APP_SERVICE,
       useClass: AppService
