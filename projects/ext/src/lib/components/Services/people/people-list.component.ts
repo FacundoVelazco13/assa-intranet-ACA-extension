@@ -50,7 +50,7 @@ export class PeopleListComponent implements OnInit, OnDestroy {
   private readonly searchSubject$ = new Subject<string>();
 
   people: ItopPerson[] = [];
-  displayedColumns: string[] = ['expand', 'employee_number', 'friendlyname', 'email', 'org_name', 'location_name', 'mobile_phone'];
+  displayedColumns: string[] = ['employee_number', 'friendlyname', 'email', 'org_name', 'location_name', 'mobile_phone', 'expand'];
 
   isLoading = true;
   searchQuery = '';

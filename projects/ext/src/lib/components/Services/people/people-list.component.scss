@@ -427,6 +427,23 @@ mat-cell,
   }
 }
 
+// Columna de acciones - ajustada para ocupar solo lo necesario
+.people-table mat-header-cell.mat-column-expand,
+.people-table .mat-mdc-header-cell.mat-column-expand {
+  flex: 0 0 56px;
+  max-width: 56px;
+  min-width: 56px;
+  padding: 0 8px;
+}
+
+.people-table mat-cell.mat-column-expand,
+.people-table .mat-mdc-cell.mat-column-expand {
+  flex: 0 0 56px;
+  max-width: 56px;
+  min-width: 56px;
+  padding: 0 8px;
+}
+
 // View toggle styling (must come after mat-cell span for correct specificity)
 .view-toggle span {
   margin-left: 8px;
@@ -443,7 +460,7 @@ mat-cell,
 
 .cards-grid {
   flex: 1;
-  overflow: auto hidden;
+  overflow: auto;
   padding: 20px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
