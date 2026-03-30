@@ -6,8 +6,8 @@ import { AlfrescoApiService } from '@alfresco/adf-content-services';
 import { AppConfigService } from '@alfresco/adf-core';
 import { firstValueFrom } from 'rxjs';
 
-const principal_url = 'alfresco/s/api/itop/data';
-const mock_url = 'alfresco/s/api/itop/mock';
+const principal_url = 'alfresco/s/itop/data';
+const mock_url = 'alfresco/s/itop/mock';
 
 @Injectable({
   providedIn: 'root'
