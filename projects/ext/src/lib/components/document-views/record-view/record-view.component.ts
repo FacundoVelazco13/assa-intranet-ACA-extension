@@ -1,4 +1,3 @@
-/* eslint-disable license-header/header */
 import { Component, inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppHookService, ContentApiService, PageComponent, PageLayoutComponent, ToolbarComponent, NodePermissionService } from '@alfresco/aca-shared';
@@ -39,6 +38,7 @@ export class RecordViewComponent extends PageComponent implements OnInit, OnDest
   nodeId: string;
   isLoading: boolean;
   activeTab = 0;
+  isDescriptionExpanded = false;
   aspectActions: Array<ContentActionRef> = [];
   nodeIcon: string;
 
@@ -120,6 +120,10 @@ export class RecordViewComponent extends PageComponent implements OnInit, OnDest
 
   onBreadcrumbNavigate() {
     this.router.navigate(['../../'], { relativeTo: this.route });
+  }
+
+  toggleDescriptionExpansion(): void {
+    this.isDescriptionExpanded = !this.isDescriptionExpanded;
   }
 
   canUpdatePermissions(node: Node): boolean {

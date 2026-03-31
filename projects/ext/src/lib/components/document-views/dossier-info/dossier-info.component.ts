@@ -1,7 +1,7 @@
-/* eslint-disable license-header/header */
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCard, MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardContent } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Node } from '@alfresco/js-api';
 import { getNameByTypeCode } from '../../../utils/content-types.utils';
@@ -19,7 +19,7 @@ export interface PropertyConfig {
 @Component({
   selector: 'aca-dossier-info',
   standalone: true,
-  imports: [CommonModule, MatCard, MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardContent, MatIconModule],
+  imports: [CommonModule, MatCard, MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardContent, MatButtonModule, MatIconModule],
   templateUrl: './dossier-info.component.html',
   styleUrls: ['./dossier-info.component.scss'],
   encapsulation: ViewEncapsulation.None
@@ -27,16 +27,22 @@ export interface PropertyConfig {
 export class DossierInfoComponent implements OnInit {
   @Input() node: Node;
   properties: PropertyConfig[] = [];
+  isDescriptionExpanded = false;
 
   ngOnInit(): void {
-    // eslint-disable-next-line no-console
-    console.log('DossierInfoComponent initialized with node:', this.node.properties);
+    if (!this.node) {
+      return;
+    }
     this.properties.push(...getStandardProperties());
     this.properties.push(...getPropertiesByType(this.node.nodeType));
   }
 
   get typeName(): string {
     return getNameByTypeCode(this.node?.nodeType);
+  }
+
+  toggleDescriptionExpansion(): void {
+    this.isDescriptionExpanded = !this.isDescriptionExpanded;
   }
 
   getPropertyValue(property: PropertyConfig): string {

@@ -7,15 +7,25 @@
   </mat-card>
 
   <!-- Descripción Card destacada -->
-  <mat-card class="description-card">
+  <mat-card class="description-card" *ngIf="node?.properties?.['cm:description']">
     <mat-card-content>
       <div class="description-header">
-        <mat-icon class="description-icon">description</mat-icon>
-        <h3>Descripción</h3>
+        <div class="description-title-group">
+          <mat-icon class="description-icon">description</mat-icon>
+          <h3>Descripción</h3>
+        </div>
+        <button
+          type="button"
+          mat-icon-button
+          class="description-toggle-button"
+          (click)="toggleDescriptionExpansion()"
+          [attr.aria-label]="isDescriptionExpanded ? 'Contraer descripción' : 'Expandir descripción'"
+          [attr.title]="isDescriptionExpanded ? 'Contraer' : 'Expandir'"
+        >
+          <mat-icon>{{ isDescriptionExpanded ? 'expand_less' : 'expand_more' }}</mat-icon>
+        </button>
       </div>
-      <p class="description-text">
-        {{ getPropertyValue({ key: 'cm:description', label: 'Descripción' }) }}
-      </p>
+      <p class="aca-dossier-description" [class.expanded]="isDescriptionExpanded">{{ node?.properties?.['cm:description'] }}</p>
     </mat-card-content>
   </mat-card>
 

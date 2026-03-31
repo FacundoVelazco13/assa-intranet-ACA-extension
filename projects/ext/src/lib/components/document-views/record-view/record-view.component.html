@@ -50,7 +50,22 @@
                     <span class="aca-metadata-value">{{ node.createdByUser?.displayName }}</span>
                   </div>
                 </div>
-                <p *ngIf="node.properties?.['cm:description']" class="aca-record-description">{{ node.properties['cm:description'] }}</p>
+                <div *ngIf="node.properties?.['cm:description']" class="aca-record-description-section">
+                  <div class="aca-record-description-header">
+                    <h4>Descripción</h4>
+                    <button
+                      type="button"
+                      mat-icon-button
+                      class="aca-record-description-toggle"
+                      (click)="toggleDescriptionExpansion()"
+                      [attr.aria-label]="isDescriptionExpanded ? 'Contraer descripción' : 'Expandir descripción'"
+                      [attr.title]="isDescriptionExpanded ? 'Contraer' : 'Expandir'"
+                    >
+                      <mat-icon>{{ isDescriptionExpanded ? 'expand_less' : 'expand_more' }}</mat-icon>
+                    </button>
+                  </div>
+                  <p class="aca-record-description" [class.aca-record-description--expanded]="isDescriptionExpanded">{{ node.properties['cm:description'] }}</p>
+                </div>
               </div>
             </div>
           </ng-template>

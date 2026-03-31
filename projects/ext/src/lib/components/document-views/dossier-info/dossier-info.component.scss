@@ -34,14 +34,7 @@
   // Card de Descripción
   .description-card {
     margin-bottom: 32px;
-    border-left: 4px solid #4170a6;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
-
-    &:hover {
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-      transform: translateY(-2px);
-    }
 
     mat-card-content {
       padding: 24px;
@@ -49,8 +42,14 @@
       .description-header {
         display: flex;
         align-items: center;
-        gap: 12px;
+        justify-content: space-between;
         margin-bottom: 16px;
+
+        .description-title-group {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
 
         .description-icon {
           font-size: 28px;
@@ -65,16 +64,27 @@
           font-weight: 600;
           color: #194c7b;
         }
+
+        .description-toggle-button {
+          color: #4170a6;
+        }
       }
 
-      .description-text {
-        margin: 0;
-        font-size: 16px;
-        line-height: 1.8;
+      .aca-dossier-description {
         color: rgba(0, 0, 0, 0.75);
-        text-align: justify;
+        font-family: inherit;
+        font-size: 1rem;
+        line-height: 1.8;
+        margin: 0;
+        max-height: 220px;
+        overflow-y: auto;
         white-space: pre-wrap;
         word-wrap: break-word;
+
+        &.expanded {
+          max-height: none;
+          overflow-y: visible;
+        }
       }
     }
   }
