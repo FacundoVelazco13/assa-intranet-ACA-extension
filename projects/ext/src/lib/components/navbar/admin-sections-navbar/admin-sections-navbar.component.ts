@@ -49,7 +49,7 @@ export class AdminSectionsNavbarComponent implements OnInit, OnDestroy {
     },
     {
       id: 'intranet.navbar.gestion',
-      title: 'Gestión Institucional',
+      title: 'Mesa de Entrada',
       homeRoute: 'intranet/gi',
       isOpen: false,
       items: [
