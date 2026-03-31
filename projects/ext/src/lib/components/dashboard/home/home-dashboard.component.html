@@ -57,7 +57,7 @@
                   </li>
                 </ul>
 
-                <p class="start-exploring">Para comenzar, utiliza la barra de navegación de la izquierda o los accesos rápidos.</p>
+                <p class="start-exploring">Para comenzar, utiliza la barra de navegación de la izquierda o la sección Explorar contenido.</p>
               </mat-card-content>
             </mat-card>
 
@@ -97,16 +97,16 @@
             </mat-card>
           </div>
 
-          <!-- Columna Derecha: Accesos rápidos -->
+          <!-- Columna Derecha: Explorar contenido -->
           <div class="access-column">
             <mat-card class="quick-access-card">
               <mat-card-header>
                 <mat-icon mat-card-avatar>apps</mat-icon>
-                <mat-card-title>Accesos Rápidos</mat-card-title>
+                <mat-card-title>Explorar contenido</mat-card-title>
               </mat-card-header>
               <mat-card-content>
                 <div class="quick-access-list">
-                  <div class="access-item" routerLink="/personal-files">
+                  <a class="access-item" routerLink="/libraries">
                     <div class="access-icon-wrapper">
                       <mat-icon>folder</mat-icon>
                     </div>
@@ -115,9 +115,9 @@
                       <span class="access-desc">Archivos y carpetas</span>
                     </div>
                     <mat-icon class="access-arrow">chevron_right</mat-icon>
-                  </div>
+                  </a>
 
-                  <div class="access-item" routerLink="/search">
+                  <a class="access-item" routerLink="/intranet/search">
                     <div class="access-icon-wrapper">
                       <mat-icon>search</mat-icon>
                     </div>
@@ -126,9 +126,9 @@
                       <span class="access-desc">Buscar documentos</span>
                     </div>
                     <mat-icon class="access-arrow">chevron_right</mat-icon>
-                  </div>
+                  </a>
 
-                  <div class="access-item" routerLink="/favorites">
+                  <a class="access-item" routerLink="/favorites">
                     <div class="access-icon-wrapper">
                       <mat-icon>star</mat-icon>
                     </div>
@@ -137,9 +137,9 @@
                       <span class="access-desc">Documentos guardados</span>
                     </div>
                     <mat-icon class="access-arrow">chevron_right</mat-icon>
-                  </div>
+                  </a>
 
-                  <div class="access-item" routerLink="/recent-files">
+                  <a class="access-item" routerLink="/recent-files">
                     <div class="access-icon-wrapper">
                       <mat-icon>history</mat-icon>
                     </div>
@@ -148,7 +148,7 @@
                       <span class="access-desc">Últimos archivos vistos</span>
                     </div>
                     <mat-icon class="access-arrow">chevron_right</mat-icon>
-                  </div>
+                  </a>
                 </div>
               </mat-card-content>
             </mat-card>
