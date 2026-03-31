@@ -2,6 +2,8 @@ import { Route } from '@angular/router';
 import { HomeDashboardComponent } from './components/dashboard/home/home-dashboard.component';
 import { GiDashboardComponent } from './components/dashboard/gi/gi-dashboard.component';
 import { OymDashboardComponent } from './components/dashboard/oym/oym-dashboard.component';
+import { HysDashboardComponent } from './components/dashboard/hys/hys-dashboard.component';
+import { PcDashboardComponent } from './components/dashboard/pc/pc-dashboard.component';
 import { IntranetPageComponent } from './components/intranet-page/intranet-page.component';
 import { DossierViewComponent } from './components/document-views/dossier-view/dossier-view.component';
 import { RecordViewComponent } from './components/document-views/record-view/record-view.component';
@@ -181,7 +183,7 @@ export const INTRANET_LAYOUT_ROUTES: Route[] = [
         children: [
           {
             path: '',
-            component: IntranetPageComponent
+            component: HysDashboardComponent
           },
           {
             path: 'normas',
@@ -282,7 +284,7 @@ export const INTRANET_LAYOUT_ROUTES: Route[] = [
         children: [
           {
             path: '',
-            component: IntranetPageComponent
+            component: PcDashboardComponent
           },
           {
             path: 'micromedicion',

@@ -23,6 +23,8 @@ import { IntranetSearchResultComponent } from './components/Intranet-search/intr
 import { IntranetSearchResultsRowComponent } from './components/Intranet-search/intranet-search-results-row/intranet-search-results-row.component';
 import { IntranetRouterEffects } from './store/effects/intranet-router.effects';
 import { GiDashboardComponent } from './components/dashboard/gi/gi-dashboard.component';
+import { HysDashboardComponent } from './components/dashboard/hys/hys-dashboard.component';
+import { PcDashboardComponent } from './components/dashboard/pc/pc-dashboard.component';
 import { ServicesRedirectComponent } from './components/dashboard/services-home/services-redirect.component';
 import { PeopleListComponent } from './components/Services/people/people-list.component';
 
@@ -47,6 +49,8 @@ export function provideExtExtension(): (Provider | EnvironmentProviders)[] {
         'intranet-search-result.component': IntranetSearchResultComponent,
         'intranet-search-results-row.component': IntranetSearchResultsRowComponent,
         'gi-dashboard.component': GiDashboardComponent,
+        'hys-dashboard.component': HysDashboardComponent,
+        'pc-dashboard.component': PcDashboardComponent,
         'services-redirect.component': ServicesRedirectComponent,
         'people-list.component': PeopleListComponent
       },
