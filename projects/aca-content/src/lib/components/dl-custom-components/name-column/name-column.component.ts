@@ -22,8 +22,8 @@
  * from Hyland Software. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { NameColumnComponent, NodeNameTooltipPipe, NodesApiService } from '@alfresco/adf-content-services';
-import { ChangeDetectorRef, Component, DestroyRef, ElementRef, inject, OnInit, ViewEncapsulation } from '@angular/core';
+import { NameColumnComponent, NodesApiService } from '@alfresco/adf-content-services';
+import { ChangeDetectorRef, Component, DestroyRef, inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { filter } from 'rxjs/operators';
 import { NodeActionTypes } from '@alfresco/aca-shared/store';
@@ -34,7 +34,7 @@ import { DatatableCellBadgesComponent } from '../datatable-cell-badges/datatable
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
-  imports: [CommonModule, TranslatePipe, LockedByComponent, NodeNameTooltipPipe, DatatableCellBadgesComponent],
+  imports: [CommonModule, TranslatePipe, LockedByComponent, DatatableCellBadgesComponent],
   selector: 'aca-custom-name-column',
   templateUrl: './name-column.component.html',
   styleUrls: ['./name-column.component.scss'],
@@ -48,15 +48,9 @@ export class CustomNameColumnComponent extends NameColumnComponent implements On
   isFileWriteLocked: boolean;
 
   private readonly destroy = inject(DestroyRef);
-
-  constructor(
-    element: ElementRef,
-    private readonly cd: ChangeDetectorRef,
-    private readonly actions$: Actions,
-    private readonly nodesService: NodesApiService
-  ) {
-    super(element, nodesService);
-  }
+  private readonly cd = inject(ChangeDetectorRef);
+  private readonly actions$ = inject(Actions);
+  private readonly nodesService = inject(NodesApiService);
 
   ngOnInit() {
     this.updateValue();

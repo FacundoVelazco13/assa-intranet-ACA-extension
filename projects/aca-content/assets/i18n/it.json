@@ -1,6 +1,6 @@
 {
     "APP": {
-        "COPYRIGHT": "© 2005-2025 Hyland Software, Inc. e sue affiliate. Tutti i diritti riservati.",
+        "COPYRIGHT": "© 2005-2025 Hyland, Inc. e sue affiliate. Tutti i diritti riservati.",
         "TITLE": "Workspace",
         "ABOUT": {
             "VERSION": "Versione:",
@@ -52,19 +52,13 @@
             "LOCATION": "Posizione",
             "TELEPHONE": "Telefono",
             "MOBILE": "Cellulare",
-            "LOGIN": "Login",
-            "USERNAME": "Nome utente",
             "EMAIL": "E-mail",
-            "PASSWORD": "Password",
-            "OLD_PASSWORD": "Vecchia password",
-            "FORGOT_PASSWORD": "Password dimenticata",
-            "NEW_PASSWORD": "Nuova password",
-            "VERIFY_PASSWORD": "Verifica password",
             "COMPANY_DETAILS": "Dettagli azienda",
             "NAME": "Nome",
             "ADDRESS": "Indirizzo",
             "POSTCODE": "Codice postale",
-            "INVALID_INPUT": "Input non valido",
+            "INVALID_PHONE_FORMAT": "Inserisci un numero di telefono valido",
+            "INVALID_EMAIL_FORMAT": "Inserisci un indirizzo email valido",
             "GO_TO_PERSONAL_FILES_BUTTON_LABEL": "Vai a File personali"
         },
         "LOCKED_BY": "Bloccato da: ",
@@ -274,6 +268,7 @@
                     "SIZE": "Dimensione"
                 },
                 "UNKNOWN_LOCATION": "Sconosciuto",
+                "VIEW_ADDITIONAL_LOCATIONS": "View additional references locations",
                 "NO_RESULTS": "La ricerca ha restituito 0 risultati",
                 "EMPTY_SEARCH": "Termine di ricerca obbligatorio",
                 "NO_FILTER_RESULTS": "Il filtro ha restituito 0 risultati",
@@ -318,7 +313,7 @@
             "EDIT_OFFLINE_CANCEL": "Annulla modifica",
             "CHANGE_ASPECT": "Modifica aspetti",
             "ADD_ASPECTS": "Aggiungi aspetti",
-            "FOLDER_INFO": "Informazioni Cartella"
+            "NODE_INFO": "Information"
         },
         "DIALOGS": {
             "CONFIRM_PURGE": {
@@ -433,6 +428,10 @@
                         "FAIL": "Impossibile spostare {{ failed }}."
                     }
                 },
+                "NODE_CREATE": {
+                    "FILE_FROM_TEMPLATE_SUCCESS": "Il file {{ name }} è stato creato dal modello",
+                    "FOLDER_FROM_TEMPLATE_SUCCESS": "La cartella {{ name }} è stata creata dal modello"
+                },
                 "LIBRARY_DELETED": "Libreria eliminata",
                 "LEFT_LIBRARY": "Sei uscito dalla libreria",
                 "FAVORITE_NODE_ADDED": "{{ name }} Aggiunto",
@@ -472,6 +471,7 @@
         },
         "TOOLTIPS": {
             "COLLAPSE_NAVIGATION": "Comprimi il menu di navigazione",
+            "COLLAPSE_NAVIGATION_ALT": "Icona per comprimere il menu di navigazione",
             "OPTIONS_SETTINGS": "Opzioni e impostazioni",
             "MY_PROFILE": "Il mio profilo",
             "EXPAND_NAVIGATION": "Espande il menu di navigazione",
@@ -481,19 +481,24 @@
             "CANCEL": "Annulla",
             "SAVE": "Salva"
         },
-        "FOLDER_INFO": {
-            "ICON": "Icona Cartella",
-            "TITLE": "Informazioni Cartella",
-            "SIZE": "Dimensione",
-            "NUMBER_OF_FILES": "Numero di file",
-            "CALCULATING": "Calcolo...",
-            "CALCULATED_SIZE_LARGE": "{{sizeInBytes}} bytes ({{sizeInLargeUnit}} {{unit}} sul disco) per i file {{count}}",
-            "CALCULATED_SIZE_NORMAL": "{{sizeInBytes}} bytes per i file {{count}}",
-            "LOCATION": "Località",
-            "CREATED": "Creato",
-            "MODIFIED": "Modificato",
-            "DONE": "Fatto",
-            "ERROR": "Qualcosa è andato storto, chiudere questa finestra di dialogo e riprovare"
+        "NODE_INFO": {
+            "ICON": "Node Icon",
+            "TITLE": "Information",
+            "SIZE": "Size",
+            "NUMBER_OF_FILES": "Number of files",
+            "CALCULATING": "Calculating...",
+            "LOCATION": "Location",
+            "REFERENCED": "Referenced",
+            "CREATED": "Created",
+            "MODIFIED": "Modified",
+            "DONE": "Done",
+            "ERROR": "Something went wrong, please close this dialog and try again"
+        },
+        "ADDITIONAL_REFERENCES_DIALOG": {
+            "TITLE": "Additional Reference Locations",
+            "NO_LOCATIONS": "{{ name }} is not referenced in any locations.",
+            "DESCRIPTION": "{{ name }} is currently referenced in these locations.",
+            "CLOSE": "Close"
         }
     },
     "NODE_SELECTOR": {
@@ -583,6 +588,7 @@
     },
     "SEARCH": {
         "BULK_ACTIONS_DROPDOWN": {
+            "LABEL": "Azioni collettive",
             "TITLE": "Azioni in blocco ({{ count }} elementi)",
             "BULK_NOT_AVAILABLE": "Azioni in blocco (non disponibile)",
             "BULK_NOT_AVAILABLE_TOOLTIP": "Azioni in blocco non possono essere utilizzate senza i risultati di ricerca"
@@ -594,7 +600,8 @@
             "LIBRARIES": "Librerie",
             "MIN_LENGTH": "La stringa di ricerca deve contenere almeno 2 caratteri alfanumerici.",
             "REQUIRED": "L'input di ricerca è obbligatorio.",
-            "WHITESPACE": "L'input di ricerca non può essere solo spazi bianchi."
+            "WHITESPACE": "L'input di ricerca non può essere solo spazi bianchi.",
+            "OPERATORS": "L’input di ricerca non può iniziare, terminare o essere composto solo da operatori"
         },
         "SORT": {
             "SORTING_OPTION": "Ordina per",

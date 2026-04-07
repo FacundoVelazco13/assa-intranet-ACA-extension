@@ -36,6 +36,7 @@ import { APP_ROUTES } from './app.routes';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { CONTENT_LAYOUT_ROUTES, ContentServiceExtensionModule } from '@alfresco/aca-content';
 import { INTRANET_LAYOUT_ROUTES } from '@alfresco/ext';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 registerLocaleData(localeEs);
 
@@ -64,8 +65,13 @@ export const AppConfig: ApplicationConfig = {
     {
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
       useValue: {
-        duration: 10000
+        duration: 10000,
+        politeness: 'polite'
       }
+    },
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'outline', floatLabel: 'always', subscriptSizing: 'dynamic' }
     }
   ]
 };

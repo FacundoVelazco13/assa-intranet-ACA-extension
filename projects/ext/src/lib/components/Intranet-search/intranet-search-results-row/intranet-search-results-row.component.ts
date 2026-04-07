@@ -22,7 +22,7 @@
  * from Hyland Software. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, inject, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { SearchEntryHighlight } from '@alfresco/js-api';
 import { BehaviorSubject } from 'rxjs';
 import { NameColumnComponent, NodesApiService } from '@alfresco/adf-content-services';
@@ -68,13 +68,8 @@ export class IntranetSearchResultsRowComponent extends NameColumnComponent imple
   isFile = false;
 
   private readonly destroy = inject(DestroyRef);
+  private readonly nodesService = inject(NodesApiService);
 
-  constructor(
-    element: ElementRef,
-    private readonly nodesService: NodesApiService
-  ) {
-    super(element, nodesService);
-  }
   ngOnInit() {
     this.updateValues();
 

@@ -27,21 +27,16 @@ import { BaseComponent } from '../base.component';
 
 export class LinkRulesDialog extends BaseComponent {
   private static rootElement = 'aca-rule-set-picker';
+  private getRowByName = (name: string | number): Locator => this.getChild(`adf-datatable-row`, { hasText: name.toString() });
+
+  selectFolderButton = this.getChild('button', { hasText: ' Select folder ' });
+  getOptionLocator = (optionName: string): Locator => this.page.locator('[role=listbox] [role=option]', { hasText: optionName }).first();
+  getFolderIcon = this.getChild('.adf-dropdown-breadcrumb-icon', { hasText: 'folder' });
+  getLibraryIcon = this.getChild('.adf-empty-content__icon', { hasText: 'library_books' });
 
   constructor(page: Page) {
     super(page, LinkRulesDialog.rootElement);
   }
-
-  cancelButton = this.getChild('[data-automation-id="content-node-selector-actions-cancel"]');
-  selectFolderButton = this.getChild('button', { hasText: ' Select folder ' });
-  emptyLinkRules = this.getChild('.adf-empty-content__title');
-  getOptionLocator = (optionName: string): Locator =>
-    this.page.locator('.mat-mdc-select-panel .mdc-list-item__primary-text', { hasText: optionName });
-  private getRowByName = (name: string | number): Locator => this.getChild(`adf-datatable-row`, { hasText: name.toString() });
-  getDialogTitle = (text: string) => this.getChild('[data-automation-id="content-node-selector-title"]', { hasText: text });
-  getBreadcrumb = (text: string) => this.getChild('[data-automation-id="current-folder"]', { hasText: text });
-  getFolderIcon = this.getChild('.adf-dropdown-breadcrumb-icon', { hasText: 'folder' });
-  getLibraryIcon = this.getChild('.adf-empty-content__icon', { hasText: 'library_books' });
 
   async selectDestination(folderName: string): Promise<void> {
     const row = this.getRowByName(folderName);

@@ -26,14 +26,12 @@ import { expect, Page } from '@playwright/test';
 import { BaseComponent } from '../base.component';
 
 export class MatMenuComponent extends BaseComponent {
-  private static rootElement = '.mat-mdc-menu-content';
+  private static rootElement = '[role="menu"]';
 
   constructor(page: Page) {
     super(page, MatMenuComponent.rootElement);
   }
 
-  public getMenuItemsLocator = this.getChild('button');
-  public getMenuItemTextLocator = this.getChild('[data-automation-id="menu-item-title"]');
   public createFolder = this.getChild('[id="app.create.folder"]');
   public createFolderFromTemplate = this.getChild('[id="app.create.folderFromTemplate"]');
   public createFileFromTemplate = this.getChild('[id="app.create.fileFromTemplate"]');
@@ -60,11 +58,11 @@ export class MatMenuComponent extends BaseComponent {
   }
 
   async verifyActualMoreActions(expectedToolbarMore: string[]): Promise<void> {
-    await this.page.locator('.mat-mdc-menu-content').waitFor({ state: 'attached' });
-    const menus = await this.page.$$('.mat-mdc-menu-content .mat-mdc-menu-item');
+    await this.getChild('').waitFor();
+    const menus = await this.getChild('[role="menuitem"]').all();
     const actualMoreActions: string[] = await Promise.all(
       menus.map(async (button) => {
-        const title = await (await button.$('.mat-mdc-menu-item-text span')).innerText();
+        const title = await button.locator('span span').innerText();
         return title || '';
       })
     );

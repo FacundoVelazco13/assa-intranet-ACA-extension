@@ -1,6 +1,6 @@
 {
     "APP": {
-        "COPYRIGHT": "© 2005-2025 Hyland Software, Inc. y sus afiliados. Todos los derechos reservados.",
+        "COPYRIGHT": "© 2005-2025 Hyland, Inc. y sus afiliados. Todos los derechos reservados.",
         "TITLE": "Workspace",
         "ABOUT": {
             "VERSION": "Versión:",
@@ -52,19 +52,13 @@
             "LOCATION": "Ubicación",
             "TELEPHONE": "Teléfono",
             "MOBILE": "Móvil",
-            "LOGIN": "Iniciar sesión",
-            "USERNAME": "Nombre de usuario",
             "EMAIL": "Correo electrónico",
-            "PASSWORD": "Contraseña",
-            "OLD_PASSWORD": "Contraseña anterior",
-            "FORGOT_PASSWORD": "¿Olvidó la contraseña?",
-            "NEW_PASSWORD": "Nueva contraseña",
-            "VERIFY_PASSWORD": "Contraseña de verificación",
             "COMPANY_DETAILS": "Detalles de la empresa",
             "NAME": "Nombre",
             "ADDRESS": "Dirección",
             "POSTCODE": "Código postal",
-            "INVALID_INPUT": "Entrada no válida",
+            "INVALID_PHONE_FORMAT": "Introduzca un número de teléfono válido",
+            "INVALID_EMAIL_FORMAT": "Introduzca una dirección de correo electrónico válida",
             "GO_TO_PERSONAL_FILES_BUTTON_LABEL": "Ir a Archivos personales"
         },
         "LOCKED_BY": "Bloqueado por: ",
@@ -274,6 +268,7 @@
                     "SIZE": "Tamaño"
                 },
                 "UNKNOWN_LOCATION": "Desconocido",
+                "VIEW_ADDITIONAL_LOCATIONS": "View additional references locations",
                 "NO_RESULTS": "Su búsqueda ha devuelto 0 resultados",
                 "EMPTY_SEARCH": "Se requiere un término de búsqueda",
                 "NO_FILTER_RESULTS": "Su filtro ha devuelto 0 resultados",
@@ -318,7 +313,7 @@
             "EDIT_OFFLINE_CANCEL": "Cancelar edición",
             "CHANGE_ASPECT": "Editar aspectos",
             "ADD_ASPECTS": "Añadir aspectos",
-            "FOLDER_INFO": "Información de la carpeta"
+            "NODE_INFO": "Information"
         },
         "DIALOGS": {
             "CONFIRM_PURGE": {
@@ -433,6 +428,10 @@
                         "FAIL": "{{ failed }} no se ha podido mover."
                     }
                 },
+                "NODE_CREATE": {
+                    "FILE_FROM_TEMPLATE_SUCCESS": "El archivo {{ name }} se creó a partir de la plantilla",
+                    "FOLDER_FROM_TEMPLATE_SUCCESS": "La carpeta {{ name }} se creó a partir de la plantilla"
+                },
                 "LIBRARY_DELETED": "Biblioteca eliminada",
                 "LEFT_LIBRARY": "Ha abandonado la biblioteca",
                 "FAVORITE_NODE_ADDED": "{{ name }} se ha añadido a los favoritos",
@@ -472,6 +471,7 @@
         },
         "TOOLTIPS": {
             "COLLAPSE_NAVIGATION": "Oculta el menú de navegación",
+            "COLLAPSE_NAVIGATION_ALT": "Icono para contraer el menú de navegación",
             "OPTIONS_SETTINGS": "Configuración y opciones",
             "MY_PROFILE": "Mi Perfil",
             "EXPAND_NAVIGATION": "Expande el menú de navegación",
@@ -481,19 +481,24 @@
             "CANCEL": "Cancelar",
             "SAVE": "Guardar"
         },
-        "FOLDER_INFO": {
-            "ICON": "Icono de carpeta",
-            "TITLE": "Información de la carpeta",
-            "SIZE": "Tamaño",
-            "NUMBER_OF_FILES": "Número de archivos",
-            "CALCULATING": "Calculando...",
-            "CALCULATED_SIZE_LARGE": "{{sizeInBytes}} bytes ({{sizeInLargeUnit}} {{unit}} en el disco) para {{count}} archivos",
-            "CALCULATED_SIZE_NORMAL": "{{sizeInBytes}} bytes para {{count}} archivos",
-            "LOCATION": "Ubicación",
-            "CREATED": "Creado",
-            "MODIFIED": "Modificado",
-            "DONE": "Hecho",
-            "ERROR": "Algo ha ido mal, cierre este cuadro de diálogo e inténtelo de nuevo"
+        "NODE_INFO": {
+            "ICON": "Node Icon",
+            "TITLE": "Information",
+            "SIZE": "Size",
+            "NUMBER_OF_FILES": "Number of files",
+            "CALCULATING": "Calculating...",
+            "LOCATION": "Location",
+            "REFERENCED": "Referenced",
+            "CREATED": "Created",
+            "MODIFIED": "Modified",
+            "DONE": "Done",
+            "ERROR": "Something went wrong, please close this dialog and try again"
+        },
+        "ADDITIONAL_REFERENCES_DIALOG": {
+            "TITLE": "Additional Reference Locations",
+            "NO_LOCATIONS": "{{ name }} is not referenced in any locations.",
+            "DESCRIPTION": "{{ name }} is currently referenced in these locations.",
+            "CLOSE": "Close"
         }
     },
     "NODE_SELECTOR": {
@@ -583,6 +588,7 @@
     },
     "SEARCH": {
         "BULK_ACTIONS_DROPDOWN": {
+            "LABEL": "Acciones masivas",
             "TITLE": "Acciones masivas ({{ count }} elementos)",
             "BULK_NOT_AVAILABLE": "Acciones masivas (no disponible)",
             "BULK_NOT_AVAILABLE_TOOLTIP": "Las acciones masivas no pueden utilizarse sin resultados de búsqueda"
@@ -594,7 +600,8 @@
             "LIBRARIES": "Bibliotecas",
             "MIN_LENGTH": "La cadena de búsqueda debe contener al menos 2 caracteres alfanuméricos",
             "REQUIRED": "Se requiere entrada de búsqueda.",
-            "WHITESPACE": "Entrada de búsqueda no puede ser solo espacio en blanco."
+            "WHITESPACE": "Entrada de búsqueda no puede ser solo espacio en blanco.",
+            "OPERATORS": "La entrada de búsqueda no puede comenzar, terminar o consistir únicamente en operadores"
         },
         "SORT": {
             "SORTING_OPTION": "Clasificar por",

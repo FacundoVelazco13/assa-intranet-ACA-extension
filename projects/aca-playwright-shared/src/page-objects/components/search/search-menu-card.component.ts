@@ -25,20 +25,15 @@
 import { BaseComponent } from '../base.component';
 import { Page } from '@playwright/test';
 
-export class ToolbarComponent extends BaseComponent {
-  private static rootElement = 'adf-toolbar';
-  private createRuleButton = this.getChild('[data-automation-id="manage-rules-create-button"]');
-  private linkRulesButton = this.getChild('[data-automation-id="manage-rules-link-button"]');
+export class SearchMenuCard extends BaseComponent {
+  private static readonly rootElement = '.adf-search-filter-menu-card';
+
+  public menuCardTitle = this.getChild('.adf-search-filter-title');
+  public menuCardClose = this.getChild('.adf-search-filter-title-action');
+  public menuCardClear = this.getChild('#cancel-filter-button');
+  public menuCardApply = this.getChild('#apply-filter-button');
 
   constructor(page: Page) {
-    super(page, ToolbarComponent.rootElement);
-  }
-
-  async clickCreateRuleButton(): Promise<void> {
-    await this.createRuleButton.click();
-  }
-
-  async clickLinkRulesButton(): Promise<void> {
-    await this.linkRulesButton.click();
+    super(page, SearchMenuCard.rootElement);
   }
 }
