@@ -130,6 +130,15 @@ if [[ -n "${APP_CONFIG_ECM_HOST}" ]]; then
     -i "$APP_CONFIG_FILE"
 fi
 
+if [ -n "${APP_CONFIG_ITOP_PEOPLE_ENDPOINT}" ]; then
+  echo "SET APP_CONFIG_ITOP_PEOPLE_ENDPOINT"
+
+  replace="\/"
+  encoded=${APP_CONFIG_ITOP_PEOPLE_ENDPOINT//\//$replace}
+  sed -e "s/\"peopleEndpoint\": \".*\"/\"peopleEndpoint\": \"${encoded}\"/g" \
+    -i "$APP_CONFIG_FILE"
+fi
+
 if [ -n "${APP_BASE_SHARE_URL}" ]; then
   echo "SET APP_BASE_SHARE_URL"
 

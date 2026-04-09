@@ -17,6 +17,9 @@
     "categoriesEnabled": true,
     "knowledgeRetrievalEnabled": false
   },
+  "itop": {
+    "peopleEndpoint": "/alfresco/s/itop/data?class=Person&mock=true"
+  },
   "collabora": {
     "enable": true,
     "edit": ["txt", "doc", "docx", "xls", "xlsx", "ppt", "pptx", "odt", "ods", "odp"],
