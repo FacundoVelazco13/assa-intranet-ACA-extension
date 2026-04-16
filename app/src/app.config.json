@@ -18,7 +18,7 @@
     "knowledgeRetrievalEnabled": false
   },
   "itop": {
-    "peopleEndpoint": "/alfresco/s/itop/data?class=Person&mock=true"
+    "peopleEndpoint": "/alfresco-oop/api/itop/data?className=Person&mock=true"
   },
   "collabora": {
     "enable": true,

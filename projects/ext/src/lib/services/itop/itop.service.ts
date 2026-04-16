@@ -5,7 +5,7 @@ import { BaseItopService } from './base-itop.service';
 import { AlfrescoApiService } from '@alfresco/adf-content-services';
 import { firstValueFrom } from 'rxjs';
 
-const DEFAULT_PEOPLE_ENDPOINT = '/alfresco/s/itop/data?class=Person';
+const DEFAULT_PEOPLE_ENDPOINT = '/alfresco-oop/api/itop/data?className=Person';
 
 @Injectable({
   providedIn: 'root'
