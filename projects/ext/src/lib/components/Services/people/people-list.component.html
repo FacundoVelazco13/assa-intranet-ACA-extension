@@ -9,19 +9,8 @@
         <mat-form-field class="search-field" appearance="outline">
           <mat-label>Buscar personas</mat-label>
           <mat-icon matPrefix>search</mat-icon>
-          <input 
-            matInput 
-            [(ngModel)]="searchQuery" 
-            (keyup)="onSearchInput(searchQuery)"
-            placeholder="Nombre, email, organización..." 
-            type="text" />
-          <button 
-            *ngIf="searchQuery" 
-            matSuffix 
-            mat-icon-button 
-            aria-label="Limpiar" 
-            (click)="clearSearch()"
-            class="clear-button">
+          <input matInput [(ngModel)]="searchQuery" (keyup)="onSearchInput(searchQuery)" placeholder="Nombre, email, organización..." type="text" />
+          <button *ngIf="searchQuery" matSuffix mat-icon-button aria-label="Limpiar" (click)="clearSearch()" class="clear-button">
             <mat-icon>close</mat-icon>
           </button>
         </mat-form-field>
@@ -54,15 +43,16 @@
               <mat-icon>close</mat-icon>
             </button>
           </div>
-          
+
           <div class="filter-section">
             <h4>Por Organización</h4>
             <div class="filter-chips">
-              <button 
+              <button
                 *ngFor="let org of availableOrganizations"
-                [ngClass]="{ 'active': isOrganizationSelected(org) }"
+                [ngClass]="{ active: isOrganizationSelected(org) }"
                 (click)="toggleOrganizationFilter(org)"
-                class="filter-chip-button">
+                class="filter-chip-button"
+              >
                 {{ org }}
               </button>
             </div>
@@ -71,11 +61,12 @@
           <div class="filter-section">
             <h4>Por Ubicación</h4>
             <div class="filter-chips">
-              <button 
+              <button
                 *ngFor="let loc of availableLocations"
-                [ngClass]="{ 'active': isLocationSelected(loc) }"
+                [ngClass]="{ active: isLocationSelected(loc) }"
                 (click)="toggleLocationFilter(loc)"
-                class="filter-chip-button">
+                class="filter-chip-button"
+              >
                 {{ loc }}
               </button>
             </div>
@@ -116,6 +107,22 @@
                 </th>
                 <td mat-cell *matCellDef="let person">{{ person.friendlyname }}</td>
               </ng-container>
+              <ng-container matColumnDef="org_name">
+                <th mat-header-cell *matHeaderCellDef (click)="onSortColumn('descripcion_cc')" class="sortable-header">
+                  Organización
+                  <mat-icon [class.active]="isSortedBy('descripcion_cc')">{{ getSortIcon('descripcion_cc') }}</mat-icon>
+                </th>
+                <td mat-cell *matCellDef="let person">
+                  <mat-chip class="org-chip">{{ person.descripcion_cc }}</mat-chip>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="location_name">
+                <th mat-header-cell *matHeaderCellDef (click)="onSortColumn('location_name')" class="sortable-header">
+                  Ubicación
+                  <mat-icon [class.active]="isSortedBy('location_name')">{{ getSortIcon('location_name') }}</mat-icon>
+                </th>
+                <td mat-cell *matCellDef="let person">{{ person.location_name }}</td>
+              </ng-container>
               <ng-container matColumnDef="email">
                 <th mat-header-cell *matHeaderCellDef (click)="onSortColumn('email')" class="sortable-header">
                   Email
@@ -126,22 +133,6 @@
                     {{ person.email }}
                   </a>
                 </td>
-              </ng-container>
-              <ng-container matColumnDef="org_name">
-                <th mat-header-cell *matHeaderCellDef (click)="onSortColumn('org_name')" class="sortable-header">
-                  Organización
-                  <mat-icon [class.active]="isSortedBy('org_name')">{{ getSortIcon('org_name') }}</mat-icon>
-                </th>
-                <td mat-cell *matCellDef="let person">
-                  <mat-chip class="org-chip">{{ person.org_name }}</mat-chip>
-                </td>
-              </ng-container>
-              <ng-container matColumnDef="location_name">
-                <th mat-header-cell *matHeaderCellDef (click)="onSortColumn('location_name')" class="sortable-header">
-                  Ubicación
-                  <mat-icon [class.active]="isSortedBy('location_name')">{{ getSortIcon('location_name') }}</mat-icon>
-                </th>
-                <td mat-cell *matCellDef="let person">{{ person.location_name }}</td>
               </ng-container>
               <ng-container matColumnDef="mobile_phone">
                 <th mat-header-cell *matHeaderCellDef (click)="onSortColumn('mobile_phone')" class="sortable-header">
@@ -191,7 +182,8 @@
             (page)="onPageChange($event)"
             showFirstLastButtons
             aria-label="Seleccionar página de personas"
-            class="paginator" />
+            class="paginator"
+          />
         </div>
 
         <!-- Card View -->
@@ -231,7 +223,7 @@
                 <div class="info-row">
                   <mat-icon>business</mat-icon>
                   <span class="label">Organización:</span>
-                  <mat-chip class="org-chip-card">{{ person.org_name }}</mat-chip>
+                  <mat-chip class="org-chip-card">{{ person.descripcion_cc }}</mat-chip>
                 </div>
 
                 <div class="info-row">
@@ -252,7 +244,8 @@
             (page)="onPageChange($event)"
             showFirstLastButtons
             aria-label="Seleccionar página de personas"
-            class="paginator" />
+            class="paginator"
+          />
         </div>
 
         <!-- No Data -->
@@ -260,7 +253,8 @@
           <mat-icon class="no-data-icon">people_outline</mat-icon>
           <h2>No se encontraron personas</h2>
           <p *ngIf="searchQuery">
-            No hay resultados para "<strong>{{ searchQuery }}</strong>".
+            No hay resultados para "<strong>{{ searchQuery }}</strong
+            >".
             <button mat-button color="primary" (click)="clearSearch()">Limpiar búsqueda</button>
           </p>
           <p *ngIf="!searchQuery">No hay personas cargadas en el sistema.</p>
@@ -269,10 +263,11 @@
 
       <!-- Results Info -->
       <div *ngIf="!isLoading && filteredPeople.length > 0" class="results-info">
-        <small>Mostrando 
-          <strong>{{ pageIndex * pageSize + 1 }} - {{ getMaxPageItems() }}</strong> 
-          de 
-          <strong>{{ totalItems }}</strong> 
+        <small
+          >Mostrando
+          <strong>{{ pageIndex * pageSize + 1 }} - {{ getMaxPageItems() }}</strong>
+          de
+          <strong>{{ totalItems }}</strong>
           persona{{ totalItems !== 1 ? 's' : '' }}
           <span *ngIf="searchQuery" class="filter-info">(filtrado de {{ people.length }} total)</span>
         </small>

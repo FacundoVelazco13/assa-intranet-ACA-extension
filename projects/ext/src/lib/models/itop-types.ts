@@ -5,6 +5,8 @@ export interface ItopPerson {
   employee_number: string;
   location_name: string;
   mobile_phone: string;
+  costcenter: string;
+  descripcion_cc: string;
 }
 export interface ItopApiResponse {
   success: boolean;

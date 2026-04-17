@@ -50,7 +50,7 @@ export class PeopleListComponent implements OnInit, OnDestroy {
   private readonly searchSubject$ = new Subject<string>();
 
   people: ItopPerson[] = [];
-  displayedColumns: string[] = ['employee_number', 'friendlyname', 'email', 'org_name', 'location_name', 'mobile_phone', 'expand'];
+  displayedColumns: string[] = ['employee_number', 'friendlyname', 'org_name', 'location_name', 'email', 'mobile_phone', 'expand'];
 
   isLoading = true;
   searchQuery = '';
@@ -83,8 +83,8 @@ export class PeopleListComponent implements OnInit, OnDestroy {
       this.totalItems = this.filteredPeople.length;
 
       // Extract unique organizations and locations
-      this.availableOrganizations = [...new Set(this.people.map((p) => p.org_name))].sort();
-      this.availableLocations = [...new Set(this.people.map((p) => p.location_name))].sort();
+      this.availableOrganizations = [...new Set(this.people.map((p) => p.descripcion_cc ?? ''))].sort();
+      this.availableLocations = [...new Set(this.people.map((p) => p.location_name ?? ''))].sort();
 
       this.updatePaginatedData();
       this.isLoading = false;
@@ -141,12 +141,13 @@ export class PeopleListComponent implements OnInit, OnDestroy {
     } else {
       this.filteredPeople = this.people.filter(
         (person) =>
-          person.friendlyname.toLowerCase().includes(queryLower) ||
-          person.email.toLowerCase().includes(queryLower) ||
-          person.org_name.toLowerCase().includes(queryLower) ||
-          person.employee_number.includes(queryLower) ||
-          person.location_name.toLowerCase().includes(queryLower) ||
-          person.mobile_phone.includes(queryLower)
+          person.friendlyname?.toLowerCase().includes(queryLower) ||
+          person.email?.toLowerCase().includes(queryLower) ||
+          person.descripcion_cc?.toLowerCase().includes(queryLower) ||
+          person.employee_number?.includes(queryLower) ||
+          person.org_name?.toLowerCase().includes(queryLower) ||
+          person.location_name?.toLowerCase().includes(queryLower) ||
+          person.mobile_phone?.includes(queryLower)
       );
     }
     this.applyFilters();
@@ -157,10 +158,10 @@ export class PeopleListComponent implements OnInit, OnDestroy {
 
     // Apply dynamic filters
     if (this.selectedOrganizations.size > 0) {
-      result = result.filter((p) => this.selectedOrganizations.has(p.org_name));
+      result = result.filter((p) => this.selectedOrganizations.has(p.descripcion_cc ?? ''));
     }
     if (this.selectedLocations.size > 0) {
-      result = result.filter((p) => this.selectedLocations.has(p.location_name));
+      result = result.filter((p) => this.selectedLocations.has(p.location_name ?? ''));
     }
 
     this.filteredPeople = result;
