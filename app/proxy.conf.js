@@ -14,5 +14,15 @@ module.exports = {
         request.setHeader('origin', BASE_URL);
       }
     }
+  },
+  '/alfresco-oop': {
+    target: BASE_URL,
+    secure: false,
+    changeOrigin: true,
+    onProxyReq: (request) => {
+      if (request['method'] !== 'GET') {
+        request.setHeader('origin', BASE_URL);
+      }
+    }
   }
 };

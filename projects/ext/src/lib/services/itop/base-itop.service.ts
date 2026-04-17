@@ -1,5 +1,5 @@
 import { AlfrescoApiService } from '@alfresco/adf-content-services';
-import { AppConfigService } from '@alfresco/adf-core';
+import { AppConfigService, AuthenticationService } from '@alfresco/adf-core';
 import { Injectable, inject } from '@angular/core';
 import { from, Observable } from 'rxjs';
 import { AdfHttpClient } from '@alfresco/adf-core/api';
@@ -9,6 +9,7 @@ import { RequestOptions } from '@alfresco/js-api';
 export class BaseItopService {
   protected apiService = inject(AlfrescoApiService);
   protected appConfigService = inject(AppConfigService);
+  protected authenticationService = inject(AuthenticationService);
 
   protected defaultParams: RequestOptions = {
     path: '',
@@ -68,7 +69,37 @@ export class BaseItopService {
   }
 
   protected callApi<T>(url: string, params: RequestOptions): Promise<T> {
+    if (this.isOopExtensionUrl(url)) {
+      const ticket = this.getAuthenticationTicket();
+      if (ticket) {
+        params.headerParams = {
+          ...params.headerParams,
+          Authorization: `Bearer ${ticket}`
+        };
+      }
+    }
+
     return this.adfHttpClient.request(url, params);
+  }
+
+  private isOopExtensionUrl(url: string): boolean {
+    return url.startsWith('/alfresco-oop') || url.includes('/alfresco-oop') || url.startsWith('alfresco-oop');
+  }
+
+  private getAuthenticationTicket(): string | null {
+    try {
+      const ticket = this.authenticationService.getToken();
+
+      if (ticket && ticket.trim() !== '') {
+        return ticket;
+      }
+
+      console.warn('No authentication ticket found');
+      return null;
+    } catch (error) {
+      console.warn('Failed to get authentication ticket:', error);
+      return null;
+    }
   }
 
   protected get contextRoot() {
