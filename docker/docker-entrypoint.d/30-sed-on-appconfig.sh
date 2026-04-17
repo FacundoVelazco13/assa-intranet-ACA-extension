@@ -4,34 +4,44 @@ set -e
 
 APP_CONFIG_FILE="${NGINX_ENVSUBST_OUTPUT_DIR}/app.config.json"
 
+# Escape special sed characters in replacement strings:
+# - & means "matched text" in sed, must be escaped as \&
+# - / is the sed delimiter, must be escaped as \/
+escape_for_sed() {
+  local value="$1"
+  value="${value//&/\\&}"
+  value="${value//\//\\/}"
+  echo "$value"
+}
+
 if [ -n "${APP_CONFIG_AUTH_TYPE}" ]; then
   echo "SET APP_CONFIG_AUTH_TYPE"
 
-  sed -e "s/\"authType\": \".*\"/\"authType\": \"${APP_CONFIG_AUTH_TYPE}\"/g" \
+  encoded=$(escape_for_sed "$APP_CONFIG_AUTH_TYPE")
+  sed -e "s/\"authType\": \".*\"/\"authType\": \"${encoded}\"/g" \
     -i "$APP_CONFIG_FILE"
 fi
 
 if [ -n "${APP_CONFIG_PROVIDER}" ]; then
   echo "SET APP_CONFIG_PROVIDER"
 
-  sed -e "s/\"providers\": \".*\"/\"providers\": \"${APP_CONFIG_PROVIDER}\"/g" \
+  encoded=$(escape_for_sed "$APP_CONFIG_PROVIDER")
+  sed -e "s/\"providers\": \".*\"/\"providers\": \"${encoded}\"/g" \
     -i "$APP_CONFIG_FILE"
 fi
 
 if [ -n "${APP_CONFIG_IDENTITY_HOST}" ]; then
   echo "SET APP_CONFIG_IDENTITY_HOST"
 
-  replace="\/"
-  encodedIdentity=${APP_CONFIG_IDENTITY_HOST//\//$replace}
-  sed -e "s/\"identityHost\": \".*\"/\"identityHost\": \"$encodedIdentity\"/g" \
+  encoded=$(escape_for_sed "$APP_CONFIG_IDENTITY_HOST")
+  sed -e "s/\"identityHost\": \".*\"/\"identityHost\": \"${encoded}\"/g" \
     -i "$APP_CONFIG_FILE"
 fi
 
 if [ -n "${APP_CONFIG_OAUTH2_HOST}" ]; then
   echo "SET APP_CONFIG_OAUTH2_HOST"
 
-  replace="\/"
-  encoded=${APP_CONFIG_OAUTH2_HOST//\//$replace}
+  encoded=$(escape_for_sed "$APP_CONFIG_OAUTH2_HOST")
   sed -e "s/\"host\": \".*\"/\"host\": \"${encoded}\"/g" \
     -i "$APP_CONFIG_FILE"
 fi
@@ -39,7 +49,8 @@ fi
 if [ -n "${APP_CONFIG_OAUTH2_CLIENTID}" ]; then
   echo "SET APP_CONFIG_OAUTH2_CLIENTID"
 
-  sed -e "s/\"clientId\": \".*\"/\"clientId\": \"${APP_CONFIG_OAUTH2_CLIENTID}\"/g" \
+  encoded=$(escape_for_sed "$APP_CONFIG_OAUTH2_CLIENTID")
+  sed -e "s/\"clientId\": \".*\"/\"clientId\": \"${encoded}\"/g" \
     -i "$APP_CONFIG_FILE"
 fi
 
@@ -67,29 +78,31 @@ fi
 if [ -n "${APP_CONFIG_OAUTH2_LOGOUT_URL}" ]; then
   echo "SET APP_CONFIG_OAUTH2_LOGOUT_URL"
 
-  sed -e "s/\"logoutUrl\": \".*\"/\"logoutUrl\": \"${APP_CONFIG_OAUTH2_LOGOUT_URL}\"/g" \
+  encoded=$(escape_for_sed "$APP_CONFIG_OAUTH2_LOGOUT_URL")
+  sed -e "s/\"logoutUrl\": \".*\"/\"logoutUrl\": \"${encoded}\"/g" \
     -i "$APP_CONFIG_FILE"
 fi
 
 if [ -n "${APP_CONFIG_OAUTH2_LOGOUT_PARAMETERS}" ]; then
   echo "SET APP_CONFIG_OAUTH2_LOGOUT_PARAMETERS"
 
-  sed -e "s/\"logoutParameters\": \".*\"/\"logoutParameters\": \"${APP_CONFIG_OAUTH2_LOGOUT_PARAMETERS}\"/g" \
+  encoded=$(escape_for_sed "$APP_CONFIG_OAUTH2_LOGOUT_PARAMETERS")
+  sed -e "s/\"logoutParameters\": \".*\"/\"logoutParameters\": \"${encoded}\"/g" \
     -i "$APP_CONFIG_FILE"
 fi
 
 if [ -n "${APP_CONFIG_OAUTH2_AUDIENCE}" ]; then
   echo "SET APP_CONFIG_OAUTH2_AUDIENCE"
 
-  sed -e "s/\"audience\": \".*\"/\"audience\": \"${APP_CONFIG_OAUTH2_AUDIENCE}\"/g" \
+  encoded=$(escape_for_sed "$APP_CONFIG_OAUTH2_AUDIENCE")
+  sed -e "s/\"audience\": \".*\"/\"audience\": \"${encoded}\"/g" \
     -i "$APP_CONFIG_FILE"
 fi
 
 if [ -n "${APP_CONFIG_OAUTH2_REDIRECT_SILENT_IFRAME_URI}" ]; then
   echo "SET APP_CONFIG_OAUTH2_REDIRECT_SILENT_IFRAME_URI"
 
-  replace="\/"
-  encoded=${APP_CONFIG_OAUTH2_REDIRECT_SILENT_IFRAME_URI//\//$replace}
+  encoded=$(escape_for_sed "$APP_CONFIG_OAUTH2_REDIRECT_SILENT_IFRAME_URI")
   sed -e "s/\"redirectSilentIframeUri\": \".*\"/\"redirectSilentIframeUri\": \"${encoded}\"/g" \
     -i "$APP_CONFIG_FILE"
 fi
@@ -97,8 +110,7 @@ fi
 if [ -n "${APP_CONFIG_OAUTH2_REDIRECT_LOGIN}" ]; then
   echo "SET APP_CONFIG_OAUTH2_REDIRECT_LOGIN"
 
-  replace="\/"
-  encoded=${APP_CONFIG_OAUTH2_REDIRECT_LOGIN//\//$replace}
+  encoded=$(escape_for_sed "$APP_CONFIG_OAUTH2_REDIRECT_LOGIN")
   sed -e "s/\"redirectUri\": \".*\"/\"redirectUri\": \"${encoded}\"/g" \
     -i "$APP_CONFIG_FILE"
 fi
@@ -106,8 +118,7 @@ fi
 if [ -n "${APP_CONFIG_OAUTH2_REDIRECT_LOGOUT}" ]; then
   echo "SET APP_CONFIG_OAUTH2_REDIRECT_LOGOUT"
 
-  replace="\/"
-  encoded=${APP_CONFIG_OAUTH2_REDIRECT_LOGOUT//\//$replace}
+  encoded=$(escape_for_sed "$APP_CONFIG_OAUTH2_REDIRECT_LOGOUT")
   sed -e "s/\"redirectUriLogout\": \".*\"/\"redirectUriLogout\": \"${encoded}\"/g" \
     -i "$APP_CONFIG_FILE"
 fi
@@ -115,8 +126,7 @@ fi
 if [[ -n "${APP_CONFIG_BPM_HOST}" ]]; then
   echo "SET APP_CONFIG_BPM_HOST"
 
-  replace="\/"
-  encoded=${APP_CONFIG_BPM_HOST//\//$replace}
+  encoded=$(escape_for_sed "$APP_CONFIG_BPM_HOST")
   sed -e "s/\"bpmHost\": \".*\"/\"bpmHost\": \"${encoded}\"/g" \
     -i "$APP_CONFIG_FILE"
 fi
@@ -124,8 +134,7 @@ fi
 if [[ -n "${APP_CONFIG_ECM_HOST}" ]]; then
   echo "SET APP_CONFIG_ECM_HOST"
 
-  replace="\/"
-  encoded=${APP_CONFIG_ECM_HOST//\//$replace}
+  encoded=$(escape_for_sed "$APP_CONFIG_ECM_HOST")
   sed -e "s/\"ecmHost\": \".*\"/\"ecmHost\": \"${encoded}\"/g" \
     -i "$APP_CONFIG_FILE"
 fi
@@ -133,8 +142,7 @@ fi
 if [ -n "${APP_CONFIG_ITOP_PEOPLE_ENDPOINT}" ]; then
   echo "SET APP_CONFIG_ITOP_PEOPLE_ENDPOINT"
 
-  replace="\/"
-  encoded=${APP_CONFIG_ITOP_PEOPLE_ENDPOINT//\//$replace}
+  encoded=$(escape_for_sed "$APP_CONFIG_ITOP_PEOPLE_ENDPOINT")
   sed -e "s/\"peopleEndpoint\": \".*\"/\"peopleEndpoint\": \"${encoded}\"/g" \
     -i "$APP_CONFIG_FILE"
 fi
@@ -142,8 +150,7 @@ fi
 if [ -n "${APP_BASE_SHARE_URL}" ]; then
   echo "SET APP_BASE_SHARE_URL"
 
-  replace="\/"
-  encoded=${APP_BASE_SHARE_URL//\//$replace}
+  encoded=$(escape_for_sed "$APP_BASE_SHARE_URL")
   sed -e "s/\"baseShareUrl\": \".*\"/\"baseShareUrl\": \"${encoded}\"/g" \
     -i "$APP_CONFIG_FILE"
 fi
