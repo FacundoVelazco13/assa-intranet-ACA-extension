@@ -1,4 +1,3 @@
-/* eslint-disable license-header/header */
 import {
   ContentNodeDialogService,
   ContentNodeSelectorComponent,

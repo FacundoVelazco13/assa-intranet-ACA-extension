@@ -1,5 +1,3 @@
-/* eslint-disable license-header/header */
-
 import { Node } from '@alfresco/js-api';
 import {
   INTRANET_NODE_TYPES,
@@ -142,9 +140,9 @@ export function getNameByTypeCode(type: string): string {
  * @returns El tipo de asociación
  */
 export function getAssocByType(source: string, target: string): string {
-  if (source === target) {
+  if (source.split(':')[0] === target.split(':')[0]) {
     const area = source.split(':')[0];
     return `${area}:association`;
   }
-  return 'assa:association';
+  return undefined;
 }

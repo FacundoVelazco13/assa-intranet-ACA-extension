@@ -1,4 +1,3 @@
-/* eslint-disable license-header/header */
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, concatMap, mergeMap, filter, catchError, take } from 'rxjs/operators';
@@ -67,7 +66,7 @@ export class AssociationEffects {
         return dialogRef.afterClosed().pipe(
           filter((confirmed) => confirmed === true),
           mergeMap(() =>
-            from(this.customContentApi.deleteAssociation(action.payload.sourceNodeId, action.payload.targetNode.entry.id)).pipe(
+            from(this.customContentApi.deleteBidirectionalAssociation(action.payload.sourceNodeId, action.payload.targetNode.entry.id)).pipe(
               map(
                 () =>
                   new DeleteAssociationSuccessAction({

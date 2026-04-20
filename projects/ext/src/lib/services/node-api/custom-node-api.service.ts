@@ -1,4 +1,3 @@
-/* eslint-disable license-header/header */
 import { Node } from '@alfresco/js-api';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
