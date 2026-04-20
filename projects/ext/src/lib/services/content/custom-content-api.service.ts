@@ -1,4 +1,3 @@
-/* eslint-disable license-header/header */
 import { NodeAssociationPaging, NodeEntry, NodesApi, Node } from '@alfresco/js-api';
 import { inject, Injectable } from '@angular/core';
 import { ContentApiService } from '@alfresco/aca-shared';
@@ -7,6 +6,7 @@ import { ContentService, NodeAction } from '@alfresco/adf-content-services';
 import { Subject } from 'rxjs';
 import { CustomNodeActionsService } from '../node-actions/custom-node-actions.service';
 import { getAssocByType } from '../../utils/content-types.utils';
+import { AlfrescoApiResponseError } from '../../models/errors';
 
 @Injectable({
   providedIn: 'root'
@@ -59,8 +59,13 @@ export class CustomContentApiService {
 
             if (error?.message) {
               try {
-                const errorData = JSON.parse(error.message);
-                if (errorData?.error?.statusCode === 409) {
+                const errorData: AlfrescoApiResponseError = JSON.parse(error.message);
+                if (errorData?.error?.statusCode === 400) {
+                  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+                  errorData.error.errorKey === 'Missing assocType'
+                    ? (errorMessage = 'Asociación no permitida entre documentos')
+                    : (errorMessage = 'Tipo de asociación no especificado');
+                } else if (errorData?.error?.statusCode === 409) {
                   errorMessage = 'La asociación ya existe';
                 } else if (errorData?.error?.statusCode === 403) {
                   errorMessage = 'No tiene permisos para crear esta asociación';
@@ -89,7 +94,7 @@ export class CustomContentApiService {
     this.nodesApi = this.contentApi.nodesApi;
     await this.nodesApi.createAssociation(sourceNodeId, {
       targetId: targetNodeId,
-      assocType: assocType || 'oym:association'
+      assocType: assocType
     });
   }
 
@@ -126,11 +131,20 @@ export class CustomContentApiService {
       }
     };
   }
-  /**
-   * Podría crear tambien un BidirectionalDeleteAssociation,
-   * donde se eliminen ambas asociaciones entre un par de nodos.
-   * De esta forma podría mostrar todas las asociaciones en una sola tabla.
-   */
+  async deleteBidirectionalAssociation(sourceNodeId: string, targetNodeId: string, assocType?: string): Promise<void> {
+    this.nodesApi = this.contentApi.nodesApi;
+    try {
+      await this.nodesApi.deleteAssociation(sourceNodeId, targetNodeId, assocType ? { assocType } : undefined);
+    } catch (error) {
+      const alfrescoError: AlfrescoApiResponseError = JSON.parse(error.message);
+      if (alfrescoError.error.statusCode === 404) {
+        // Si no se encuentra la asociación en la dirección source->target, intentamos eliminar en la dirección opuesta
+        await this.nodesApi.deleteAssociation(targetNodeId, sourceNodeId, assocType ? { assocType } : undefined);
+      } else {
+        throw error; // Re-lanzar el error si no es un 404
+      }
+    }
+  }
   async deleteAssociation(sourceNodeId: string, targetNodeId: string, assocType?: string): Promise<void> {
     this.nodesApi = this.contentApi.nodesApi;
     return this.nodesApi.deleteAssociation(sourceNodeId, targetNodeId, assocType ? { assocType } : undefined);

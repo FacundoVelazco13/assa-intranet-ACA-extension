@@ -1,4 +1,3 @@
-/* eslint-disable license-header/header */
 import {
   DataColumnComponent,
   DataColumnListComponent,
@@ -86,7 +85,7 @@ export class DossierAssocsComponent implements OnInit {
   loadAssociations() {
     this.isLoading = true;
     this.customContentApi
-      .listTargetAssociations(this.nodeId)
+      .listBidirectionalAssociations(this.nodeId, this.pagination)
       .then((associationResult) => {
         this.nodePage = associationResult;
       })
@@ -135,6 +134,10 @@ export class DossierAssocsComponent implements OnInit {
   }
   trackByColumnId(_: number, obj: DocumentListPresetRef): string {
     return obj.id;
+  }
+  onPaginationChanged(pagination: PaginationModel) {
+    this.pagination = { maxItems: pagination.maxItems, skipCount: pagination.skipCount };
+    this.loadAssociations();
   }
   onError(error: HttpErrorResponse) {
     console.error('DossierAssocsComponent - onError', error);
