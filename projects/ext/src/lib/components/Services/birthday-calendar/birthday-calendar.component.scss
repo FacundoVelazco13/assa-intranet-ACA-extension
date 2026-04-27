@@ -1,0 +1,299 @@
+/* stylelint-disable selector-class-pattern */
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+aca-page-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+aca-page-layout .aca-page-layout-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+.birthday-calendar-container {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+  overflow: auto;
+  background: #fafafa;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  gap: 20px;
+  flex: 1;
+
+  p {
+    color: #666;
+    font-size: 1rem;
+  }
+}
+
+.calendar-wrapper {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+
+  .month-title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+  }
+}
+
+.birthday-summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: #fff3e0;
+  border-radius: 8px;
+  color: #e65100;
+  font-size: 0.9rem;
+  font-weight: 500;
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    color: #e65100;
+  }
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.day-names {
+  .day-name-cell {
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: #666;
+    padding: 8px 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #e0e0e0;
+  }
+}
+
+.calendar-body {
+  gap: 1px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.calendar-cell {
+  background: white;
+  min-height: 90px;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  transition: background-color 0.15s ease;
+
+  .day-number {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #333;
+    padding: 2px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &.other-month {
+    background: #f5f5f5;
+
+    .day-number {
+      color: #bbb;
+    }
+  }
+
+  &.today {
+    background: #e3f2fd;
+
+    .day-number {
+      background: #1976d2;
+      color: white;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &.has-birthday {
+    background: #fff8e1;
+  }
+
+  .birthday-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    overflow: hidden;
+    flex: 1;
+  }
+
+  .birthday-chip {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    background: #fce4ec;
+    border-radius: 10px;
+    padding: 1px 6px;
+    font-size: 0.7rem;
+    color: #880e4f;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: default;
+
+    .birthday-icon {
+      font-size: 12px;
+      width: 12px;
+      height: 12px;
+      flex-shrink: 0;
+    }
+
+    .birthday-name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .birthday-more {
+    font-size: 0.65rem;
+    color: #999;
+    padding-left: 4px;
+  }
+}
+
+// Responsive
+@media (max-width: 1200px) {
+  .calendar-cell {
+    min-height: 80px;
+  }
+
+  .birthday-chip {
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .birthday-calendar-container {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .calendar-wrapper {
+    padding: 12px;
+  }
+
+  .calendar-cell {
+    min-height: 60px;
+    padding: 2px;
+
+    .day-number {
+      font-size: 0.75rem;
+      width: 20px;
+      height: 20px;
+    }
+
+    .birthday-chip {
+      font-size: 0.6rem;
+      padding: 1px 4px;
+
+      .birthday-icon {
+        font-size: 10px;
+        width: 10px;
+        height: 10px;
+      }
+    }
+
+    .birthday-more {
+      font-size: 0.55rem;
+    }
+  }
+
+  .day-names .day-name-cell {
+    font-size: 0.7rem;
+    padding: 6px 2px;
+  }
+}
+
+@media (max-width: 480px) {
+  .birthday-calendar-container {
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .calendar-wrapper {
+    padding: 8px;
+  }
+
+  .calendar-header .month-title {
+    font-size: 1rem;
+  }
+
+  .calendar-cell {
+    min-height: 50px;
+
+    .birthday-name {
+      display: none;
+    }
+
+    .birthday-chip {
+      padding: 1px;
+
+      .birthday-icon {
+        font-size: 12px;
+        width: 12px;
+        height: 12px;
+      }
+    }
+  }
+
+  .day-names .day-name-cell {
+    font-size: 0.6rem;
+    padding: 4px 1px;
+  }
+
+  .birthday-summary {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+}

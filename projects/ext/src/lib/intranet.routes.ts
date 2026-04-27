@@ -9,6 +9,7 @@ import { DossierViewComponent } from './components/document-views/dossier-view/d
 import { RecordViewComponent } from './components/document-views/record-view/record-view.component';
 import { IntranetSearchResultComponent } from './components/Intranet-search/intranet-search-result/intranet-search-result.component';
 import { PeopleListComponent } from './components/Services/people/people-list.component';
+import { BirthdayCalendarComponent } from './components/Services/birthday-calendar/birthday-calendar.component';
 
 export const INTRANET_LAYOUT_ROUTES: Route[] = [
   {
@@ -337,6 +338,10 @@ export const INTRANET_LAYOUT_ROUTES: Route[] = [
       {
         path: 'services',
         component: PeopleListComponent
+      },
+      {
+        path: 'services/birthdays',
+        component: BirthdayCalendarComponent
       },
       {
         path: 'search',
