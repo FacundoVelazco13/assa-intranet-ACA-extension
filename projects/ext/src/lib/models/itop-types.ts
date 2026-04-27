@@ -7,6 +7,7 @@ export interface ItopPerson {
   mobile_phone: string;
   costcenter: string;
   descripcion_cc: string;
+  birth_date: string;
 }
 export interface ItopApiResponse {
   success: boolean;

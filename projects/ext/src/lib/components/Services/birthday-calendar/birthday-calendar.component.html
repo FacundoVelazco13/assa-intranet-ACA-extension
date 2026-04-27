@@ -1,0 +1,63 @@
+<aca-page-layout>
+  <div class="aca-page-layout-header">
+    <h1 class="aca-page-title">Cumpleaños</h1>
+  </div>
+  <div class="aca-page-layout-content">
+    <div class="birthday-calendar-container">
+      <!-- Loading -->
+      <div *ngIf="isLoading" class="loading-container">
+        <mat-spinner />
+        <p>Cargando cumpleaños...</p>
+      </div>
+
+      <!-- Calendar -->
+      <div *ngIf="!isLoading" class="calendar-wrapper">
+        <!-- Navigation Header -->
+        <div class="calendar-header">
+          <button mat-icon-button (click)="navigateMonth(-1)" [disabled]="!canNavigatePrev" aria-label="Mes anterior">
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+          <h2 class="month-title">{{ currentMonthLabel }}</h2>
+          <button mat-icon-button (click)="navigateMonth(1)" [disabled]="!canNavigateNext" aria-label="Mes siguiente">
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+        </div>
+
+        <!-- Birthday count -->
+        <div class="birthday-summary">
+          <mat-icon>cake</mat-icon>
+          <span>{{ totalBirthdaysThisMonth }} cumpleañero{{ totalBirthdaysThisMonth !== 1 ? 's' : '' }} este mes</span>
+        </div>
+
+        <!-- Day Names -->
+        <div class="calendar-grid day-names">
+          <div *ngFor="let name of weekDayNames" class="day-name-cell">{{ name }}</div>
+        </div>
+
+        <!-- Calendar Grid -->
+        <div class="calendar-grid calendar-body">
+          <div
+            *ngFor="let day of calendarDays"
+            class="calendar-cell"
+            [class.other-month]="!day.isCurrentMonth"
+            [class.today]="day.isToday"
+            [class.has-birthday]="day.birthdays.length > 0"
+          >
+            <div class="day-number">{{ day.date | date: 'd' }}</div>
+            <div class="birthday-list">
+              <div
+                *ngFor="let entry of day.birthdays.slice(0, 3)"
+                class="birthday-chip"
+                [matTooltip]="entry.person.friendlyname + (entry.person.org_name ? ' - ' + entry.person.org_name : '')"
+              >
+                <mat-icon class="birthday-icon">cake</mat-icon>
+                <span class="birthday-name">{{ getShortName(entry.person.friendlyname) }}</span>
+              </div>
+              <div *ngIf="day.birthdays.length > 3" class="birthday-more">+{{ day.birthdays.length - 3 }} m\u00e1s</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</aca-page-layout>

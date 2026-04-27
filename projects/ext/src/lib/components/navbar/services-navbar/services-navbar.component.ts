@@ -32,6 +32,11 @@ export class ServicesNavbarComponent implements OnInit, OnDestroy {
       id: 'intranet.navbar.customService',
       title: 'Guía Telefónica',
       route: 'intranet/services'
+    },
+    {
+      id: 'intranet.navbar.birthdayCalendar',
+      title: 'Cumpleaños',
+      route: 'intranet/services/birthdays'
     }
   ];
 

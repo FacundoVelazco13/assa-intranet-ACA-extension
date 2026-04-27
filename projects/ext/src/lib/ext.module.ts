@@ -27,6 +27,7 @@ import { HysDashboardComponent } from './components/dashboard/hys/hys-dashboard.
 import { PcDashboardComponent } from './components/dashboard/pc/pc-dashboard.component';
 import { ServicesRedirectComponent } from './components/dashboard/services-home/services-redirect.component';
 import { PeopleListComponent } from './components/Services/people/people-list.component';
+import { BirthdayCalendarComponent } from './components/Services/birthday-calendar/birthday-calendar.component';
 
 export function provideExtExtension(): (Provider | EnvironmentProviders)[] {
   return [
@@ -52,7 +53,8 @@ export function provideExtExtension(): (Provider | EnvironmentProviders)[] {
         'hys-dashboard.component': HysDashboardComponent,
         'pc-dashboard.component': PcDashboardComponent,
         'services-redirect.component': ServicesRedirectComponent,
-        'people-list.component': PeopleListComponent
+        'people-list.component': PeopleListComponent,
+        'birthday-calendar.component': BirthdayCalendarComponent
       },
       evaluators: {
         'ext.isDossier': rules.isDossier,
