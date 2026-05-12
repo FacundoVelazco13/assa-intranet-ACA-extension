@@ -8,6 +8,8 @@ export interface ItopPerson {
   costcenter: string;
   descripcion_cc: string;
   birth_date: string;
+  dni: string;
+  has_photo: boolean;
 }
 export interface ItopApiResponse {
   success: boolean;

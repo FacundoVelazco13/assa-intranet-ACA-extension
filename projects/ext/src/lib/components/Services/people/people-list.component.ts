@@ -14,6 +14,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatMenuModule } from '@angular/material/menu';
 import { FormsModule } from '@angular/forms';
 import { PageLayoutComponent } from '@alfresco/aca-shared';
+import { AppConfigService } from '@alfresco/adf-core';
 import { ItopPerson } from '../../../models/itop-types';
 import { ItopService } from '../../../services/itop/itop.service';
 import { Subject } from 'rxjs';
@@ -46,7 +47,9 @@ import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 export class PeopleListComponent implements OnInit, OnDestroy {
   private readonly snackBar = inject(MatSnackBar);
   private readonly itopService = inject(ItopService);
+  private readonly appConfigService = inject(AppConfigService);
   private readonly destroy$ = new Subject<void>();
+  private readonly ecmHost = this.appConfigService.get<string>('ecmHost', '');
   private readonly searchSubject$ = new Subject<string>();
 
   people: ItopPerson[] = [];
@@ -213,6 +216,10 @@ export class PeopleListComponent implements OnInit, OnDestroy {
 
   toggleViewMode(mode: 'table' | 'card') {
     this.viewMode = mode;
+  }
+
+  getPhotoUrl(dni: string): string {
+    return `${this.ecmHost}/alfresco-oop/api/photos/dni/${dni}`;
   }
 
   getInitials(friendlyname: string): string {

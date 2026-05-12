@@ -191,8 +191,9 @@
           <div *ngIf="paginatedPeople.length > 0" class="cards-grid">
             <div *ngFor="let person of paginatedPeople; let i = index" class="person-card" [style.--avatar-color]="getAvatarColor(i)">
               <div class="card-header">
-                <div class="avatar" [style.background-color]="getAvatarColor(i)">
-                  {{ getInitials(person.friendlyname) }}
+                <div class="avatar" [style.background-color]="!person.has_photo ? getAvatarColor(i) : 'transparent'">
+                  <img *ngIf="person.has_photo" [src]="getPhotoUrl(person.dni)" class="avatar-img" alt="" (error)="person.has_photo = false" />
+                  <span *ngIf="!person.has_photo">{{ getInitials(person.friendlyname) }}</span>
                 </div>
                 <h3 class="person-name">{{ person.friendlyname }}</h3>
               </div>
