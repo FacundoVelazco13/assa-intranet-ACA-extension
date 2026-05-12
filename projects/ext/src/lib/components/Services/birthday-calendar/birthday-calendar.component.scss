@@ -29,6 +29,10 @@ aca-page-layout .aca-page-layout-content {
   background: #fafafa;
 }
 
+.birthday-more-tooltip {
+  white-space: pre-line;
+}
+
 .loading-container {
   display: flex;
   flex-direction: column;
@@ -115,11 +119,13 @@ aca-page-layout .aca-page-layout-content {
 .calendar-cell {
   background: white;
   min-height: 90px;
+  max-height: 120px;
   padding: 4px;
   display: flex;
   flex-direction: column;
   gap: 2px;
   transition: background-color 0.15s ease;
+  overflow: hidden;
 
   .day-number {
     font-size: 0.85rem;
@@ -164,8 +170,19 @@ aca-page-layout .aca-page-layout-content {
     display: flex;
     flex-direction: column;
     gap: 2px;
-    overflow: hidden;
+    overflow-y: auto;
     flex: 1;
+    min-height: 0;
+    max-height: 80px;
+
+    &::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #ddd;
+      border-radius: 2px;
+    }
   }
 
   .birthday-chip {
@@ -181,6 +198,7 @@ aca-page-layout .aca-page-layout-content {
     overflow: hidden;
     text-overflow: ellipsis;
     cursor: default;
+    flex-shrink: 0;
 
     .birthday-icon {
       font-size: 12px;
@@ -199,6 +217,12 @@ aca-page-layout .aca-page-layout-content {
     font-size: 0.65rem;
     color: #999;
     padding-left: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+
+    &:hover {
+      color: #e65100;
+    }
   }
 }
 

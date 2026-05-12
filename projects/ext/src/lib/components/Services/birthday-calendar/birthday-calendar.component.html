@@ -45,15 +45,19 @@
           >
             <div class="day-number">{{ day.date | date: 'd' }}</div>
             <div class="birthday-list">
-              <div
-                *ngFor="let entry of day.birthdays.slice(0, 3)"
-                class="birthday-chip"
-                [matTooltip]="entry.person.friendlyname + (entry.person.org_name ? ' - ' + entry.person.org_name : '')"
-              >
+              <div *ngFor="let entry of day.birthdays.slice(0, 3)" class="birthday-chip" [matTooltip]="sanitizeText(entry.person.friendlyname)">
                 <mat-icon class="birthday-icon">cake</mat-icon>
                 <span class="birthday-name">{{ getShortName(entry.person.friendlyname) }}</span>
               </div>
-              <div *ngIf="day.birthdays.length > 3" class="birthday-more">+{{ day.birthdays.length - 3 }} m\u00e1s</div>
+              <div
+                *ngIf="day.birthdays.length > 3"
+                class="birthday-more"
+                [matTooltip]="getMoreTooltip(day)"
+                matTooltipShowDelay="300"
+                matTooltipClass="birthday-more-tooltip"
+              >
+                +{{ day.birthdays.length - 3 }} mas
+              </div>
             </div>
           </div>
         </div>

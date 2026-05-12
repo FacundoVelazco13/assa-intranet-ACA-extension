@@ -147,7 +147,9 @@ export class BirthdayCalendarComponent implements OnInit, OnDestroy {
       date,
       isCurrentMonth,
       isToday: isToday(date),
-      birthdays: this.birthdayMap.get(key) || []
+      birthdays: [...(this.birthdayMap.get(key) || [])].sort((a, b) =>
+        this.sanitizeText(a.person.friendlyname).localeCompare(this.sanitizeText(b.person.friendlyname), 'es', { sensitivity: 'base' })
+      )
     };
   }
 
@@ -194,14 +196,36 @@ export class BirthdayCalendarComponent implements OnInit, OnDestroy {
 
   getShortName(friendlyname: string): string {
     const parts = friendlyname.trim().split(' ');
-    return parts[0];
+    return this.sanitizeText(parts[0]);
   }
 
   getInitials(friendlyname: string): string {
-    return friendlyname
-      .split(' ')
-      .map((word) => word.charAt(0).toUpperCase())
-      .slice(0, 2)
-      .join('');
+    return this.sanitizeText(
+      friendlyname
+        .split(' ')
+        .map((word) => word.charAt(0).toUpperCase())
+        .slice(0, 2)
+        .join('')
+    );
+  }
+
+  getDayTooltip(day: CalendarDay): string {
+    return day.birthdays.map((e) => this.sanitizeText(e.person.friendlyname)).join('\n');
+  }
+
+  getMoreTooltip(day: CalendarDay): string {
+    return day.birthdays
+      .slice(3)
+      .map((e) => this.sanitizeText(e.person.friendlyname))
+      .join('\n');
+  }
+
+  sanitizeText(text: string): string {
+    if (!text) {
+      return '';
+    }
+    const textarea = document.createElement('textarea');
+    textarea.innerHTML = text;
+    return textarea.value;
   }
 }
