@@ -25,7 +25,7 @@
 import { importProvidersFrom, ApplicationConfig, LOCALE_ID } from '@angular/core';
 import { provideNoopAnimations, provideAnimations } from '@angular/platform-browser/animations';
 import { AuthGuard, provideAppConfig, provideCoreAuth, provideI18N } from '@alfresco/adf-core';
-import { AppService, provideContentAppExtensions } from '@alfresco/aca-shared';
+import { AppService } from '@alfresco/aca-shared';
 import { provideApplicationExtensions } from './extensions.module';
 import { environment } from '../environments/environment';
 import { registerLocaleData } from '@angular/common';
@@ -49,7 +49,6 @@ export const AppConfig: ApplicationConfig = {
     provideI18N({
       assets: [['app', 'assets']]
     }),
-    provideContentAppExtensions(),
     provideApplicationExtensions(),
     provideRouter(APP_ROUTES, withHashLocation()),
     environment.e2e ? provideNoopAnimations() : provideAnimations(),

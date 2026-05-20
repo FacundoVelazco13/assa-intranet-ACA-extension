@@ -24,7 +24,7 @@
 
 import { HammerModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AuthGuardEcm, LanguagePickerComponent, NotificationHistoryComponent, provideTranslations } from '@alfresco/adf-core';
+import { AuthGuardEcm, LanguagePickerComponent, NotificationHistoryComponent } from '@alfresco/adf-core';
 import {
   ContentModule,
   ContentVersionService,
@@ -80,7 +80,6 @@ import { IsFeatureSupportedInCurrentAcsPipe } from './pipes/is-feature-supported
     provideAppExtensions(),
     provideContentAppExtensions(),
     provideFolderRulesExtension(),
-    provideTranslations('app', 'assets'),
     { provide: SHELL_NAVBAR_MIN_WIDTH, useValue: 0 },
     {
       provide: MAT_DIALOG_DEFAULT_OPTIONS,
